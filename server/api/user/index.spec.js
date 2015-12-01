@@ -1,5 +1,6 @@
 'use strict';
 
+// TODO: rewrite test to support roles
 var proxyquire = require('proxyquire').noPreserveCache();
 
 var userCtrlStub = {

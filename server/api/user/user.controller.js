@@ -44,7 +44,7 @@ exports.index = function(req, res) {
 exports.create = function(req, res, next) {
   var newUser = new User(req.body);
   newUser.provider = 'local';
-  newUser.role = 'user';
+  newUser.roles.push('client');
   newUser.saveAsync()
     .spread(function(user) {
       var token = jwt.sign({ _id: user._id }, config.secrets.session, {

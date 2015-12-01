@@ -10,10 +10,10 @@ var UserSchema = new Schema({
     type: String,
     lowercase: true
   },
-  role: {
+  roles: [{
     type: String,
-    default: 'user'
-  },
+    default: 'client'
+  }],
   password: String,
   provider: String,
   salt: String
@@ -29,7 +29,7 @@ UserSchema
   .get(function() {
     return {
       'name': this.name,
-      'role': this.role
+      'roles': this.roles
     };
   });
 
@@ -39,7 +39,7 @@ UserSchema
   .get(function() {
     return {
       '_id': this._id,
-      'role': this.role
+      'roles': this.roles
     };
   });
 

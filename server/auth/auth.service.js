@@ -51,21 +51,26 @@ function hasRole(roleRequired) {
   return compose()
     .use(isAuthenticated())
     .use(function meetsRequirements(req, res, next) {
-      if (config.userRoles.indexOf(req.user.role) >=
-          config.userRoles.indexOf(roleRequired)) {
+      var ans = false;
+      for(var i in req.user.roles){
+        ans = config.userRoles.indexOf(req.user.roles[i]) >= config.userRoles.indexOf(roleRequired);
+        if(ans) break;
+      }
+      if (ans) {
         next();
       }
       else {
         res.status(403).send('Forbidden');
       }
+
     });
 }
 
 /**
  * Returns a jwt token signed by the app secret
  */
-function signToken(id, role) {
-  return jwt.sign({ _id: id, role: role }, config.secrets.session, {
+function signToken(id, roles) {
+  return jwt.sign({ _id: id, roles: roles }, config.secrets.session, {
     expiresInMinutes: 60 * 5
   });
 }
@@ -77,7 +82,7 @@ function setTokenCookie(req, res) {
   if (!req.user) {
     return res.status(404).send('Something went wrong, please try again.');
   }
-  var token = signToken(req.user._id, req.user.role);
+  var token = signToken(req.user._id, req.user.roles);
   res.cookie('token', token);
   res.redirect('/');
 }

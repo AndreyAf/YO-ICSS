@@ -48,7 +48,7 @@ User.find({}).removeAsync()
       password: 'test'
     }, {
       provider: 'local',
-      role: 'admin',
+      roles: ['admin'],
       name: 'Admin',
       email: 'admin@example.com',
       password: 'admin'
