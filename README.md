@@ -1,6 +1,8 @@
-# generator-angular-fullstack-master
+# YO-ICSS
 
 This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 3.0.0-rc8.
+
+This project based on WEBRTC technology.
 
 ## Getting Started
 
@@ -12,7 +14,7 @@ This project was generated with the [Angular Full-Stack Generator](https://githu
 - [Grunt](http://gruntjs.com/) (`npm install --global grunt-cli`)
 - [MongoDB](https://www.mongodb.org/) - Keep a running daemon with `mongod`
 
-### Developing
+### Developing (local)
 
 1. Run `npm install` to install server dependencies.
 
@@ -23,8 +25,10 @@ This project was generated with the [Angular Full-Stack Generator](https://githu
 4. Run `grunt serve` to start the development server. It should automatically open the client in your browser when ready.
 
 ## Build & development
-
+* (local)  keep an instance of the MongoDB Daemon running
 Run `grunt build` for building and `grunt serve` for preview.
+or
+Run 'node start' for starting the server.
 
 ## Testing
 
