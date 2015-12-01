@@ -26,9 +26,9 @@ This project based on WEBRTC technology.
 
 ## Build & development
 * (local)  keep an instance of the MongoDB Daemon running
-Run `grunt build` for building and `grunt serve` for preview.
+* Run `grunt build` for building and `grunt serve` for preview.
 or
-Run 'node start' for starting the server.
+* Run 'node start' for starting the server.
 
 ## Testing
 
