@@ -59,6 +59,14 @@ io.on('connection', function (socket) {
         io.in(data._session).emit('message created', msg);
       });
   });
+
+  // Listens for a new chat message
+  socket.on('typing new message', function (data) {
+
+      // Send message to those connected in the same session
+      io.in(data._session).emit('typing new message', data);
+  });
+
 });
 
 http.listen(3000, function () {
