@@ -2,7 +2,8 @@
 
 var express = require('express');
 var controller = require('./session.controller');
-var server   = require('http').Server(express);
+
+var router = express.Router();
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);

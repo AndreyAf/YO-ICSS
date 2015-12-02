@@ -16,7 +16,9 @@ angular.module('icssApp')
     $rootScope.showSidebar = true;
 
     $rootScope.currentChat = {
-      session: null,
+      session: {
+        _id : '123123'
+      },
       messages: []
     };
 

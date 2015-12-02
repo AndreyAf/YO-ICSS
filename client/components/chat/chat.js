@@ -14,11 +14,11 @@
 
       socket: socket,
 
-      sendMessage: function (message) {
+      sendMessage: function (message, _session, _user) {
         // send message
         socket.emit('new message', {
-          _session: $rootScope.currentChat.session._id,
-          _sender: Auth.getCurrentUser()._id,
+          _session: _session,
+          _sender: _user,
           content: message
         });
 

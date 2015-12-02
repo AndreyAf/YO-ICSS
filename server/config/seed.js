@@ -7,17 +7,6 @@
 import User from '../api/user/user.model';
 import Session from '../api/session/session.model';
 
-
-Session.find({}).removeAsync()
-  .then(function () {
-    Session.createAsync({
-        title: 'Global session'
-      })
-      .then(function () {
-        console.log('finished populating sessions');
-      });
-  });
-
 User.find({}).removeAsync()
   .then(function () {
     User.createAsync({

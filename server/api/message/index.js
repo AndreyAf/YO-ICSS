@@ -5,6 +5,8 @@ var controller = require('./message.controller');
 var http = require('http').Server(express);
 var io = require('socket.io')(http);
 
+var Message = require('./message.model');
+
 var router = express.Router();
 
 router.get('/', controller.index);
@@ -21,7 +23,7 @@ io.on('connection', function(socket) {
   socket.on('new user', function(data) {
 
     // TODO: get or create session
-    data._session = '123';
+    data._session = '123123';
 
     // New user joins the session
     socket.join(data._session);
@@ -55,7 +57,7 @@ io.on('connection', function(socket) {
     newMsg.save(function(err, msg){
 
       // Send message to those connected in the session
-      io.in(msg._session).emit('message created', msg);
+      io.in(data._session).emit('message created', msg);
     });
 
   });
