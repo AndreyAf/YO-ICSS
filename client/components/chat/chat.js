@@ -6,13 +6,15 @@
 
     function ChatSvc() {
 
-        var connection = new RTCMultiConnection();
+        //var connection = new RTCMultiConnection();
+        //
+        //connection.session = {
+        //    data: true
+        //};
+        //
+        //var session = 'dhjshjsdf435345';
 
-        connection.session = {
-            data: true
-        };
-
-        var session = 'dhjshjsdf435345';
+      var socket = io();
 
         var svc = {
 
@@ -207,6 +209,16 @@
             sendMessage: function (message) {
                 //svc.connection.connect('sessionToken');
                 //svc.connection.send(message);
+
+              io.on('connection', function(socket){
+
+                socket.emit('chat message', message);
+
+                console.log('a user connected');
+                socket.on('disconnect', function(){
+                  console.log('user disconnected');
+                });
+              });
             },
 
             renewLogin: function () {
