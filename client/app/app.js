@@ -1,15 +1,18 @@
 'use strict';
 
-angular.module('generatorAngularFullstackMasterApp', [
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'btford.socket-io',
-  'ui.router',
-  'ui.bootstrap',
-  'validation.match'
-])
-  .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+angular.module('icssApp', [
+    'ngCookies',
+    'ngResource',
+    'ngSanitize',
+    'btford.socket-io',
+    'ui.router',
+    'ui.bootstrap',
+    'validation.match',
+    'ngTouch',
+    'sun.scrollable',
+    'emojiApp'
+  ])
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
       .otherwise('/');
 
@@ -17,11 +20,11 @@ angular.module('generatorAngularFullstackMasterApp', [
     $httpProvider.interceptors.push('authInterceptor');
   })
 
-  .factory('authInterceptor', function($rootScope, $q, $cookies, $injector) {
+  .factory('authInterceptor', function ($rootScope, $q, $cookies, $injector) {
     var state;
     return {
       // Add authorization token to headers
-      request: function(config) {
+      request: function (config) {
         config.headers = config.headers || {};
         if ($cookies.get('token')) {
           config.headers.Authorization = 'Bearer ' + $cookies.get('token');
@@ -30,7 +33,7 @@ angular.module('generatorAngularFullstackMasterApp', [
       },
 
       // Intercept 401s and redirect you to login
-      responseError: function(response) {
+      responseError: function (response) {
         if (response.status === 401) {
           (state || (state = $injector.get('$state'))).go('login');
           // remove any stale tokens
@@ -44,11 +47,11 @@ angular.module('generatorAngularFullstackMasterApp', [
     };
   })
 
-  .run(function($rootScope, $state, Auth) {
+  .run(function ($rootScope, $state, Auth) {
     // Redirect to login if route requires auth and the user is not logged in
-    $rootScope.$on('$stateChangeStart', function(event, next) {
+    $rootScope.$on('$stateChangeStart', function (event, next) {
       if (next.authenticate) {
-        Auth.isLoggedIn(function(loggedIn) {
+        Auth.isLoggedIn(function (loggedIn) {
           if (!loggedIn) {
             event.preventDefault();
             $state.go('login');

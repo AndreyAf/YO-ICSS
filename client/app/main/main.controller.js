@@ -27,7 +27,7 @@ function MainController($scope, $http, socket) {
   });
 }
 
-angular.module('generatorAngularFullstackMasterApp')
+angular.module('icssApp')
   .controller('MainController', MainController);
 
 })();

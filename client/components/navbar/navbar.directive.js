@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('generatorAngularFullstackMasterApp')
+angular.module('icssApp')
   .directive('navbar', function () {
     return {
       templateUrl: 'components/navbar/navbar.html',

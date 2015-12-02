@@ -217,7 +217,7 @@ module.exports = function (grunt) {
     // Automatically inject Bower components into the app and karma.conf.js
     wiredep: {
       options: {
-        exclude: [ 
+        exclude: [
           /bootstrap.js/,
           '/json3/',
           '/es5-shim/',
@@ -304,7 +304,7 @@ module.exports = function (grunt) {
     ngtemplates: {
       options: {
         // This should be the name of your apps angular module
-        module: 'generatorAngularFullstackMasterApp',
+        module: 'icssApp',
         htmlmin: {
           collapseBooleanAttributes: true,
           collapseWhitespace: true,

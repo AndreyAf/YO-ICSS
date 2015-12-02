@@ -1,9 +1,10 @@
 'use strict';
 
+// TODO: write testing to chat controller
 describe('Controller: ChatCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('generatorAngularFullstackMasterApp'));
+  beforeEach(module('icssApp'));
 
   var ChatCtrl, scope;
 

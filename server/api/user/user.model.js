@@ -6,6 +6,22 @@ var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
   name: String,
+  status: {
+    type: String,
+    default: 'live'
+  },
+  statusMsg: {
+    type: String,
+    default: 'My personal status'
+  },
+  img: {
+    type: String,
+    default: 'assets/images/user.png'
+  },
+  sessionToken: {
+    type: String,
+    default: 'avshkmdvkashf1241314'
+  },
   email: {
     type: String,
     lowercase: true
@@ -26,7 +42,7 @@ var UserSchema = new Schema({
 // Public profile information
 UserSchema
   .virtual('profile')
-  .get(function() {
+  .get(function () {
     return {
       'name': this.name,
       'roles': this.roles
@@ -36,7 +52,7 @@ UserSchema
 // Non-sensitive info we'll be putting in the token
 UserSchema
   .virtual('token')
-  .get(function() {
+  .get(function () {
     return {
       '_id': this._id,
       'roles': this.roles
@@ -50,24 +66,24 @@ UserSchema
 // Validate empty email
 UserSchema
   .path('email')
-  .validate(function(email) {
+  .validate(function (email) {
     return email.length;
   }, 'Email cannot be blank');
 
 // Validate empty password
 UserSchema
   .path('password')
-  .validate(function(password) {
+  .validate(function (password) {
     return password.length;
   }, 'Password cannot be blank');
 
 // Validate email is not taken
 UserSchema
   .path('email')
-  .validate(function(value, respond) {
+  .validate(function (value, respond) {
     var self = this;
-    return this.constructor.findOneAsync({ email: value })
-      .then(function(user) {
+    return this.constructor.findOneAsync({email: value})
+      .then(function (user) {
         if (user) {
           if (self.id === user.id) {
             return respond(true);
@@ -76,12 +92,12 @@ UserSchema
         }
         return respond(true);
       })
-      .catch(function(err) {
+      .catch(function (err) {
         throw err;
       });
   }, 'The specified email address is already in use.');
 
-var validatePresenceOf = function(value) {
+var validatePresenceOf = function (value) {
   return value && value.length;
 };
 
@@ -89,7 +105,7 @@ var validatePresenceOf = function(value) {
  * Pre-save hook
  */
 UserSchema
-  .pre('save', function(next) {
+  .pre('save', function (next) {
     // Handle new/update passwords
     if (this.isModified('password')) {
       if (!validatePresenceOf(this.password)) {
@@ -98,12 +114,12 @@ UserSchema
 
       // Make salt with a callback
       var _this = this;
-      this.makeSalt(function(saltErr, salt) {
+      this.makeSalt(function (saltErr, salt) {
         if (saltErr) {
           next(saltErr);
         }
         _this.salt = salt;
-        _this.encryptPassword(_this.password, function(encryptErr, hashedPassword) {
+        _this.encryptPassword(_this.password, function (encryptErr, hashedPassword) {
           if (encryptErr) {
             next(encryptErr);
           }
@@ -128,13 +144,13 @@ UserSchema.methods = {
    * @return {Boolean}
    * @api public
    */
-  authenticate: function(password, callback) {
+  authenticate: function (password, callback) {
     if (!callback) {
       return this.password === this.encryptPassword(password);
     }
 
     var _this = this;
-    this.encryptPassword(password, function(err, pwdGen) {
+    this.encryptPassword(password, function (err, pwdGen) {
       if (err) {
         callback(err);
       }
@@ -156,7 +172,7 @@ UserSchema.methods = {
    * @return {String}
    * @api public
    */
-  makeSalt: function(byteSize, callback) {
+  makeSalt: function (byteSize, callback) {
     var defaultByteSize = 16;
 
     if (typeof arguments[0] === 'function') {
@@ -175,7 +191,7 @@ UserSchema.methods = {
       return crypto.randomBytes(byteSize).toString('base64');
     }
 
-    return crypto.randomBytes(byteSize, function(err, salt) {
+    return crypto.randomBytes(byteSize, function (err, salt) {
       if (err) {
         callback(err);
       }
@@ -191,7 +207,7 @@ UserSchema.methods = {
    * @return {String}
    * @api public
    */
-  encryptPassword: function(password, callback) {
+  encryptPassword: function (password, callback) {
     if (!password || !this.salt) {
       return null;
     }
@@ -202,10 +218,10 @@ UserSchema.methods = {
 
     if (!callback) {
       return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength)
-                   .toString('base64');
+        .toString('base64');
     }
 
-    return crypto.pbkdf2(password, salt, defaultIterations, defaultKeyLength, function(err, key) {
+    return crypto.pbkdf2(password, salt, defaultIterations, defaultKeyLength, function (err, key) {
       if (err) {
         callback(err);
       }

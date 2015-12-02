@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('generatorAngularFullstackMasterApp')
+angular.module('icssApp')
   .config(function($stateProvider) {
     $stateProvider
       .state('login', {

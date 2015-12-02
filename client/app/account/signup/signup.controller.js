@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('generatorAngularFullstackMasterApp')
+angular.module('icssApp')
   .controller('SignupCtrl', function($scope, Auth, $state) {
     $scope.user = {};
     $scope.errors = {};

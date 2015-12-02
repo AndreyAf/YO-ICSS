@@ -1,10 +1,13 @@
 'use strict';
 
-angular.module('generatorAngularFullstackMasterApp')
+angular.module('icssApp')
   .controller('NavbarCtrl', function ($scope, Auth) {
     $scope.menu = [{
       'title': 'Home',
       'state': 'main'
+    }, {
+      'title': 'Chat',
+      'state': 'chat'
     }];
 
     $scope.isCollapsed = true;

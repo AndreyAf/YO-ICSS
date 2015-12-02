@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('generatorAngularFullstackMasterApp')
+angular.module('icssApp')
   .directive('footer', function () {
     return {
       templateUrl: 'components/footer/footer.html',

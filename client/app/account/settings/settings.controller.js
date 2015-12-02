@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('generatorAngularFullstackMasterApp')
+angular.module('icssApp')
   .controller('SettingsCtrl', function($scope, User, Auth) {
     $scope.errors = {};
 

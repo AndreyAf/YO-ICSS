@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('generatorAngularFullstackMasterApp')
+angular.module('icssApp')
   .factory('Modal', function ($rootScope, $modal) {
     /**
      * Opens a modal

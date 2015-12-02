@@ -1,0 +1,25 @@
+<div class="profile-image">
+    <img ng-src="{{vm.user.img}}" class="img-circle img-responsive">
+    <div class="user-status"></div>
+</div>
+<div class="profile-info">
+    <label class="user-info-name" ng-bind="vm.user.name"></label>
+    <small class="user-info-status" ng-bind="vm.user.status"></small>
+</div>
+<div class="profile-settings">
+    <div class="dropdown">
+        <a href="" class="dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" uib-tooltip="Options menu" tooltip-placement="right"
+           aria-expanded="true">
+            <span class="glyphicon glyphicon-cog"></span>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+            <li><a href="#">New group</a></li>
+            <li><a href="#">New company</a></li>
+            <li><a href="#">Setting</a></li>
+            <li><a href="" ng-click="vm.setFullScreenStatus()"><span ng-class="vm.isFullscreen ? 'glyphicon glyphicon-ok' : ''"></span>  Full screen</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Log out</a></li>
+        </ul>
+    </div>
+</div>
+</div>

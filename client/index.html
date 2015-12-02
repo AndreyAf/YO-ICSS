@@ -13,6 +13,8 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/nanoscroller/bin/css/nanoscroller.css" />
+      <link rel="stylesheet" href="bower_components/angular-emoji-popup/dist/css/emoji.min.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -21,13 +23,13 @@
       <!-- endinjector -->
     <!-- endbuild -->
   </head>
-  <body ng-app="generatorAngularFullstackMasterApp">
+  <body ng-app="icssApp">
     <!--[if lt IE 7]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ui-view=""></div>
+    <div ui-view="" style="height: 100%;"></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
@@ -52,6 +54,12 @@
       <script src="bower_components/angular-cookies/angular-cookies.js"></script>
       <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+      <script src="bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js"></script>
+      <script src="bower_components/angular-nanoscroller/scrollable.js"></script>
+      <script src="bower_components/angular-emoji-popup/dist/js/config.js"></script>
+      <script src="bower_components/angular-emoji-popup/dist/js/emoji.min.js"></script>
+      <script src="bower_components/angular-touch/angular-touch.js"></script>
+      <script src="bower_components/rtcmulticonnection/RTCMultiConnection.js"></script>
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
       <script src="bower_components/angular-socket-io/socket.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
@@ -68,10 +76,19 @@
       <script src="app/account/signup/signup.controller.js"></script>
       <script src="app/admin/admin.controller.js"></script>
       <script src="app/admin/admin.js"></script>
+      <script src="app/chat/chat.controller.js"></script>
+      <script src="app/chat/chat.js"></script>
       <script src="app/main/main.controller.js"></script>
       <script src="app/main/main.js"></script>
       <script src="components/auth/auth.service.js"></script>
       <script src="components/auth/user.service.js"></script>
+      <script src="components/chat/chat.js"></script>
+      <script src="components/chatMain/chatMain.js"></script>
+      <script src="components/chatMainEmpty/chatMainEmpty.js"></script>
+      <script src="components/chatSidebar/sidebar.js"></script>
+      <script src="components/chatSidebarListItemSingle/sidebarListItemSingle.js"></script>
+      <script src="components/chatSidebarProfile/sidebarProfile.js"></script>
+      <script src="components/chatSidebarTabs/chatSidebarTabs.js"></script>
       <script src="components/footer/footer.directive.js"></script>
       <script src="components/modal/modal.service.js"></script>
       <script src="components/mongoose-error/mongoose-error.directive.js"></script>

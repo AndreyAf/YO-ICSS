@@ -3,7 +3,7 @@
 /**
  * Removes server error when user updates input
  */
-angular.module('generatorAngularFullstackMasterApp')
+angular.module('icssApp')
   .directive('mongooseError', function () {
     return {
       restrict: 'A',

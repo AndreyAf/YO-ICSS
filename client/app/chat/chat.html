@@ -1,1 +1,26 @@
-<div>This is the chat view.</div>
+<div class="chat-container"
+     ng-class="isFullscreen ? 'container-fluid' : 'container'"
+     ng-keyup="keyup($event.keyCode)"
+     ng-swipe-left="showSidebar = false"
+     ng-swipe-right="showSidebar = true">
+  <div class="full-height">
+
+    <div class="chat-sidebar" ng-show="showSidebar">
+      <ic-sidebar-profile user="currentUser"></ic-sidebar-profile>
+      <ic-sidebar-tabs users="users" companies="companies"></ic-sidebar-tabs>
+    </div>
+
+    <div class="chat-main" ng-hide="!currentChat.user" ng-class="{'full-width': !showSidebar}">
+      <div class="doggle-btn" ng-click="showSidebar = !showSidebar">
+        <span class="glyphicon" ng-class="showSidebar ? 'glyphicon-chevron-left' : 'glyphicon-chevron-right'"></span>
+      </div>
+      <ic-chat-main></ic-chat-main>
+    </div>
+    <div class="chat-main" ng-show="!currentChat.user">
+      <div class="doggle-btn" ng-click="showSidebar = !showSidebar">
+        <span class="glyphicon" ng-class="showSidebar ? 'glyphicon-chevron-left' : 'glyphicon-chevron-right'"></span>
+      </div>
+      <ic-chat-main-empty></ic-chat-main-empty>
+    </div>
+  </div>
+</div>

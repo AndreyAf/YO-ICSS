@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('generatorAngularFullstackMasterApp')
+angular.module('icssApp')
   .factory('Auth', function Auth($http, User, $cookies, $q) {
     /**
      * Return a callback or noop function
