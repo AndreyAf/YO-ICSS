@@ -2,9 +2,7 @@
 
   'use strict';
 
-  angular.module('icssApp').factory('ciSessionSvc', SessionSvc);
-
-  function SessionSvc(Session, Auth) {
+  function SessionSvc() {
 
     // Get session by current user and other user / group / company
     //var setSession = function (type,_otherUser) {
@@ -36,5 +34,7 @@
 
     return svc;
   }
+
+  angular.module('icssApp').factory('ciSessionSvc', SessionSvc);
 
 })();

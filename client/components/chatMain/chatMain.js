@@ -3,13 +3,6 @@
   'use strict';
 
   angular.module('icssApp').directive('icChatMain', function () {
-    return {
-      restrict: 'E',
-      scope: {},
-      templateUrl: 'components/chatMain/chatMain.html',
-      controllerAs: 'vm',
-      controller: icChatMain
-    };
 
     // @ngInject
     function icChatMain(ciChatSvc, $rootScope, Auth, $timeout) {
@@ -34,13 +27,13 @@
         });
 
         // On enter pressed send message
-        if (data == 13) {
+        if (data === 13) {
           vm.sendMessage();
         }
       });
 
       vm.isCurrentUser = function(_id){
-        return Auth.getCurrentUser()._id == _id;
+        return Auth.getCurrentUser()._id === _id;
       };
 
       /***
@@ -55,7 +48,7 @@
        */
       ciChatSvc.socket.on('typing new message', function (data) {
         // timeout limited
-        if(data._sender != Auth.getCurrentUser()._id){
+        if(data._sender !== Auth.getCurrentUser()._id){
 
           vm.isTyping = true;
 
@@ -72,10 +65,18 @@
 
         ciChatSvc.sendMessage(vm.emojiMessage.messagetext, _session);
 
-        vm.emojiMessage.messagetext = "";
-        vm.emojiMessage.rawhtml = "";
+        vm.emojiMessage.messagetext = '';
+        vm.emojiMessage.rawhtml = '';
       };
     }
+
+    return {
+      restrict: 'E',
+      scope: {},
+      templateUrl: 'components/chatMain/chatMain.html',
+      controllerAs: 'vm',
+      controller: icChatMain
+    };
 
   });
 })();

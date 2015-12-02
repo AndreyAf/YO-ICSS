@@ -1,37 +1,38 @@
 (function () {
 
-    'use strict';
+  'use strict';
 
-    angular.module('icssApp').directive('icSidebarListItemSingle', function () {
-        return {
-            restrict: 'E',
-            scope: {
-                item: '='
-            },
-            templateUrl: 'components/chatSidebarListItemSingle/sidebarListItemSingle.html',
-            controllerAs: 'vm',
-            controller: icSidebarListItemSingle
+  angular.module('icssApp').directive('icSidebarListItemSingle', function () {
+
+    // @ngInject
+    function icSidebarListItemSingle($scope, $rootScope, ciChatSvc) {
+      var vm = this; //jshint ignore:line
+
+      // TODO: get current user data
+      vm.user = $scope.item;
+
+      vm.selectItem = function (user) {
+        $rootScope.currentChat = {
+          user: user,
+          messages: []
         };
 
-        // @ngInject
-        function icSidebarListItemSingle($scope, $rootScope, ciChatSvc) {
-            var vm = this; //jshint ignore:line
+        ciChatSvc.socket.emit('new user', {
+          username: 'demo user'
+        });
+      };
 
-            // TODO: get current user data
-            vm.user = $scope.item;
+    }
 
-            vm.selectItem = function (user) {
-                $rootScope.currentChat = {
-                    user: user,
-                    messages: []
-                };
+    return {
+      restrict: 'E',
+      scope: {
+        item: '='
+      },
+      templateUrl: 'components/chatSidebarListItemSingle/sidebarListItemSingle.html',
+      controllerAs: 'vm',
+      controller: icSidebarListItemSingle
+    };
 
-              ciChatSvc.socket.emit('new user', {
-                username: 'demo user'
-              });
-            };
-
-
-        }
-    });
+  });
 })();

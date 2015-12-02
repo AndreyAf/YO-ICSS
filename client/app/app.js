@@ -65,7 +65,7 @@ angular.module('icssApp', [
         if (next.roles) {
 
           // Check if the current users has one of route roles
-          if ((_.intersection(next.roles, Auth.getRoles())).length == 0) {
+          if ((_.intersection(next.roles, Auth.getRoles())).length === 0) {
             event.preventDefault();
             $state.go('login');
           }

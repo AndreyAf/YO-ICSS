@@ -2,7 +2,7 @@
 (function() {
 
 function MainController(Auth) {
-  var self = this;
+  //var self = this;
 
   this.isLoggedIn = function(){
     return Auth.isLoggedIn;

@@ -154,7 +154,7 @@ angular.module('icssApp')
         }
 
         return this.getCurrentUser(null)
-          .then(function (user) {
+          .then(function () {
 
             var is = false;
             for (var i in currentUser.roles) {

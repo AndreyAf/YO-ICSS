@@ -2,8 +2,6 @@
 
   'use strict';
 
-  angular.module('icssApp').factory('ciChatSvc', ChatSvc);
-
   function ChatSvc(socketFactory, Message, $rootScope, Auth) {
 
     // TODO: rewrite server address
@@ -26,5 +24,7 @@
 
     return svc;
   }
+
+  angular.module('icssApp').factory('ciChatSvc', ChatSvc);
 
 })();
