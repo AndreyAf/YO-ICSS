@@ -12,7 +12,7 @@
         };
 
         // @ngInject
-        function icChatMain(ciChatSvc, $rootScope) {
+        function icChatMain(ciChatSvc, $rootScope, Auth) {
             var vm = this; //jshint ignore:line
 
             vm.users = ciChatSvc.getPrivateChats();
@@ -33,40 +33,20 @@
                 }
             });
 
-            vm.joinSession = function () {
+          ciChatSvc.socket.on('message created', function (data) {
+            $rootScope.currentChat.messages.push(data);
+          });
 
-                ciChatSvc.connection.close();
-
-                ciChatSvc.connection.join('dhjshjsdf435345');
-            };
-
-            ciChatSvc.connection.onmessage = function (e) {
-                $rootScope.currentChat.messages.push(
-                    {
-                        content: e.data,
-                        sent: 'remote date'
-                    }
-                );
-
-                $rootScope.$apply();
-            };
 
             vm.sendMessage = function () {
 
-                // TODO: finish that
-                var message = {
-                    content: vm.emojiMessage.messagetext,
-                    sentAt: new Date(),
-                    sendBy: ''
-                };
-
+                // Add message to list
                 $rootScope.currentChat.messages.push({
                     content: vm.emojiMessage.messagetext,
                     sent: new Date()
                 });
 
-                ciChatSvc.connection.send(vm.emojiMessage.messagetext);
-                //ciChatSvc.sendMessage(vm.emojiMessage.messagetext);
+                ciChatSvc.sendMessage(vm.emojiMessage.messagetext);
 
                 vm.emojiMessage.messagetext = "";
                 vm.emojiMessage.rawhtml = "";

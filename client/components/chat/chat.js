@@ -1,232 +1,35 @@
 (function () {
 
-    'use strict';
+  'use strict';
 
-    angular.module('icssApp').factory('ciChatSvc', ChatSvc);
+  angular.module('icssApp').factory('ciChatSvc', ChatSvc);
 
-    function ChatSvc() {
+  function ChatSvc(socketFactory, Message, $rootScope, Auth) {
 
-        //var connection = new RTCMultiConnection();
-        //
-        //connection.session = {
-        //    data: true
-        //};
-        //
-        //var session = 'dhjshjsdf435345';
+    var myIoSocket = io.connect('http://localhost:3000');
 
-      var socket = io();
+    var socket = socketFactory({ioSocket: myIoSocket});
 
-        var svc = {
+    var svc = {
 
-            connection: connection,
+      socket: socket,
 
-            startChat :  function(){
+      sendMessage: function (message) {
+        // send message
+        socket.emit('new message', {
+          _session: $rootScope.currentChat.session._id,
+          _sender: Auth.getCurrentUser()._id,
+          content: message
+        });
 
-                connection.open(session);
-            },
+      },
 
-            isFullscreen: false,
+      renewLogin: function () {
+      }
 
-            getCompaniesChats: function () {
-                return [
-                    {
-                        name: 'comnany_1',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'comnany_1',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'comnany_1',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'comnany_1',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'comnany_1',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'comnany_1',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'comnany_1',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'comnany_1',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'comnany_1',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'comnany_1',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'comnany_1',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'comnany_1',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }
-                ]
+    };
 
-            },
-
-            getPrivateChats: function () {
-                return [
-                    {
-                        name: 'Israel Israeli1',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png',
-                        sessionToken: 'avshkmdvkashf1241314'
-                    }, {
-                        name: 'Israel Israeli2',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'Israel Israeli3',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'Israel Israeli4',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'Israel Israeli5',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'Israel Israeli6',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'Israel Israeli2',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'Israel Israeli3',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'Israel Israeli4',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'Israel Israeli5',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'Israel Israeli6',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'Israel Israeli2',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'Israel Israeli3',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'Israel Israeli4',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'Israel Israeli5',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'Israel Israeli6',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'Israel Israeli2',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'Israel Israeli3',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'Israel Israeli4',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'Israel Israeli5',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }, {
-                        name: 'Israel Israeli6',
-                        status: 'live',
-                        statusMsg: 'Hello world',
-                        img: 'assets/images/user.png'
-                    }
-                ]
-            },
-
-            sendMessage: function (message) {
-                //svc.connection.connect('sessionToken');
-                //svc.connection.send(message);
-
-              io.on('connection', function(socket){
-
-                socket.emit('chat message', message);
-
-                console.log('a user connected');
-                socket.on('disconnect', function(){
-                  console.log('user disconnected');
-                });
-              });
-            },
-
-            renewLogin: function () {
-            }
-
-        };
-
-        return svc;
-    }
+    return svc;
+  }
 
 })();
