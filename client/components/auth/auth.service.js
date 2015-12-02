@@ -165,6 +165,14 @@ angular.module('icssApp')
           });
       },
 
+        /***
+         * Returns current user roles
+         * @returns {Array|*|Object[]}
+         */
+      getRoles: function(){
+        return currentUser.roles;
+      },
+
       /**
        * Get auth token
        *

@@ -48,8 +48,10 @@ angular.module('icssApp', [
   })
 
   .run(function ($rootScope, $state, Auth) {
-    // Redirect to login if route requires auth and the user is not logged in
+    // Route state change (before open)
     $rootScope.$on('$stateChangeStart', function (event, next) {
+
+      // Check if the user need to login before open this route
       if (next.authenticate) {
         Auth.isLoggedIn(function (loggedIn) {
           if (!loggedIn) {
@@ -57,6 +59,17 @@ angular.module('icssApp', [
             $state.go('login');
           }
         });
+
+        // Check if route contain roles
+        if (next.roles) {
+
+          // Check if the current users has one of route roles
+          if ((_.intersection(next.roles, Auth.getRoles())).length == 0) {
+            event.preventDefault();
+            $state.go('login');
+          }
+        }
       }
+
     });
   });

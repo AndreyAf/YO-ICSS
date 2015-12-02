@@ -33,3 +33,11 @@ or
 ## Testing
 
 Running `npm test` will run the unit tests with karma.
+
+
+## Login info
+
+* Client: client@example.com : client 
+* Employee: employee@example.com : employee 
+* Manager: manager@example.com : manager 
+* Admin: admin@example.com : admin 

@@ -28,7 +28,7 @@ var UserSchema = new Schema({
   },
   roles: [{
     type: String,
-    default: 'client'
+    enum: ['client','employee','manager','admin']
   }],
   password: String,
   provider: String,
