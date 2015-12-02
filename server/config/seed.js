@@ -42,7 +42,7 @@ User.find({}).removeAsync()
         provider: 'local',
         roles: ['manager','client','employee'],
         name: 'Very_long_user_name Very_long_user_name Very_long_user_name',
-        email: 'manager@example.com',
+        email: 'managerr@example.com',
         password: 'manager'
       })
       .then(function () {

@@ -39,6 +39,10 @@
         }
       });
 
+      vm.isCurrentUser = function(_id){
+        return Auth.getCurrentUser()._id == _id;
+      };
+
       /***
        * Listen to new message created
        */

@@ -1,68 +1,70 @@
 <div class="chat-header">
-        <div class="chat-info col-xs-3">
-            <div class="row">
-                <div class="col-xs-3">
-                    <img ng-src="{{vm.currentChat.user.img}}" class="user-img img-circle img-responsive">
+  <div class="chat-info col-xs-3">
+    <div class="row">
+      <div class="col-xs-3">
+        <img ng-src="{{vm.currentChat.user.img}}" class="user-img img-circle img-responsive">
 
-                    <div class="user-status"></div>
-                </div>
-                <div class="col-xs-9">
-                    <label class="user-info-name" ng-bind="vm.currentChat.user.name"></label>
-                    <small class="user-info-status" ng-bind="vm.currentChat.user.status"></small>
-                </div>
-            </div>
-        </div>
-        <div class="chat-functions col-xs-9">
-            <div class="pull-right">
-                <a class="chat-header-btn chat-video-call">
-                    <span class="glyphicon glyphicon-facetime-video"></span>
-                </a>
-                <a class="chat-header-btn chat-voice-call">
-                    <span class="glyphicon glyphicon-earphone"></span>
-                </a>
-                <a class="chat-header-btn chat-attachment">
-                    <span class="glyphicon glyphicon-paperclip"></span>
-                </a>
-                <a class="chat-header-btn chat-settings">
-                    <span class="glyphicon glyphicon-option-horizontal"></span>
-                </a>
-                <a class="btn btn-warning" href="" ng-click="vm.joinSession()">Join</a>
-            </div>
-        </div>
+        <div class="user-status"></div>
+      </div>
+      <div class="col-xs-9">
+        <label class="user-info-name" ng-bind="vm.currentChat.user.name"></label>
+        <small class="user-info-status" ng-bind="vm.currentChat.user.status"></small>
+      </div>
     </div>
-    <div class="chat-header-content">
-        <scrollable>
-            <div class="message-list" ng-repeat="message in vm.currentChat.messages track by $index">
-                <div class="message-list-box">
-                    <div class="message-item">
-                        <div class="message-sender col-xs-1">
-                            <img src="assets/images/user.png" class="user-img img-circle img-responsive">
-                        </div>
-                        <div class="message col-xs-11">
-                            <div class="content">
-                                <label>{{message._sender}}</label>
-                                <p>{{message.content}}</p>
-                                <small>{{message.created}}</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </scrollable>
-
+  </div>
+  <div class="chat-functions col-xs-9">
+    <div class="pull-right">
+      <a class="chat-header-btn chat-video-call">
+        <span class="glyphicon glyphicon-facetime-video"></span>
+      </a>
+      <a class="chat-header-btn chat-voice-call">
+        <span class="glyphicon glyphicon-earphone"></span>
+      </a>
+      <a class="chat-header-btn chat-attachment">
+        <span class="glyphicon glyphicon-paperclip"></span>
+      </a>
+      <a class="chat-header-btn chat-settings">
+        <span class="glyphicon glyphicon-option-horizontal"></span>
+      </a>
+      <a class="btn btn-warning" href="" ng-click="vm.joinSession()">Join</a>
     </div>
-    <div class="chat-header-footer">
-        <div class="chat-status" ng-show="vm.isTyping">Israel is typing...</div>
-        <div emoji-form emoji-message="vm.emojiMessage" class="send-message">
+  </div>
+</div>
+<div class="chat-header-content">
+  <scrollable>
+    <div class="message-list" ng-repeat="message in vm.currentChat.messages track by $index">
+      <div class="message-list-box">
+        <div class="message-item">
+          <div class="message-sender-info " ng-class="vm.isCurrentUser(message._sender)? 'pull-right': 'pull-left'">
+            <div class="message-sender">
+              <img src="assets/images/user.png" class="user-img img-circle img-responsive">
+            </div>
+          </div>
+          <div class="message"  ng-class="vm.isCurrentUser(message._sender)? 'pull-left': 'pull-right'">
+            <div class="content">
+              <label>{{message._sender}}</label>
+              <p>{{message.content}}</p>
+              <small>{{message.created}}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </scrollable>
+
+</div>
+<div class="chat-header-footer">
+  <div class="chat-status" ng-show="vm.isTyping">Israel is typing...</div>
+  <div emoji-form emoji-message="vm.emojiMessage" class="send-message">
         <textarea class="form-control send-message"
                   id="messageInput"
                   ng-model="vm.emojiMessage.messagetext"
                   placeholder="Write a message..."
                   ng-enter="vm.sendMessage()"></textarea>
-            <button id="emojibtn">
-                <i class="icon icon-emoji"></i>
-            </button>
-        </div>
-        <a href="" class="send-btn" ng-click="vm.sendMessage()">Send</a>
-    </div>
+    <button id="emojibtn">
+      <i class="icon icon-emoji"></i>
+    </button>
+  </div>
+  <a href="" class="send-btn" ng-click="vm.sendMessage()">Send</a>
+</div>
