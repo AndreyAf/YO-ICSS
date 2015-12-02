@@ -14,7 +14,7 @@
         };
 
         // @ngInject
-        function icSidebarListItemSingle($scope, $rootScope) {
+        function icSidebarListItemSingle($scope, $rootScope, ciChatSvc) {
             var vm = this; //jshint ignore:line
 
             // TODO: get current user data
@@ -25,11 +25,13 @@
                     user: user,
                     messages: []
                 };
+
+              ciChatSvc.socket.emit('new user', {
+                username: 'demo user'
+              });
             };
 
-          ciChatSvc.socket.emit('new user', {
-            username: 'demo user'
-          });
+
         }
     });
 })();

@@ -16,11 +16,11 @@ router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 
-io.on('connection', function(socket) {
+io.on('connection', function (socket) {
 
 
   // Listens for new user
-  socket.on('new user', function(data) {
+  socket.on('new user', function (data) {
 
     // TODO: get or create session
     data._session = '123123';
@@ -33,7 +33,7 @@ io.on('connection', function(socket) {
   });
 
   //Listens for switch room
-  socket.on('switch room', function(data) {
+  socket.on('switch room', function (data) {
 
     // Handles joining and leaving rooms
     socket.leave(data._oldSession);
@@ -44,26 +44,24 @@ io.on('connection', function(socket) {
   });
 
   // Listens for a new chat message
-  socket.on('new message', function(data) {
+  socket.on('new message', function (data) {
 
-    // Create message
     var newMsg = new Message({
       content: data.content,
       _sender: data._sender,
       _session: data._session
     });
+    newMsg.save()
+      .then(function (msg) {
+        console.log(msg);
 
-    // Save it to DB
-    newMsg.save(function(err, msg){
-
-      // Send message to those connected in the session
-      io.in(data._session).emit('message created', msg);
-    });
-
+        // Send message to those connected in the same session
+        io.in(data._session).emit('message created', msg);
+      });
   });
 });
 
-http.listen(3000, function(){
+http.listen(3000, function () {
   console.log('listening on *:3000');
 });
 

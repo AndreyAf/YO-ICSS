@@ -6,27 +6,22 @@
 
   function ChatSvc(socketFactory, Message, $rootScope, Auth) {
 
+    // TODO: rewrite server address
     var myIoSocket = io.connect('http://localhost:3000');
 
     var socket = socketFactory({ioSocket: myIoSocket});
 
     var svc = {
-
       socket: socket,
+      sendMessage: function (message, _session) {
 
-      sendMessage: function (message, _session, _user) {
-        // send message
+        // Send message
         socket.emit('new message', {
           _session: _session,
-          _sender: _user,
+          _sender: Auth.getCurrentUser()._id,
           content: message
         });
-
-      },
-
-      renewLogin: function () {
       }
-
     };
 
     return svc;

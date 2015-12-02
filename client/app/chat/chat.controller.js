@@ -1,14 +1,11 @@
 'use strict';
 
 angular.module('icssApp')
-  .controller('ChatCtrl', ['$scope', 'ciChatSvc','$rootScope','User', function ($scope, ciChatSvc,$rootScope,User, socket) {
-
-    $scope.users = User.query();
-
-    $scope.companies = [];
+  .controller('ChatCtrl', ['$scope','$rootScope', function ($scope,$rootScope) {
 
     $scope.keyup = function(keyupEvent){
 
+      // for other directive to listen
       $rootScope.$broadcast('keyup',keyupEvent);
     };
   }]);

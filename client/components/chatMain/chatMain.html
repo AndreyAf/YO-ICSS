@@ -32,7 +32,7 @@
     </div>
     <div class="chat-header-content">
         <scrollable>
-            <div class="message-list" ng-repeat="message in vm.currentChat.messages">
+            <div class="message-list" ng-repeat="message in vm.currentChat.messages track by $index">
                 <div class="message-list-box">
                     <div class="message-item">
                         <div class="message-sender col-xs-1">
@@ -40,10 +40,9 @@
                         </div>
                         <div class="message col-xs-11">
                             <div class="content">
-                                <label>Israel Israeli</label>
-
+                                <label>{{message._sender}}</label>
                                 <p>{{message.content}}</p>
-                                <small>{{message.sent}}</small>
+                                <small>{{message.created}}</small>
                             </div>
                         </div>
                     </div>
@@ -54,7 +53,7 @@
 
     </div>
     <div class="chat-header-footer">
-        <div class="chat-status">Israel is typing...</div>
+        <div class="chat-status" ng-show="vm.isTyping">Israel is typing...</div>
         <div emoji-form emoji-message="vm.emojiMessage" class="send-message">
         <textarea class="form-control send-message"
                   id="messageInput"

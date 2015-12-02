@@ -12,10 +12,12 @@
     };
 
     // @ngInject
-    function icChatMain(ciChatSvc, $rootScope, Auth) {
+    function icChatMain(ciChatSvc, $rootScope, Auth, $timeout) {
       var vm = this; //jshint ignore:line
 
       vm.emojiMessage = {};
+
+      vm.isTyping = false;
 
       vm.currentChat = $rootScope.currentChat;
 
@@ -24,36 +26,52 @@
       });
 
       $rootScope.$on('keyup', function (event, data) {
+
+        // Send message
+        ciChatSvc.socket.emit('typing new message', {
+          _session: '123123',
+          _sender: Auth.getCurrentUser()._id
+        });
+
+        // On enter pressed send message
         if (data == 13) {
           vm.sendMessage();
         }
       });
 
+      /***
+       * Listen to new message created
+       */
       ciChatSvc.socket.on('message created', function (data) {
         $rootScope.currentChat.messages.push(data);
       });
 
+      /***
+       * Listen to typing
+       */
+      ciChatSvc.socket.on('typing new message', function (data) {
+        // timeout limited
+        if(data._sender != Auth.getCurrentUser()._id){
+
+          vm.isTyping = true;
+
+          $timeout(function() {
+            vm.isTyping = false;
+          }, 1000);
+
+        }
+      });
+
       vm.sendMessage = function () {
 
-        // Add message to list
-        $rootScope.currentChat.messages.push({
-          content: vm.emojiMessage.messagetext,
-          sent: new Date()
-        });
-
-        //var _session = $rootScope.currentChat.session._id;
         var _session = '123123';
-        var _user = Auth.getCurrentUser();
 
-        ciChatSvc.sendMessage(vm.emojiMessage.messagetext, _session, _user);
+        ciChatSvc.sendMessage(vm.emojiMessage.messagetext, _session);
 
         vm.emojiMessage.messagetext = "";
         vm.emojiMessage.rawhtml = "";
       };
-
-      vm.keyup = function (event) {
-        console.log('keyup', event);
-      };
     }
+
   });
 })();

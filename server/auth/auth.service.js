@@ -4,6 +4,7 @@ import passport from 'passport';
 import config from '../config/environment';
 import jwt from 'jsonwebtoken';
 import expressJwt from 'express-jwt';
+import _ from 'lodash';
 import compose from 'composable-middleware';
 import User from '../api/user/user.model';
 var validateJwt = expressJwt({
@@ -67,6 +68,27 @@ function hasRole(roleRequired) {
 }
 
 /**
+ * Checks if the user roles meets the minimum requirements of the route
+ */
+function hasRoles(rolesRequired) {
+  if (!rolesRequired) {
+    throw new Error('Required role needs to be set');
+  }
+
+  return compose()
+    .use(isAuthenticated())
+    .use(function meetsRequirements(req, res, next) {
+      if (_.intersection(rolesRequired, req.user.roles).length > 0) {
+        next();
+      }
+      else {
+        res.status(403).send('Forbidden');
+      }
+
+    });
+}
+
+/**
  * Returns a jwt token signed by the app secret
  */
 function signToken(id, roles) {
@@ -89,5 +111,6 @@ function setTokenCookie(req, res) {
 
 exports.isAuthenticated = isAuthenticated;
 exports.hasRole = hasRole;
+exports.hasRoles = hasRoles;
 exports.signToken = signToken;
 exports.setTokenCookie = setTokenCookie;
