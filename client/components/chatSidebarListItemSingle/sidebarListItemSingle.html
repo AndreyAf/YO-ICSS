@@ -5,8 +5,8 @@
             <div class="user-status"></div>
         </div>
         <div class="col-xs-9">
-            <label class="user-info-name" ng-bind="vm.user.name"></label>
-            <small class="user-info-status" ng-bind="vm.user.statusMsg"></small>
+            <label class="user-info-name" ng-text-truncate="vm.user.name" ng-tt-chars-threshold="20" ng-tt-no-toggling></label>
+            <small class="user-info-status" ng-text-truncate="vm.user.statusMsg" ng-tt-chars-threshold="20" ng-tt-no-toggling></small>
             <div class="pull-right">
                 <a class="chat-header-btn chat-video-call">
                     <span class="glyphicon glyphicon-facetime-video"></span>

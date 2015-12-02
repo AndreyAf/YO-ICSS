@@ -7,7 +7,7 @@ angular.module('icssApp')
         url: '/chat',
         templateUrl: 'app/chat/chat.html',
         controller: 'ChatCtrl',
-        roles: ['client'],
+        roles: ['client','employee','admin','manager'],
         authenticate: true
       });
   })

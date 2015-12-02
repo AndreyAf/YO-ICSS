@@ -10,7 +10,8 @@ angular.module('icssApp', [
     'validation.match',
     'ngTouch',
     'sun.scrollable',
-    'emojiApp'
+    'emojiApp',
+    'ngTextTruncate'
   ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
