@@ -41,3 +41,7 @@ Running `npm test` will run the unit tests with karma.
 * Employee: employee@example.com : employee 
 * Manager: manager@example.com : manager 
 * Admin: admin@example.com : admin 
+
+## devDependencies vs Dependencies
+* dependencies - run 'npm install' from a directory that contains 'package.json' or 'npm install $package' on any other directory. Those dependencies are required to run and devDependencies only to develop (e.g : unit tests, minification, ...)
+* devDependencies - run 'npm install' from a directory that contains 'package.json', unless you pass the '--production' flag. not installed on 'npm install $package' on any other directory. unless you give it the '--dev' flag.
