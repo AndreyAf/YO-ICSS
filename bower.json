@@ -17,6 +17,7 @@
     "angular-nanoscroller": "~0.2.1",
     "angular-emoji-popup": "~1.1.0",
     "angular-touch": "~1.4.8",
+    "font-awesome": ">=4.1.0",
     "rtcmulticonnection": "*",
     "lodash": "~2.4.1",
     "angular-socket-io": "~0.7.0",

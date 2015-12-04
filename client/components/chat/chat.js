@@ -5,7 +5,8 @@
   function ChatSvc(socketFactory, Message, $rootScope, Auth) {
 
     // TODO: rewrite server address
-    var myIoSocket = io.connect('https://icss-yo-v1.herokuapp.com:3000');
+    //var myIoSocket = io.connect('https://icss-yo-v1.herokuapp.com:3000');
+    var myIoSocket = io.connect('http://localhost:3000');
 
     var socket = socketFactory({ioSocket: myIoSocket});
 

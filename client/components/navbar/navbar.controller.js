@@ -7,7 +7,8 @@ angular.module('icssApp')
       'state': 'main'
     }, {
       'title': 'Chat',
-      'state': 'chat'
+      'state': 'chat',
+      'target': '_blank'
     }];
 
     $scope.isCollapsed = true;
