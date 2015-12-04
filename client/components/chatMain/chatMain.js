@@ -65,6 +65,9 @@
 
         ciChatSvc.sendMessage(vm.emojiMessage.messagetext, _session);
 
+        // TODO: rewrite - not the correct angular way
+        $(".nano").nanoScroller({ scrollBottom: 5 });
+
         vm.emojiMessage.messagetext = '';
         vm.emojiMessage.rawhtml = '';
       };
