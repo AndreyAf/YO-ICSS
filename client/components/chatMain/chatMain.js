@@ -11,6 +11,7 @@
       vm.emojiMessage = {};
 
       vm.isTyping = false;
+      vm.isVideoChat = false;
 
       vm.currentChat = $rootScope.currentChat;
 

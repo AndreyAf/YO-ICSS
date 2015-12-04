@@ -14,7 +14,7 @@
   </div>
   <div class="chat-functions col-xs-9">
     <div class="pull-right">
-      <a class="chat-header-btn chat-video-call">
+      <a class="chat-header-btn chat-video-call" ng-click="vm.isVideoChat = !vm.isVideoChat">
         <span class="glyphicon glyphicon-facetime-video"></span>
       </a>
       <a class="chat-header-btn chat-voice-call">
@@ -30,6 +30,7 @@
   </div>
 </div>
 <div class="chat-header-content">
+  <div ng-hide="vm.isVideoChat">
   <scrollable>
     <div class="scrollable-chat-container">
     <div class="message-list" ng-repeat="message in vm.currentChat.messages track by $index" >
@@ -52,7 +53,10 @@
     </div>
     </div>
   </scrollable>
-
+  </div>
+  <div ng-show="vm.isVideoChat" class="video-chat-content">
+    <div id="videoContainer"></div>
+  </div>
 </div>
 
 <div class="chat-header-footer">
