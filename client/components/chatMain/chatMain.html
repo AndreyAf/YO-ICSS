@@ -31,6 +31,7 @@
 </div>
 <div class="chat-header-content">
   <scrollable>
+    <div class="scrollable-chat-container">
     <div class="message-list" ng-repeat="message in vm.currentChat.messages track by $index" >
       <div class="message-list-box">
         <div class="message-item">
@@ -49,7 +50,7 @@
         </div>
       </div>
     </div>
-
+    </div>
   </scrollable>
 
 </div>
