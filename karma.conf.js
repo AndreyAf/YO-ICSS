@@ -20,8 +20,6 @@ module.exports = function(config) {
       'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'client/bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js',
       'client/bower_components/angular-nanoscroller/scrollable.js',
-      'client/bower_components/angular-emoji-popup/dist/js/config.js',
-      'client/bower_components/angular-emoji-popup/dist/js/emoji.min.js',
       'client/bower_components/angular-touch/angular-touch.js',
       'client/bower_components/rtcmulticonnection/RTCMultiConnection.js',
       'client/bower_components/lodash/dist/lodash.compat.js',

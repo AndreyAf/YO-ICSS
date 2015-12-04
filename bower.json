@@ -15,7 +15,6 @@
     "angular-sanitize": "~1.4.0",
     "angular-bootstrap": "~0.14.3",
     "angular-nanoscroller": "~0.2.1",
-    "angular-emoji-popup": "~1.1.0",
     "angular-touch": "~1.4.8",
     "font-awesome": ">=4.1.0",
     "rtcmulticonnection": "*",

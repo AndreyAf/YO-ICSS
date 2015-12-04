@@ -14,12 +14,12 @@
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/nanoscroller/bin/css/nanoscroller.css" />
-      <link rel="stylesheet" href="bower_components/angular-emoji-popup/dist/css/emoji.min.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
       <link rel="stylesheet" href="app/app.css">
       <!-- injector:css -->
+      <link rel="stylesheet" href="components/angular-emoji-popup/css/emoji.min.css">
       <!-- endinjector -->
     <!-- endbuild -->
   </head>
@@ -56,8 +56,6 @@
       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
       <script src="bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js"></script>
       <script src="bower_components/angular-nanoscroller/scrollable.js"></script>
-      <script src="bower_components/angular-emoji-popup/dist/js/config.js"></script>
-      <script src="bower_components/angular-emoji-popup/dist/js/emoji.min.js"></script>
       <script src="bower_components/angular-touch/angular-touch.js"></script>
       <script src="bower_components/rtcmulticonnection/RTCMultiConnection.js"></script>
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
@@ -81,6 +79,8 @@
       <script src="app/chat/chat.js"></script>
       <script src="app/main/main.controller.js"></script>
       <script src="app/main/main.js"></script>
+      <script src="components/angular-emoji-popup/config.js"></script>
+      <script src="components/angular-emoji-popup/emoji.min.js"></script>
       <script src="components/auth/auth.service.js"></script>
       <script src="components/auth/user.service.js"></script>
       <script src="components/chat/chat.js"></script>
