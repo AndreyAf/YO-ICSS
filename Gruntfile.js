@@ -523,7 +523,7 @@ module.exports = function (grunt) {
     less: {
       server: {
         files: {
-          '.tmp/app/app.css' : '<%= yeoman.client %>/app/app.less'
+          'client/app/app.css' : '<%= yeoman.client %>/app/app.less'
         }
       }
     },
