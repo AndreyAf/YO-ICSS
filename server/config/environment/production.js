@@ -15,10 +15,11 @@ module.exports = {
 
   // MongoDB connection options
   mongo: {
-    uri:    process.env.MONGOLAB_URI ||
-            process.env.MONGOHQ_URL ||
-            process.env.OPENSHIFT_MONGODB_DB_URL +
-            process.env.OPENSHIFT_APP_NAME ||
-            'mongodb://localhost/generatorangularfullstackmaster'
+    uri: "mongodb://ninickname:oneXone1@ds061974.mongolab.com:61974/icssyo"
+    //process.env.MONGOLAB_URI ||
+    //process.env.MONGOHQ_URL ||
+    //        process.env.OPENSHIFT_MONGODB_DB_URL +
+    //          process.env.OPENSHIFT_APP_NAME ||
+    //            'mongodb://localhost/generatorangularfullstackmaster'
   }
 };
