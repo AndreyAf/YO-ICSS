@@ -20,6 +20,9 @@ angular.module('icssApp', [
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
   })
+  .constant('config', {
+    SIGNALIG_SERVER_URL: undefined
+  })
 
   .factory('authInterceptor', function ($rootScope, $q, $cookies, $injector) {
     var state;
@@ -49,6 +52,13 @@ angular.module('icssApp', [
   })
 
   .run(function ($rootScope, $state, Auth) {
+
+    $rootScope.$on('$stateChangeSuccess', function (event, current, previous) {
+      if(current.title) {
+        $rootScope.title = current.title;
+      }
+    });
+
     // Route state change (before open)
     $rootScope.$on('$stateChangeStart', function (event, next) {
 

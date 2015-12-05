@@ -4,6 +4,7 @@ angular.module('icssApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('chat', {
+        title: 'Chat',
         url: '/chat',
         templateUrl: 'app/chat/chat.html',
         controller: 'ChatCtrl',
