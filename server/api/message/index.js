@@ -6,7 +6,7 @@ var http = require('http').Server(express);
 var io = require('socket.io')(http);
 
 var Message = require('./message.model');
-var port = 3000;
+var port =  5000;
 var router = express.Router();
 
 router.get('/', controller.index);
@@ -16,11 +16,13 @@ router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 
-io.configure(function () {
-  io.set("transports", ["xhr-polling"]);
-  io.set("polling duration", 10);
-});
 
+//io.configure(function () {
+//  io.set("transports", ["xhr-polling"]);
+//  io.set("polling duration", 10);
+//});
+
+//
 io.on('connection', function (socket) {
 
 
