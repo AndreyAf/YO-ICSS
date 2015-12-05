@@ -12,13 +12,14 @@ angular.module('icssApp')
         authenticate: true
       });
   })
-  .run(function ($rootScope) {
+  .run(function ($rootScope,ciSessionSvc) {
     $rootScope.isFullscreen = false;
     $rootScope.showSidebar = true;
 
+    // TODO: delete and put in service ciSessionSvc
     $rootScope.currentChat = {
       session: {
-        _id : '123123'
+        _id : ciSessionSvc.getSession()._id
       },
       messages: []
     };

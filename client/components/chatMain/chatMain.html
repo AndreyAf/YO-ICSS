@@ -30,32 +30,41 @@
   </div>
 </div>
 <div class="chat-header-content">
-  <div ng-hide="vm.isVideoChat">
-  <scrollable>
-    <div class="scrollable-chat-container">
-    <div class="message-list" ng-repeat="message in vm.currentChat.messages track by $index" >
-      <div class="message-list-box">
-        <div class="message-item">
-          <div class="message-sender-info " ng-class="vm.isCurrentUser(message._sender)? 'pull-right': 'pull-left'">
-            <div class="message-sender">
-              <img src="assets/images/user.png" class="user-img img-circle img-responsive">
-            </div>
-          </div>
-          <div class="message"  ng-class="vm.isCurrentUser(message._sender)? 'pull-left': 'pull-right'">
-            <div class="content">
-              <label>{{message._sender}}</label>
-              <p>{{message.content}}</p>
-              <small>{{message.created}}</small>
+  <div ng-hide="vm.isVideoChat" style="height:100%">
+    <scrollable>
+      <div class="scrollable-chat-container">
+        <div class="message-list" ng-repeat="message in vm.currentChat.messages track by $index">
+          <div class="message-list-box">
+            <div class="message-item">
+              <div class="message-sender-info " ng-class="vm.isCurrentUser(message._sender)? 'pull-right': 'pull-left'">
+                <div class="message-sender">
+                  <img src="assets/images/user.png" class="user-img img-circle img-responsive">
+                </div>
+              </div>
+              <div class="message" ng-class="vm.isCurrentUser(message._sender)? 'pull-left': 'pull-right'">
+                <div class="content">
+                  <label>{{message._sender}}</label>
+
+                  <p ng-bind-html="message.content  | colonToSmiley"></p>
+                  <small>{{message.created}}</small>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    </div>
-  </scrollable>
+    </scrollable>
   </div>
-  <div ng-show="vm.isVideoChat" class="video-chat-content">
-    <div id="videoContainer"></div>
+  <div ng-show="vm.isVideoChat" class="video-chat-content" style="height:100%">
+
+    <div class="video-wrapper">
+      <video-player class="col-md-4" ng-repeat="peer in vm.peers" vid-src="{{peer.stream}}"></video-player>
+    </div>
+
+    <div class="video-wrapper">
+      <video ng-src="{{vm.getLocalVideo()}}" autoplay muted style="width: 150px;"></video>
+    </div>
+
   </div>
 </div>
 
