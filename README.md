@@ -48,3 +48,6 @@ Running `npm test` will run the unit tests with karma.
 * 
 ## ISSUES
 1. https://github.com/nodejs/node-gyp
+
+## Session generate token
+* usin node-uuid v4
