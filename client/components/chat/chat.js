@@ -2,28 +2,24 @@
 
   'use strict';
 
-  function ChatSvc(socketFactory, Message, $rootScope, Auth, ciIoSvc, ciSessionSvc) {
+  function ChatSvc(socketFactory, Auth, ciIoSvc, ciSessionSvc) {
 
-    // TODO: rewrite server address
-    //var myIoSocket = io.connect('https://icss-yo-v1.herokuapp.com:3000');
-    var myIoSocket = ciIoSvc.connect("https://chat-rape.herokuapp.com:8080");
+    var ioSocket = ciIoSvc.connect('localhost:3000'),
+      socket = socketFactory({ioSocket: ioSocket});
 
-    var socket = socketFactory({ioSocket: myIoSocket});
-
-    var svc = {
+    return {
       socket: socket,
       sendMessage: function (message) {
 
         // Send message
         socket.emit('new message', {
           _session: ciSessionSvc.getSession()._id,
-          _sender: Auth.getCurrentUser()._id,
+          _sender: Auth.getCurrentUser(null)._id,
           content: message
         });
+
       }
     };
-
-    return svc;
   }
 
   angular.module('icssApp').factory('ciChatSvc', ChatSvc);
