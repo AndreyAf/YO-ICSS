@@ -113,7 +113,8 @@ module.exports = function (grunt) {
     jshint: {
       options: {
         jshintrc: '<%= yeoman.client %>/.jshintrc',
-        reporter: require('jshint-stylish')
+        reporter: require('jshint-stylish'),
+        ignores : ['client/components/angular-emoji-popup/**','client/components/chat/io.service.js']
       },
       server: {
         options: {

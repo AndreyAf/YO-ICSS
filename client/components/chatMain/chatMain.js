@@ -20,7 +20,7 @@
 
       vm.currentChat = $rootScope.currentChat;
 
-      $rootScope.$watch('currentChat', function (newVal, oldVal) {
+      $rootScope.$watch('currentChat', function (newVal, oldVal) {// jshint ignore:line
         vm.currentChat = newVal;
       });
 
@@ -70,7 +70,7 @@
         ciChatSvc.sendMessage(vm.emojiMessage.messagetext);
 
         // TODO: rewrite - not the correct angular way
-        $(".nano").nanoScroller({scrollBottom: 5});
+        $('.nano').nanoScroller({scrollBottom: 5});
 
         vm.emojiMessage.messagetext = '';
         vm.emojiMessage.rawhtml = '';

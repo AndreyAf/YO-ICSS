@@ -11,7 +11,8 @@ angular.module('icssApp', [
     'ngTouch',
     'sun.scrollable',
     'emojiApp',
-    'ngTextTruncate'
+    'ngTextTruncate',
+    'ngNotify'
   ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
@@ -53,8 +54,8 @@ angular.module('icssApp', [
 
   .run(function ($rootScope, $state, Auth) {
 
-    $rootScope.$on('$stateChangeSuccess', function (event, current, previous) {
-      if(current.title) {
+    $rootScope.$on('$stateChangeSuccess', function (event, current) {
+      if (current.title) {
         $rootScope.title = current.title;
       }
     });
