@@ -13,6 +13,13 @@
         return;
       }
 
+      var host = location.origin.replace(/^http/, 'ws')
+      var ws = new WebSocket(host);
+      ws.onmessage = function (event) {
+        var data = JSON.parse(event.data);
+        $rootScope.currentChat.messages.push(data);
+      };
+
       vm.emojiMessage = {};
 
       vm.isTyping = false;
@@ -45,9 +52,9 @@
       /***
        * Listen to new message created
        */
-      ciChatSvc.socket.on('message created', function (data) {
-        $rootScope.currentChat.messages.push(data);
-      });
+      //ciChatSvc.socket.on('message created', function (data) {
+      //  $rootScope.currentChat.messages.push(data);
+      //});
 
       /***
        * Listen to typing
