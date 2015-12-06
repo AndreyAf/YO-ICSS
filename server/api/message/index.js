@@ -1,13 +1,15 @@
 'use strict';
 
+var WebSocketServer = require("ws").Server;
 var express = require('express');
 var app = express();
 var controller = require('./message.controller');
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-
+var http = require('http');
+var server = http.createServer(app);
+//var io = require('socket.io')(app);
+var wss = new WebSocketServer({server: server});
 var Message = require('./message.model');
-var port =   5000;
+var port =   process.env.PORT || 5000;
 var router = express.Router();
 
 app.use(express.static(__dirname + '/public'));
@@ -19,11 +21,11 @@ router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 
-io.on('connection', function (socket) {
+wss.on('connection', function (socket) {
 
 
   // Listens for new user
-  socket.on('new user', function (data) {
+  ws.on('new user', function (data) {
 
     // TODO: get or create session
     data._session = '123123123';
@@ -32,18 +34,18 @@ io.on('connection', function (socket) {
     socket.join(data._session);
 
     // Tell all those in the session that a new user joined
-    io.in(data._session).emit('user joined', data);
+    wss.in(data._session).emit('user joined', data);
   });
 
   //Listens for switch room
-  socket.on('switch room', function (data) {
+  ws.on('switch room', function (data) {
 
     // Handles joining and leaving rooms
-    socket.leave(data._oldSession);
-    socket.join(data._newSession);
+    ws.leave(data._oldSession);
+    ws.join(data._newSession);
 
-    io.in(data._oldSession).emit('user left', data);
-    io.in(data._newSession).emit('user joined', data);
+    wss.in(data._oldSession).emit('user left', data);
+    wss.in(data._newSession).emit('user joined', data);
   });
 
   // Listens for a new chat message
@@ -59,15 +61,15 @@ io.on('connection', function (socket) {
         console.log(msg);
 
         // Send message to those connected in the same session
-        io.in(data._session).emit('message created', msg);
+        wss.in(data._session).emit('message created', msg);
       });
   });
 
   // Listens for a new chat message
-  socket.on('typing new message', function (data) {
+  ws.on('typing new message', function (data) {
 
       // Send message to those connected in the same session
-      io.in(data._session).emit('typing new message', data);
+      wss.in(data._session).emit('typing new message', data);
   });
 
 
@@ -141,6 +143,6 @@ io.on('connection', function (socket) {
 
 });
 
-http.listen(port);
+server.listen(port);
 
 module.exports = router;
