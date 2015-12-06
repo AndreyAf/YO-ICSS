@@ -1,5 +1,5 @@
-import passport from 'passport';
-import {Strategy as LocalStrategy} from 'passport-local';
+var passport = require( 'passport');
+var LocalStrategy = require( 'passport-local');
 
 function localAuthenticate(User, email, password, done) {
   User.findOneAsync({

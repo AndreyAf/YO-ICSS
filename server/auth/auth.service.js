@@ -1,12 +1,12 @@
 'use strict';
 
-import passport from 'passport';
-import config from '../config/environment';
-import jwt from 'jsonwebtoken';
-import expressJwt from 'express-jwt';
-import _ from 'lodash';
-import compose from 'composable-middleware';
-import User from '../api/user/user.model';
+var passport = require('passport');
+var config = require('../config/environment');
+var jwt = require('jsonwebtoken');
+var expressJwt = require('express-jwt');
+var _ = require('lodash');
+var compose = require('composable-middleware');
+var User = require('../api/user/user.model');
 var validateJwt = expressJwt({
   secret: config.secrets.session
 });
@@ -17,8 +17,8 @@ var validateJwt = expressJwt({
  */
 function isAuthenticated() {
   return compose()
-    // Validate jwt
-    .use(function(req, res, next) {
+  // Validate jwt
+    .use(function (req, res, next) {
       // allow access_token to be passed through query parameter as well
       if (req.query && req.query.hasOwnProperty('access_token')) {
         req.headers.authorization = 'Bearer ' + req.query.access_token;
@@ -26,16 +26,16 @@ function isAuthenticated() {
       validateJwt(req, res, next);
     })
     // Attach user to request
-    .use(function(req, res, next) {
+    .use(function (req, res, next) {
       User.findByIdAsync(req.user._id)
-        .then(function(user) {
+        .then(function (user) {
           if (!user) {
             return res.status(401).end();
           }
           req.user = user;
           next();
         })
-        .catch(function(err) {
+        .catch(function (err) {
           return next(err);
         });
     });
@@ -53,9 +53,9 @@ function hasRole(roleRequired) {
     .use(isAuthenticated())
     .use(function meetsRequirements(req, res, next) {
       var ans = false;
-      for(var i in req.user.roles){
+      for (var i in req.user.roles) {
         ans = config.userRoles.indexOf(req.user.roles[i]) >= config.userRoles.indexOf(roleRequired);
-        if(ans) break;
+        if (ans) break;
       }
       if (ans) {
         next();
@@ -92,7 +92,7 @@ function hasRoles(rolesRequired) {
  * Returns a jwt token signed by the app secret
  */
 function signToken(id, roles) {
-  return jwt.sign({ _id: id, roles: roles }, config.secrets.session, {
+  return jwt.sign({_id: id, roles: roles}, config.secrets.session, {
     expiresInMinutes: 60 * 5
   });
 }

@@ -1,6 +1,6 @@
 'use strict';
 
-import crypto from 'crypto';
+var crypto = require('crypto');
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var Schema = mongoose.Schema;
 
@@ -28,7 +28,7 @@ var UserSchema = new Schema({
   },
   roles: [{
     type: String,
-    enum: ['client','employee','manager','admin']
+    enum: ['client', 'employee', 'manager', 'admin']
   }],
   password: String,
   provider: String,
