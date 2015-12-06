@@ -5,16 +5,6 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/generatorangularfullstackmaster-test'
-  },
-  sequelize: {
-    uri: 'sqlite://',
-    options: {
-      logging: false,
-      storage: 'test.sqlite',
-      define: {
-        timestamps: false
-      }
-    }
+    uri: 'mongodb://ninickname:oneXone1@ds061974.mongolab.com:61974/icssyo'
   }
 };

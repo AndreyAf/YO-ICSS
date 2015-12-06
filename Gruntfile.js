@@ -1,4 +1,3 @@
-// Generated on 2015-12-01 using generator-angular-fullstack 3.0.0-rc8
 'use strict';
 
 module.exports = function (grunt) {
@@ -107,14 +106,15 @@ module.exports = function (grunt) {
       bower: {
         files: ['bower.json'],
         tasks: ['wiredep']
-      },
+      }
     },
 
     // Make sure code styles are up to par and there are no obvious mistakes
     jshint: {
       options: {
         jshintrc: '<%= yeoman.client %>/.jshintrc',
-        reporter: require('jshint-stylish')
+        reporter: require('jshint-stylish'),
+        ignores : ['client/components/angular-emoji-popup/**','client/components/chat/io.service.js']
       },
       server: {
         options: {

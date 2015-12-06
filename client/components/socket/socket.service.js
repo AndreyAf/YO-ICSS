@@ -1,4 +1,3 @@
-/* global io */
 'use strict';
 
 angular.module('icssApp')
