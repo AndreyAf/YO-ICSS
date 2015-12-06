@@ -2,21 +2,21 @@
 
   'use strict';
 
-  function ChatSvc(socketFactory, Message, $rootScope, Auth, ciIoSvc, ciSessionSvc) {
+  function ChatSvc(socketFactory, Message, $rootScope, Auth, ciIoSvc) {
 
     // TODO: rewrite server address
     //var myIoSocket = io.connect('https://icss-yo-v1.herokuapp.com:3000');
-    var myIoSocket = ciIoSvc.connect("https://chat-rape.herokuapp.com:8080");
+    var myIoSocket = ciIoSvc.connect('localhost:3000');
 
     var socket = socketFactory({ioSocket: myIoSocket});
 
     var svc = {
       socket: socket,
-      sendMessage: function (message) {
+      sendMessage: function (message, _session) {
 
         // Send message
         socket.emit('new message', {
-          _session: ciSessionSvc.getSession()._id,
+          _session: _session,
           _sender: Auth.getCurrentUser()._id,
           content: message
         });

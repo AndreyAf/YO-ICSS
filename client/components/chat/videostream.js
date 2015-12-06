@@ -9,20 +9,13 @@
  */
 angular.module('icssApp')
   .factory('VideoStream', function ($q) {
-
     var stream;
-
     return {
       get: function () {
-
         if (stream) {
-
           return $q.when(stream);
-
         } else {
-
           var d = $q.defer();
-
           navigator.getUserMedia({
             video: true,
             audio: true
@@ -32,7 +25,6 @@ angular.module('icssApp')
           }, function (e) {
             d.reject(e);
           });
-
           return d.promise;
         }
       }

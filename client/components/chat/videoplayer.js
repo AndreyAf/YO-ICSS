@@ -16,6 +16,7 @@ angular.module('icssApp')
         vidSrc: '@'
       },
       link: function (scope) {
+        console.log('Initializing video-player');
         scope.trustSrc = function () {
           if (!scope.vidSrc) {
             return undefined;

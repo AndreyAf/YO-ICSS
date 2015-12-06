@@ -1,6 +1,6 @@
 'use strict';
 
-var crypto = require('crypto');
+import crypto from 'crypto';
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var Schema = mongoose.Schema;
 

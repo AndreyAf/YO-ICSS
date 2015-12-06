@@ -1,13 +1,13 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html ng-app="icssApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html ng-app="icssApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html ng-app="icssApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html ng-app="icssApp" class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <base href="/">
-    <title ng-bind="'ICSS &mdash; ' + title">ICSS</title>
+    <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -17,13 +17,14 @@
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
+      <link rel="stylesheet" href="app/app.css">
       <!-- injector:css -->
       <link rel="stylesheet" href="app/app.css">
       <link rel="stylesheet" href="components/angular-emoji-popup/css/emoji.min.css">
       <!-- endinjector -->
     <!-- endbuild -->
   </head>
-  <body>
+  <body ng-app="icssApp">
     <!--[if lt IE 7]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -65,7 +66,7 @@
       <script src="bower_components/ng-text-truncate/ng-text-truncate.js"></script>
       <script src="bower_components/eventEmitter/EventEmitter.js"></script>
       <!-- endbower -->
-      <script src="bower_components/socket.io-client/socket.io.js"></script>
+      <script src="socket.io-client/socket.io.js"></script>
     <!-- endbuild -->
     <!-- build:js({.tmp,client}) app/app.js -->
       <script src="app/app.js"></script>

@@ -4,7 +4,7 @@
 
 'use strict';
 
-var config = require('./environment');
+import config from './environment';
 
 // When the user disconnects.. perform this
 function onDisconnect(socket) {
@@ -45,8 +45,8 @@ module.exports = function(socketio) {
 
     socket.connectedAt = new Date();
 
-    socket.log = function(data) {
-      console.log("SocketIO ${socket.nsp.name} [${socket.address}]", data);
+    socket.log = function(...data) {
+      console.log(`SocketIO ${socket.nsp.name} [${socket.address}]`, ...data);
     };
 
     // Call onDisconnect.

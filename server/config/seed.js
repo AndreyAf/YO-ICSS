@@ -4,8 +4,8 @@
  */
 
 'use strict';
-var User = require( '../api/user/user.model');
-var Session = require( '../api/session/session.model');
+import User from '../api/user/user.model';
+import Session from '../api/session/session.model';
 
 User.find({}).removeAsync()
   .then(function () {

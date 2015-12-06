@@ -52,13 +52,6 @@ angular.module('icssApp', [
   })
 
   .run(function ($rootScope, $state, Auth) {
-
-    $rootScope.$on('$stateChangeSuccess', function (event, current, previous) {
-      if(current.title) {
-        $rootScope.title = current.title;
-      }
-    });
-
     // Route state change (before open)
     $rootScope.$on('$stateChangeStart', function (event, next) {
 

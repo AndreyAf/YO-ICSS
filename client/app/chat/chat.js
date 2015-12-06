@@ -4,7 +4,6 @@ angular.module('icssApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('chat', {
-        title: 'Chat',
         url: '/chat',
         templateUrl: 'app/chat/chat.html',
         controller: 'ChatCtrl',
@@ -12,14 +11,13 @@ angular.module('icssApp')
         authenticate: true
       });
   })
-  .run(function ($rootScope,ciSessionSvc) {
+  .run(function ($rootScope) {
     $rootScope.isFullscreen = false;
     $rootScope.showSidebar = true;
 
-    // TODO: delete and put in service ciSessionSvc
     $rootScope.currentChat = {
       session: {
-        _id : ciSessionSvc.getSession()._id
+        _id : '123123'
       },
       messages: []
     };

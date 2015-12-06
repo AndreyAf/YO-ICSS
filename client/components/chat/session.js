@@ -20,20 +20,19 @@
     //
     //};
 
-    var session = {};
+    var session = '123123';
 
-    return {
-      getSession: function(){
-        //if(session === {}) {
-        //  // TODO : create / get session
-          session = {
-            _id : '123123123'
-          };
-        //}
-
+    var svc = {
+      session: session,
+      getCurrentSession: function () {
         return session;
+      },
+      setSession: function(){
+
       }
     };
+
+    return svc;
   }
 
   angular.module('icssApp').factory('ciSessionSvc', SessionSvc);
