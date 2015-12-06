@@ -29,11 +29,11 @@ var all = {
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
-    session: 'generator-angular-fullstack-master-secret'
+    session: '0c3=05`6ll&kh1o{22N1HHD)9(a3KKr}QWx9.DmD{+=cz35!i$ngIN,9NH-C'
   },
 
   // List of user roles
-  userRoles: ['guest', 'user', 'admin'],
+  userRoles: ['client', 'employee','manager', 'admin'],
 
   // MongoDB connection options
   mongo: {

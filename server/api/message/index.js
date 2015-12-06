@@ -6,7 +6,7 @@ var http = require('http').Server(express);
 var io = require('socket.io')(http);
 
 var Message = require('./message.model');
-var port =  8080;
+var port =  process.env.PORT || 3000;
 var router = express.Router();
 
 router.get('/', controller.index);
@@ -137,7 +137,7 @@ io.on('connection', function (socket) {
   ///////// END
 
 });
-console.log(io);
+
 http.listen(port);
 
 module.exports = router;
