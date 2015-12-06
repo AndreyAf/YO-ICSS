@@ -8,7 +8,7 @@
  * Factory in the publicApp.
  */
 angular.module('icssApp')
-  .factory('ciIoSvc', function () {grunt
+  .factory('ciIoSvc', function () {
     if (typeof io === 'undefined') {
       throw new Error('Socket.io required');
     }

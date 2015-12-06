@@ -4,7 +4,8 @@
 
   function ChatSvc(socketFactory, Auth, ciIoSvc, ciSessionSvc) {
 
-    var ioSocket = ciIoSvc.connect('localhost:3000'),
+    //var ioSocket = ciIoSvc.connect('ws://chat-rape.herokuapp.com:3000'),
+    var ioSocket = ciIoSvc.connect('ws://chat-rape.herokuapp.com:5000'),
       socket = socketFactory({ioSocket: ioSocket});
 
     return {
