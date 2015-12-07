@@ -1,13 +1,15 @@
 'use strict';
 
-var express = require('express');
-var controller = require('./message.controller');
-var http = require('http').Server(express);
-var io = require('socket.io')(http);
+var express = require('express'),
+  controller = require('./message.controller'),
+  http = require('http').Server(express),
+  options = {transports: ['polling']},
+  io = require('socket.io')(http, options),
+  Message = require('./message.model'),
+  router = express.Router();
 
-var Message = require('./message.model');
-
-var router = express.Router();
+//io.set('transports', ['xhr-polling']);
+//io.set('polling duration', 10);
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);
@@ -63,8 +65,8 @@ io.on('connection', function (socket) {
   // Listens for a new chat message
   socket.on('typing new message', function (data) {
 
-      // Send message to those connected in the same session
-      io.in(data._session).emit('typing new message', data);
+    // Send message to those connected in the same session
+    io.in(data._session).emit('typing new message', data);
   });
 
 });
