@@ -5,7 +5,8 @@ var express = require('express'),
   http = require('http').Server(express),
   io = require('socket.io')(http),
   Message = require('./message.model'),
-  router = express.Router();
+  router = express.Router(),
+  port = process.env.PORT || '80';
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);
@@ -17,7 +18,6 @@ router.delete('/:id', controller.destroy);
 io.on('connection', function (socket) {
   io.set('transports', ['xhr-polling']);
   io.set('polling duration', 10);
-
 
   // Listens for new user
   socket.on('new user', function (data) {
@@ -69,6 +69,6 @@ io.on('connection', function (socket) {
 
 });
 
-http.listen(3000);
+http.listen(port);
 
 module.exports = router;
