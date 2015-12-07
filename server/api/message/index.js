@@ -3,13 +3,9 @@
 var express = require('express'),
   controller = require('./message.controller'),
   http = require('http').Server(express),
-  options = {transports: ['polling']},
-  io = require('socket.io')(http, options),
+  io = require('socket.io')(http),
   Message = require('./message.model'),
   router = express.Router();
-
-//io.set('transports', ['xhr-polling']);
-//io.set('polling duration', 10);
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);
@@ -19,6 +15,8 @@ router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 
 io.on('connection', function (socket) {
+  io.set('transports', ['xhr-polling']);
+  io.set('polling duration', 10);
 
 
   // Listens for new user
