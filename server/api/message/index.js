@@ -6,7 +6,7 @@ var express = require('express'),
   io = require('socket.io')(http),
   Message = require('./message.model'),
   router = express.Router(),
-  port = 80;
+  port = 8080;
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);
