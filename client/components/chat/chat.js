@@ -6,7 +6,7 @@
 
     // TODO: rewrite server address
     //var myIoSocket = io.connect('https://icss-yo-v1.herokuapp.com:3000');
-    var myIoSocket = ciIoSvc.connect();
+    var myIoSocket = ciIoSvc.connect('chat-rape.herokuapp.com');
 
     var socket = socketFactory({ioSocket: myIoSocket});
 
