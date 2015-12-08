@@ -1,12 +1,14 @@
 'use strict';
 
 var express = require('express'),
+  app = express(),
   controller = require('./message.controller'),
-  http = require('http').Server(express),
-  io = require('socket.io')(http),
+  port = process.env.PORT || 8080,
+  server = app.listen(port),
+  io = require('socket.io')(server),
   Message = require('./message.model'),
-  router = express.Router(),
-  port = 8080;
+  router = express.Router();
+
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);
@@ -16,8 +18,8 @@ router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 
 io.on('connection', function (socket) {
-  io.set('transports', ['xhr-polling']);
-  io.set('polling duration', 10);
+  //io.set('transports', ['xhr-polling']);
+  //io.set('polling duration', 10);
 
   // Listens for new user
   socket.on('new user', function (data) {
@@ -69,6 +71,6 @@ io.on('connection', function (socket) {
 
 });
 
-http.listen(port);
+//http.listen(port);
 
 module.exports = router;

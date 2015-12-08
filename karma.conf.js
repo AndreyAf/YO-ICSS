@@ -28,6 +28,7 @@ module.exports = function(config) {
       'client/bower_components/angular-validation-match/dist/angular-validation-match.min.js',
       'client/bower_components/ng-text-truncate/ng-text-truncate.js',
       'client/bower_components/eventEmitter/EventEmitter.js',
+      'client/bower_components/ng-notify/src/scripts/ng-notify.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'node_modules/socket.io-client/socket.io.js',
