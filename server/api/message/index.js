@@ -3,7 +3,7 @@
 var express = require('express'),
   app = express(),
   controller = require('./message.controller'),
-  port = 3000,
+  port = 8080,
   server = app.listen(port),
   io = require('socket.io')(server),
   Message = require('./message.model'),
