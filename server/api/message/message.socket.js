@@ -1,14 +1,6 @@
-/**
- * Broadcast updates to client when the model changes
- */
-
 'use strict';
 
-var MessageEvents = require('./message.events');
 var Message = require('./message.model');
-
-// Model events to emit
-var events = ['save', 'remove'];
 
 exports.register = function(socket,socketio) {
 
