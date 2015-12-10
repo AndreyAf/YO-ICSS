@@ -4,13 +4,15 @@ angular.module('icssApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
+    'btford.socket-io',
     'ui.router',
     'ui.bootstrap',
     'validation.match',
     'ngTouch',
     'sun.scrollable',
     'emojiApp',
-    'ngTextTruncate'
+    'ngTextTruncate',
+    'ngLodash'
   ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
@@ -50,7 +52,7 @@ angular.module('icssApp', [
     };
   })
 
-  .run(function ($rootScope, $state, Auth) {
+  .run(function ($rootScope, $state, Auth, lodash) {
     // Route state change (before open)
     $rootScope.$on('$stateChangeStart', function (event, next) {
 
@@ -71,7 +73,7 @@ angular.module('icssApp', [
               var currentUserRoles = Auth.getRoles();
 
               // Check if the current users has one of route roles
-              if ((_.intersection(next.roles, currentUserRoles)).length === 0) {
+              if ((lodash.intersection(next.roles, currentUserRoles)).length === 0) {
                 event.preventDefault();
                 $state.go('login');
               }

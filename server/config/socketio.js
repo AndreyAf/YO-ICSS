@@ -11,7 +11,7 @@ function onDisconnect(socket) {
 }
 
 // When the user connects.. perform this
-function onConnect(socket) {
+function onConnect(socket,socketio) {
   // When the client emits 'info', this listens and executes
   socket.on('info', function (data) {
     socket.log(JSON.stringify(data, null, 2));
@@ -19,7 +19,7 @@ function onConnect(socket) {
 
   // Insert sockets below
   require('../api/session/session.socket').register(socket);
-  require('../api/message/message.socket').register(socket);
+  require('../api/message/message.socket').register(socket,socketio);
 
 }
 
@@ -46,7 +46,7 @@ module.exports = function (socketio) {
     socket.connectedAt = new Date();
 
     socket.log = function (data) {
-      console.log(`SocketIO ${socket.nsp.name} [${socket.address}]`, data);
+      console.log("SocketIO ${socket.nsp.name} [${socket.address}]", data);
     };
 
     // Call onDisconnect.
@@ -56,7 +56,7 @@ module.exports = function (socketio) {
     });
 
     // Call onConnect.
-    onConnect(socket);
+    onConnect(socket,socketio);
     socket.log('CONNECTED');
   });
 };

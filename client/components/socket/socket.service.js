@@ -1,10 +1,11 @@
+/* global io */
 'use strict';
 
 angular.module('icssApp')
-  .factory('socket', function(socketFactory,ciIoSvc) {
+  .factory('socket', function(socketFactory,lodash) {
 
     // socket.io now auto-configures its connection when we ommit a connection url
-    var ioSocket = ciIoSvc('', {
+    var ioSocket = io('', {
       // Send auth token on connection, you will need to DI the Auth service above
       // 'query': 'token=' + Auth.getToken()
       path: '/socket.io-client'
@@ -34,7 +35,7 @@ angular.module('icssApp')
          * Syncs item creation/updates on 'model:save'
          */
         socket.on(modelName + ':save', function (item) {
-          var oldItem = _.find(array, {_id: item._id});
+          var oldItem = lodash.find(array, {_id: item._id});
           var index = array.indexOf(oldItem);
           var event = 'created';
 
@@ -55,7 +56,7 @@ angular.module('icssApp')
          */
         socket.on(modelName + ':remove', function (item) {
           var event = 'deleted';
-          _.remove(array, {_id: item._id});
+          lodash.remove(array, {_id: item._id});
           cb(event, item, array);
         });
       },
