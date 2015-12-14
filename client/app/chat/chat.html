@@ -9,23 +9,13 @@
       <ic-sidebar-profile></ic-sidebar-profile>
       <ic-sidebar-tabs></ic-sidebar-tabs>
     </div>
-    <div class="chat-main" ng-if="state == 'chat'" ng-class="{'full-width': !showSidebar}">
+    <div class="chat-main" ng-class="{'full-width': !showSidebar}">
       <div class="doggle-btn" ng-click="showSidebar = !showSidebar">
         <span class="glyphicon" ng-class="showSidebar ? 'glyphicon-chevron-left' : 'glyphicon-chevron-right'"></span>
       </div>
-      <ic-chat-main></ic-chat-main>
-    </div>
-    <div class="chat-main" ng-if="state == 'empty'">
-      <div class="doggle-btn" ng-click="showSidebar = !showSidebar">
-        <span class="glyphicon" ng-class="showSidebar ? 'glyphicon-chevron-left' : 'glyphicon-chevron-right'"></span>
-      </div>
-      <ic-chat-main-empty></ic-chat-main-empty>
-    </div>
-    <div class="chat-main" ng-if="state == 'addContact'">
-      <div class="doggle-btn" ng-click="showSidebar = !showSidebar">
-        <span class="glyphicon" ng-class="showSidebar ? 'glyphicon-chevron-left' : 'glyphicon-chevron-right'"></span>
-      </div>
-      <ic-chat-main-add-contact></ic-chat-main-add-contact>
+      <ic-chat-main ng-if="state === 'chat'"></ic-chat-main>
+      <ic-chat-main-empty ng-if="state === 'empty'"></ic-chat-main-empty>
+      <ic-chat-main-add-contact ng-if="state === 'addContact'"></ic-chat-main-add-contact>
     </div>
   </div>
 </div>
