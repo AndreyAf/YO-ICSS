@@ -4,6 +4,21 @@ var crypto = require('crypto');
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var Schema = mongoose.Schema;
 
+var Contact = new Schema({
+  _contact: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  _singleSession: {
+    type: Schema.Types.ObjectId,
+    ref: 'SingleSession'
+  },
+  useCounter: {
+    type: Number,
+    default: 0
+  }
+});
+
 var UserSchema = new Schema({
   name: String,
   status: {
@@ -29,6 +44,13 @@ var UserSchema = new Schema({
   roles: [{
     type: String,
     enum: ['client', 'employee', 'manager', 'admin']
+  }],
+  contacts: [Contact],
+  blackList: [{
+    _id: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
   }],
   password: String,
   provider: String,

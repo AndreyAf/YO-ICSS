@@ -1,6 +1,7 @@
 'use strict';
 
 var User = require('./user.model');
+var _ = require('lodash');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
@@ -23,6 +24,35 @@ function respondWith(res, statusCode) {
   statusCode = statusCode || 200;
   return function () {
     res.status(statusCode).end();
+  };
+}
+
+function responseWithResult(res, statusCode) {
+  statusCode = statusCode || 200;
+  return function (entity) {
+    if (entity) {
+      res.status(statusCode).json(entity);
+    }
+  };
+}
+
+function handleEntityNotFound(res) {
+  return function (entity) {
+    if (!entity) {
+      res.status(404).end();
+      return null;
+    }
+    return entity;
+  };
+}
+
+function saveUpdates(updates) {
+  return function (entity) {
+    var updated = _.merge(entity, updates);
+    return updated.saveAsync()
+      .spread(function (updated) {
+        return updated;
+      });
   };
 }
 
@@ -61,7 +91,9 @@ exports.create = function (req, res, next) {
 exports.show = function (req, res, next) {
   var userId = req.params.id;
 
-  User.findByIdAsync(userId)
+  User.find({_id: userId})
+    .populate('contacts._contact')
+    .execAsync()
     .then(function (user) {
       if (!user) {
         return res.status(404).end();
@@ -109,12 +141,55 @@ exports.changePassword = function (req, res, next) {
 };
 
 /**
- * Get my info
+ * Add contact to user
+ */
+exports.addContact = function (req, res, next) {
+  var userId = req.user._id;
+
+  User.findByIdAsync(userId)
+    .then(function (user) {
+      user.contacts.push(req.body.contact);
+      return user.saveAsync()
+        .then(function () {
+          res.status(204).end();
+        })
+        .catch(validationError(res));
+    });
+};
+
+/**
+ * Add contact to user
+ */
+exports.getPossibleContacts = function (req, res, next) {
+  var userId = req.user._id;
+
+  User.findOne({_id: userId})
+    .then(function (user) { // don't ever give out the password or salt
+
+      var contactsIds = _.union(_.pluck(user.contacts,'_contact'),[userId]);
+      User.findAsync({
+          "$and": [
+            {"_id": {$nin: contactsIds}}
+          ]
+        }, '-salt -hashedPassword')
+        .then(function (users) {
+          res.status(200).json(users);
+        })
+        .catch(handleError(res));
+    })
+
+
+};
+
+/**
+ * Get my infos
  */
 exports.me = function (req, res, next) {
   var userId = req.user._id;
 
-  User.findOneAsync({_id: userId}, '-salt -hashedPassword')
+  User.findOne({_id: userId}, '-salt -hashedPassword')
+    .populate('contacts._contact')
+    .execAsync()
     .then(function (user) { // don't ever give out the password or salt
       if (!user) {
         return res.status(401).end();

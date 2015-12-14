@@ -2,21 +2,19 @@
 
 var Message = require('./message.model');
 
-exports.register = function(socket,socketio) {
+exports.register = function (socket, socketio) {
 
   // Listens for new user
   socket.on('new user', function (data) {
 
-    // TODO: get or create session
-    data._session = '123123';
-
-    // New user joins the session
+    // User joins the session
     socket.join(data._session);
 
     // Tell all those in the session that a new user joined
     socketio.in(data._session).emit('user joined', data);
   });
 
+  // TODO: support functionality
   //Listens for switch room
   socket.on('switch room', function (data) {
 
@@ -32,17 +30,27 @@ exports.register = function(socket,socketio) {
   socket.on('new message', function (data) {
 
     var newMsg = new Message({
-      content: data.content,
+      _session: data._session,
       _sender: data._sender,
-      _session: data._session
+      content: data.content
     });
-    newMsg.save()
-      .then(function (msg) {
-        console.log(msg);
 
-        // Send message to those connected in the same session
-        socketio.in(data._session).emit('message created', msg);
-      });
+    console.log(newMsg);
+
+    // Save the new message
+    newMsg.save().then(function (msg) {
+
+      Message.findOne({ _id : msg._id })
+        .populate('_sender')
+        .exec(function (error, msg) {
+
+          if (error) return console.log(error);
+
+          // Send the message to those connected to the same session
+          socketio.in(data._session).emit('message created', msg);
+
+        });
+    });
   });
 
   // Listens for a new chat message

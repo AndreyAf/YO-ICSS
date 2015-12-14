@@ -7,5 +7,5 @@ module.exports = {
   mongo: {
     uri: "mongodb://ninickname:oneXone1@ds061974.mongolab.com:61974/icssyo"
   },
-  seedDB: true
+  seedDB: false
 };

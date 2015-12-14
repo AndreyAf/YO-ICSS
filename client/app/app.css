@@ -8880,6 +8880,29 @@ button.close {
 .chat-header-content .nano-content .scrollable-chat-container {
   margin-top: auto;
 }
+.chat-main-add-content .chat-main-header {
+  height: 50px;
+  padding: 0 15px;
+}
+.chat-main-add-content .chat-main-content .search {
+  width: 100%;
+  border: none;
+  height: 40px;
+  padding: 0 15px;
+}
+.chat-main-add-content .chat-main-content .users-list {
+  padding: 20px;
+}
+.chat-main-add-content .chat-main-content .users-list li {
+  width: 100%;
+  background-color: #E2E2E3;
+  list-style: none;
+  padding: 5px;
+  display: inline-block;
+}
+.chat-main-add-content .chat-main-content .users-list li button {
+  float: right;
+}
 .ic-sidebar-list-item .ic-sidebar-list-item-settings {
   display: none;
   position: absolute;
@@ -8891,6 +8914,11 @@ button.close {
 }
 .ic-sidebar-list-item:hover .ic-sidebar-list-item-settings {
   display: block;
+}
+.profile-settings ul.uib-dropdown-menu.dropdown-menu {
+  width: 270px;
+  top: 60px;
+  right: -20px;
 }
 .ic-chat-sidebar-content {
   height: calc(100% - 155px);

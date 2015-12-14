@@ -5,23 +5,19 @@
   angular.module('icssApp').directive('icSidebarListItemSingle', function () {
 
     // @ngInject
-    function icSidebarListItemSingle($scope, $rootScope, ciChatSvc) {
+    function icSidebarListItemSingle($scope, ciChatSvc) {
       var vm = this; //jshint ignore:line
 
-      // TODO: get current user data
-      vm.user = $scope.item;
+      /***
+       * Select item from sidebar list
+       * @param selectItem
+         */
+      vm.selectItem = function (selectItem) {
 
-      vm.selectItem = function (user) {
-        $rootScope.currentChat = {
-          user: user,
-          messages: []
-        };
+        // Set current chat by selected item
+        ciChatSvc.setCurrentChat(selectItem);
 
-        ciChatSvc.socket.emit('new user', {
-          username: 'demo user'
-        });
       };
-
     }
 
     return {

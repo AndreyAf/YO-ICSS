@@ -4,7 +4,7 @@
 
 'use strict';
 
-var SessionEvents = require('./session.events');
+var CompanySessionEvents = require('./companySession.events');
 
 // Model events to emit
 var events = ['save', 'remove'];
@@ -13,9 +13,9 @@ exports.register = function(socket) {
   // Bind model events to socket events
   for (var i = 0, eventsLength = events.length; i < eventsLength; i++) {
     var event = events[i];
-    var listener = createListener('session:' + event, socket);
+    var listener = createListener('companySession:' + event, socket);
 
-    SessionEvents.on(event, listener);
+    CompanySessionEvents.on(event, listener);
     socket.on('disconnect', removeListener(event, listener));
   }
 };
@@ -29,6 +29,6 @@ function createListener(event, socket) {
 
 function removeListener(event, listener) {
   return function() {
-    SessionEvents.removeListener(event, listener);
+    CompanySessionEvents.removeListener(event, listener);
   };
 }

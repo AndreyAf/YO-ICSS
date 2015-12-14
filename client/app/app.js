@@ -68,16 +68,16 @@ angular.module('icssApp', [
         // Check if route contain roles
         if (next.roles) {
 
-          Auth.getCurrentUser().$promise
-            .then(function () {
-              var currentUserRoles = Auth.getRoles();
+          Auth.getCurrentUser(function (user) {
+            var currentUserRoles = user.roles;
 
-              // Check if the current users has one of route roles
-              if ((lodash.intersection(next.roles, currentUserRoles)).length === 0) {
-                event.preventDefault();
-                $state.go('login');
-              }
-            });
+            // Check if the current users has one of route roles
+            if ((lodash.intersection(next.roles, currentUserRoles)).length === 0) {
+              event.preventDefault();
+              $state.go('login');
+            }
+          });
+
         }
       }
 

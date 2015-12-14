@@ -18,7 +18,9 @@ function onConnect(socket, socketio) {
   });
 
   // Insert sockets below
-  require('../api/session/session.socket').register(socket);
+  require('../api/singleSession/singleSession.socket').register(socket);
+  require('../api/companySession/companySession.socket').register(socket);
+  require('../api/groupSession/groupSession.socket').register(socket);
   require('../api/message/message.socket').register(socket, socketio);
 }
 

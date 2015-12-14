@@ -15,13 +15,6 @@ angular.module('icssApp')
     $rootScope.isFullscreen = false;
     $rootScope.showSidebar = true;
 
-    $rootScope.currentChat = {
-      session: {
-        _id : '123123'
-      },
-      messages: []
-    };
-
     // TODO: get current user
     $rootScope.currentUser = {
       name: 'Israel Israeli',

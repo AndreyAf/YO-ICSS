@@ -13,9 +13,13 @@
 
       <div class="full-height" scrollable>
         <ul class="list-group">
-          <ic-sidebar-list-item-single ng-repeat="user in vm.users | filter : search"
-                                       item="user"></ic-sidebar-list-item-single>
-
+          <div ng-if="vm.contacts">
+          <ic-sidebar-list-item-single ng-repeat="contact in vm.contacts | filter : search"
+                                       item="contact._contact"></ic-sidebar-list-item-single>
+          </div>
+          <div ng-if="vm.contacts.length == 0">
+            <label>You have no friends you poor bastard!! <a href="" ng-click="vm.changeState('addContact')"> click here</a> to add some friends :) </label>
+          </div>
         </ul>
       </div>
 
@@ -25,10 +29,11 @@
         <span class="glyphicon glyphicon-briefcase"></span>
         <span class="badge">+99</span>
       </uib-tab-heading>
-      <div scrollable>
+      <div class="full-height" scrollable>
         <ul class="list-group">
-          <ic-sidebar-list-item-single ng-repeat="company in vm.companies | filter : search"
-                                       item="company"></ic-sidebar-list-item-single>
+
+          <ic-sidebar-list-item-single ng-repeat="contact in vm.contacts | filter : search"
+                                       item="contact._contact"></ic-sidebar-list-item-single>
 
         </ul>
       </div>

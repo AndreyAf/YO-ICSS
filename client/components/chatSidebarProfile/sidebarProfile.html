@@ -12,12 +12,13 @@
         <span class="glyphicon glyphicon-cog"></span>
       </a>
       <ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
-        <li><a href="#">New group</a></li>
-        <li><a href="#">New company</a></li>
-        <li><a href="#">Setting</a></li>
+        <li><a href="" ng-click="vm.changeState('addContact')">Add contact</a></li>
+        <li><a href="">Add group</a></li>
+        <li><a href="">Add company</a></li>
+        <li><a href="">Setting</a></li>
         <li><a href="" ng-click="vm.setFullScreenStatus()"><span ng-class="vm.isFullscreen ? 'glyphicon glyphicon-ok' : ''"></span>  Full screen</a></li>
         <li role="separator" class="divider"></li>
-        <li><a href="#">Log out</a></li>
+        <li><a href="" ui-sref="logout">Log out</a></li>
       </ul>
     </span>
 </div>

@@ -5,24 +5,24 @@
   angular.module('icssApp').directive('icSidebarProfile', function () {
 
     // @ngInject
-    function icSidebarProfile($scope, $rootScope) {
+    function icSidebarProfile(Auth, $rootScope, ciChatSvc) {
       var vm = this; //jshint ignore:line
 
-      // TODO: get current user data
-      vm.user = $scope.user;
+      vm.user = Auth.getCurrentUser();
       vm.isFullscreen = $rootScope.isFullscreen;
 
       vm.setFullScreenStatus = function () {
         $rootScope.isFullscreen = !$rootScope.isFullscreen;
         vm.isFullscreen = $rootScope.isFullscreen;
       };
+
+      vm.changeState = function(state){
+        ciChatSvc.setCurrentState(state);
+      };
     }
 
     return {
       restrict: 'E',
-      scope: {
-        user: '='
-      },
       templateUrl: 'components/chatSidebarProfile/sidebarProfile.html',
       controllerAs: 'vm',
       controller: icSidebarProfile

@@ -173,6 +173,42 @@ angular.module('icssApp')
         return currentUser.roles;
       },
 
+
+      /***
+       * Add new contact to current user
+       */
+      addContact: function(contact, callback){
+
+        var newContact = {
+          _contact: contact,
+          _session: null
+        };
+
+        // Update locally
+        currentUser.contacts.push(newContact);
+
+        // update server
+        return User.addContact({id: currentUser._id}, {
+          contact: newContact
+        }, function () {
+          return safeCb(callback)(null);
+        }, function (err) {
+          return safeCb(callback)(err);
+        }).$promise;
+      },
+      /***
+       * Add new contact to current user
+       */
+      getPossibleContacts: function(callback){
+
+        // update server
+        return User.getPossibleContacts({id: currentUser._id}, function (users) {
+          return safeCb(callback)(users);
+        }, function (err) {
+          return safeCb(callback)(err);
+        }).$promise;
+      },
+
       /**
        * Get auth token
        *

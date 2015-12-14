@@ -5,7 +5,6 @@
 
 'use strict';
 var User = require( '../api/user/user.model');
-var Session = require( '../api/session/session.model');
 
 User.find({}).removeAsync()
   .then(function () {

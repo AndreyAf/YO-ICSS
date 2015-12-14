@@ -10,7 +10,9 @@ var path = require('path');
 module.exports = function(app) {
 
   // Insert routes below
-  app.use('/api/sessions', require('./api/session'));
+  app.use('/api/singleSessions', require('./api/singleSession'));
+  app.use('/api/companySessions', require('./api/companySession'));
+  app.use('/api/groupSessions', require('./api/groupSession'));
   app.use('/api/messages', require('./api/message'));
   app.use('/api/users', require('./api/user'));
 

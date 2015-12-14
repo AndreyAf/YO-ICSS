@@ -1,21 +1,22 @@
-<li class="list-group-item ic-sidebar-list-item" ng-click="vm.selectItem(vm.user)">
-    <div class="row">
-        <div class="col-xs-3">
-            <img ng-src="{{vm.user.img}}" class="user-img img-circle img-responsive">
-            <div class="user-status"></div>
-        </div>
-        <div class="col-xs-9">
-            <label class="user-info-name" ng-text-truncate="vm.user.name" ng-tt-chars-threshold="20" ng-tt-no-toggling></label>
-            <small class="user-info-status" ng-text-truncate="vm.user.statusMsg" ng-tt-chars-threshold="20" ng-tt-no-toggling></small>
-            <div class="pull-right">
-                <a class="chat-header-btn chat-video-call">
-                    <span class="glyphicon glyphicon-facetime-video"></span>
-                </a>
-                <a class="chat-header-btn chat-voice-call">
-                    <span class="glyphicon glyphicon-earphone"></span>
-                </a>
-            </div>
-          <span class="ic-sidebar-list-item-settings">settings</span>
-        </div>
+<li class="list-group-item ic-sidebar-list-item" ng-click="vm.selectItem(item)">
+  <div class="row">
+    <div class="col-xs-3">
+      <img ng-src="{{item.img}}" class="user-img img-circle img-responsive">
+      <div class="user-status"></div>
     </div>
+    <div class="col-xs-9">
+      <label class="user-info-name" ng-text-truncate="item.name" ng-tt-chars-threshold="20" ng-tt-no-toggling></label>
+      <small class="user-info-status" ng-text-truncate="item.statusMsg" ng-tt-chars-threshold="20"
+             ng-tt-no-toggling></small>
+      <div class="pull-right">
+        <a class="chat-header-btn chat-video-call">
+          <span class="glyphicon glyphicon-facetime-video"></span>
+        </a>
+        <a class="chat-header-btn chat-voice-call">
+          <span class="glyphicon glyphicon-earphone"></span>
+        </a>
+      </div>
+      <span class="ic-sidebar-list-item-settings">Settings</span>
+    </div>
+  </div>
 </li>
