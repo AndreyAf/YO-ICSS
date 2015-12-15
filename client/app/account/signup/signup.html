@@ -1,9 +1,10 @@
 <navbar></navbar>
 
-<div class="container">
+<div class="container signup-screen">
+  <div class="well">
   <div class="row">
     <div class="col-sm-12">
-      <h1>Sign up</h1>
+      <legend>Sign up</legend>
     </div>
     <div class="col-sm-12">
       <form class="form" name="form" ng-submit="register(form)" novalidate>
@@ -67,10 +68,10 @@
         </div>
 
         <div>
-          <button class="btn btn-inverse btn-lg btn-register" type="submit">
+          <button class="btn btn-success  btn-register" type="submit">
             Sign up
           </button>
-          <a class="btn btn-default btn-lg btn-login" ui-sref="login">
+          <a class="btn btn-warning  btn-login" ui-sref="login">
             Login
           </a>
         </div>
@@ -78,5 +79,5 @@
       </form>
     </div>
   </div>
-  <hr>
+  </div>
 </div>
