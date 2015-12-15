@@ -1,12 +1,9 @@
 <navbar></navbar>
 
 <div class="container signup-screen">
-  <div class="well">
-  <div class="row">
-    <div class="col-sm-12">
-      <legend>Sign up</legend>
-    </div>
-    <div class="col-sm-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">Sign up</div>
+    <div class="panel-body">
       <form class="form" name="form" ng-submit="register(form)" novalidate>
 
         <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
@@ -78,6 +75,5 @@
 
       </form>
     </div>
-  </div>
   </div>
 </div>
