@@ -1,15 +1,11 @@
 <div class="chat-header">
-  <div class="chat-info col-xs-3">
-    <div class="row">
-      <div class="col-xs-3">
-        <img ng-src="{{vm.currentChat.img}}" class="user-img img-circle img-responsive">
-
-        <div class="user-status"></div>
-      </div>
-      <div class="col-xs-9">
-        <label class="user-info-name" ng-bind="vm.currentChat.title"></label>
-        <small class="user-info-status" ng-bind="vm.currentChat.status"></small>
-      </div>
+  <div class="chat-info">
+    <div class="chat-info-img">
+      <img ng-src="{{vm.currentChat.img}}" class="user-img img-circle img-responsive">
+    </div>
+    <div class="chat-info-details">
+      <label class="user-info-name" ng-bind="vm.currentChat.title"></label>
+      <small class="user-info-status" ng-bind="vm.currentChat.status"></small>
     </div>
   </div>
   <div class="chat-functions col-xs-9">
@@ -31,28 +27,30 @@
 </div>
 <div class="chat-header-content">
   <div ng-hide="vm.isVideoChat" style="height:100%">
-  <scrollable>
-    <div class="scrollable-chat-container">
-    <div class="message-list" ng-repeat="message in vm.currentChat.messages track by $index" >
-      <div class="message-list-box">
-        <div class="message-item">
-          <div class="message-sender-info " ng-class="vm.isCurrentUser(message._sender._id)? 'pull-right': 'pull-left'">
-            <div class="message-sender">
-              <img src="assets/images/user.png" class="user-img img-circle img-responsive">
-            </div>
-          </div>
-          <div class="message"  ng-class="vm.isCurrentUser(message._sender._id)? 'pull-left': 'pull-right'">
-            <div class="content">
-              <label>{{message._sender.name}}</label>
-              <p ng-bind-html="message.content  | colonToSmiley"></p>
-              <small>{{message.created_at | date: 'HH:mm dd/MM/yyyy'}}</small>
+    <scrollable>
+      <div class="scrollable-chat-container">
+        <div class="message-list" ng-repeat="message in vm.currentChat.messages track by $index">
+          <div class="message-list-box">
+            <div class="message-item">
+              <div class="message-sender-info "
+                   ng-class="vm.isCurrentUser(message._sender._id)? 'pull-right': 'pull-left'">
+                <div class="message-sender">
+                  <img src="assets/images/user.png" class="user-img img-circle img-responsive">
+                </div>
+              </div>
+              <div class="message" ng-class="vm.isCurrentUser(message._sender._id)? 'pull-left': 'pull-right'">
+                <div class="content">
+                  <label>{{message._sender.name}}</label>
+
+                  <p ng-bind-html="message.content  | colonToSmiley"></p>
+                  <small>{{message.created_at | date: 'HH:mm dd/MM/yyyy'}}</small>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    </div>
-  </scrollable>
+    </scrollable>
   </div>
   <div ng-show="vm.isVideoChat" class="video-chat-content" style="height:100%">
     <div id="videoContainer"></div>

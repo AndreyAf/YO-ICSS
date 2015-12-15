@@ -73,6 +73,7 @@ body {
 
 .chat-header {
   height: 65px;
+  border-bottom: solid #D0D0D0 1px;
 }
 
 .chat-main {
@@ -250,10 +251,6 @@ div#content::after {
   color: gray;
 }
 
-.chat-info {
-  padding-top: 10px;
-}
-
 .chat-status {
   position: absolute;
   bottom: 50px;
@@ -278,47 +275,34 @@ ic-sidebar-profile {
   display: block;
   margin-right: -15px;
   margin-left: -15px;
-  height: 80px;
+  height: 65px;
+  border-bottom: solid #D0D0D0 1px;
+
+  .profile-image {
+    float: left;
+    height: 100%;
+    img {
+      height: 100%;
+    }
+  }
+
+  .profile-info {
+    padding: 0 0 0 15px;
+    float: left;
+    height: 100%;
+  }
+
+  .profile-settings {
+    height: 100%;
+    float: right;
+    font-size: 25px;
+
+    .dropdown-menu {
+      right: 0;
+      left: inherit;
+    }
+  }
 }
-
-.profile-image {
-  width: 60px;
-  float: left;
-}
-
-.profile-image img {
-
-}
-
-.profile-info {
-  width: 50%;
-  padding: 10px;
-  float: left;
-  height: 60px;
-}
-
-.profile-settings {
-  padding: 10px;
-  width: 50px;
-  height: 60px;
-  float: right;
-  text-align: center;
-  margin: 0 auto;
-  display: flex;
-  font-size: 25px;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.profile-settings .dropdown-menu {
-  right: 0;
-  left: inherit;
-}
-
-/*.emoji-wysiwyg-editor {*/
-/*width: calc(100% - 60px);*/
-/*}*/
-
 
 .full-width {
   width: 100%!important;

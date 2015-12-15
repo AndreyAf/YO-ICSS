@@ -2,21 +2,28 @@
   <div class="row">
     <div class="col-xs-3">
       <img ng-src="{{item.img}}" class="user-img img-circle img-responsive">
-      <div class="user-status"></div>
     </div>
     <div class="col-xs-9">
       <label class="user-info-name" ng-text-truncate="item.name" ng-tt-chars-threshold="20" ng-tt-no-toggling></label>
       <small class="user-info-status" ng-text-truncate="item.statusMsg" ng-tt-chars-threshold="20"
              ng-tt-no-toggling></small>
-      <div class="pull-right">
-        <a class="chat-header-btn chat-video-call">
-          <span class="glyphicon glyphicon-facetime-video"></span>
-        </a>
-        <a class="chat-header-btn chat-voice-call">
-          <span class="glyphicon glyphicon-earphone"></span>
-        </a>
+      <div class="ic-sidebar-list-item-settings">
+        <span uib-dropdown on-toggle="toggled(open)">
+          <a href id="simple-dropdown" uib-dropdown-toggle>
+            <span class="glyphicon glyphicon-arrow-down"></span>
+          </a>
+          <ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
+            <li><a href="" ng-click="vm.changeState('addContact')">Add contact</a></li>
+            <li><a href="">Add group</a></li>
+            <li><a href="">Add company</a></li>
+            <li><a href="">Setting</a></li>
+            <li><a href="" ng-click="vm.setFullScreenStatus()"><span
+              ng-class="vm.isFullscreen ? 'glyphicon glyphicon-ok' : ''"></span> Full screen</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="" ui-sref="logout">Log out</a></li>
+          </ul>
+        </span>
       </div>
-      <span class="ic-sidebar-list-item-settings">Settings</span>
     </div>
   </div>
 </li>
