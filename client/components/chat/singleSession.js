@@ -2,7 +2,7 @@
 
   'use strict';
 
-  function SingleSessionSvc(Auth, $http, SingleSession, ciMessageSvc) {
+  function SingleSessionSvc(Auth, SingleSession, ciMessageSvc, socket) {
     /**
      * Return a callback or noop function
      *
@@ -10,29 +10,58 @@
      * @return {Function}
      */
     var safeCb = function (cb) {
-      return (angular.isFunction(cb)) ? cb : angular.noop;
-    },
-      session = {
-        "_id" : 'jy6Xat9LrMSK3aK9_ah3dlnkO-WsEBE6'
-      };
+        return (angular.isFunction(cb)) ? cb : angular.noop;
+      },
+      session = null;
 
     return {
-      session: session,
+      getCurrentSession: function () {
+        return session;
+      },
+      /***
+       * Get session for current user and participant two
+       * @param _participantTwo
+       * @param callback
+       * @returns {*|Function}
+       */
       getSession: function (_participantTwo, callback) {
+        var currentId = Auth.getCurrentUser()._id;
 
-        return safeCb(callback)(session);
-        //return SingleSession.getSession({id: Auth.getCurrentUser()._id}, {
-        //  _participantTwo: _participantTwo
-        //}, function (_session_) {
-        //  session = _session_;
-        //
-        //  // Get last messages on this session
-        //  ciMessageSvc.getLastMessages(session);
-        //
-        //  return safeCb(callback)(_session_);
-        //}, function (err) {
-        //  return safeCb(callback)(err);
-        //}).$promise;
+        return SingleSession.getSession({
+          id: currentId,
+          otherId: _participantTwo
+        }, function (_session_) {
+
+          // TODO: Get last messages on this session
+          ciMessageSvc.getLastMessages(_session_);
+
+          if (session == null) {
+
+            // Notify socket that new user connected
+            socket.socket.emit('new user', {
+              user: {
+                name: Auth.getCurrentUser().name
+              },
+              _session: _session_._id
+            });
+          }
+          else {
+
+            // switch room
+            socket.socket.emit('switch room', {
+              _oldSession: session._id,
+              _newSession: _session_._id
+            });
+
+          }
+
+          // Set chat session
+          session = _session_;
+
+          return safeCb(callback)(_session_);
+        }, function (err) {
+          return safeCb(callback)(err);
+        }).$promise;
 
       }
     };

@@ -25,16 +25,19 @@
 
       $rootScope.$on('keyup', function (event, data) {
 
-        // Send message
-        socket.socket.emit('typing new message', {
-          _session: ciSingleSessionSvc.session._id,
-          _sender: Auth.getCurrentUser()._id,
-          sender_name: Auth.getCurrentUser().name
-        });
 
-        // On enter pressed send message
-        if (data === 13) {
-          vm.sendMessage();
+        if(ciSingleSessionSvc.getCurrentSession() != null) {
+          // Send message
+          socket.socket.emit('typing new message', {
+            _session: ciSingleSessionSvc.getCurrentSession()._id,
+            _sender: Auth.getCurrentUser()._id,
+            sender_name: Auth.getCurrentUser().name
+          });
+
+          // On enter pressed send message
+          if (data === 13) {
+            vm.sendMessage();
+          }
         }
       });
 

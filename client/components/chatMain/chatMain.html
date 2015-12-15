@@ -36,7 +36,7 @@
     <div class="message-list" ng-repeat="message in vm.currentChat.messages track by $index" >
       <div class="message-list-box">
         <div class="message-item">
-          <div class="message-sender-info " ng-class="vm.isCurrentUser(message._sender)? 'pull-right': 'pull-left'">
+          <div class="message-sender-info " ng-class="vm.isCurrentUser(message._sender._id)? 'pull-right': 'pull-left'">
             <div class="message-sender">
               <img src="assets/images/user.png" class="user-img img-circle img-responsive">
             </div>

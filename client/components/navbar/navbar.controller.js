@@ -4,8 +4,12 @@ angular.module('icssApp')
   .controller('NavbarCtrl', function ($scope, Auth, $location) {
 
     $scope.location = $location;
+    $scope.isCollapsed = true;
+    $scope.isLoggedIn = Auth.isLoggedIn;
+    $scope.getCurrentUser = Auth.getCurrentUser;
 
     var isAdmin = Auth.isAdmin();
+    $scope.isLoggedIn = Auth.isLoggedIn();
 
     var menuItems = [{
       'title': 'Home',
@@ -30,7 +34,7 @@ angular.module('icssApp')
     }, {
       'title': 'Chat',
       'state': 'chat',
-      'isVisible': isAdmin
+      'isVisible': $scope.isLoggedIn
       //,
       //'target': '_blank'
     }, {
@@ -41,12 +45,11 @@ angular.module('icssApp')
 
     $scope.menu = menuItems;
 
-    $scope.$watch(function(){return Auth.isAdmin();},function(){
+    $scope.$watch(function(){return null;},function(){
       isAdmin = Auth.isAdmin();
+      $scope.isLoggedIn= Auth.isLoggedIn();
       $scope.menu = menuItems;
     });
 
-    $scope.isCollapsed = true;
-    $scope.isLoggedIn = Auth.isLoggedIn;
-    $scope.getCurrentUser = Auth.getCurrentUser;
+
   });

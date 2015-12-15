@@ -38,34 +38,26 @@
       },
       setCurrentChat: function (item) {
 
-        currentState = states.chat;
-
         // Get session by item id
-        ciSingleSessionSvc.getSession(item._id, function (session) {
+        ciSingleSessionSvc.getSession(item._id,function(ses){
 
-          // Notify socket that new user connected
-          socket.socket.emit('new user', {
-            user: {
-              name: Auth.getCurrentUser().name
-            },
-            _session: session._id
-          });
+          // Set state to chat
+          currentState = states.chat;
 
+          // Set current chat title
+          currentChat.title = item.name;
+
+          // TODO: add $promise
+          // Set current chat messages
+          currentChat.messages = ciMessageSvc.getLastMessages();
+
+          currentChat.isActive = true;
         });
-
-        // Set current chat title
-        currentChat.title = item.name;
-
-        // TODO: add $promise
-        // Set current chat messages
-        currentChat.messages = ciMessageSvc.getLastMessages();
-
-        currentChat.isActive = true;
       },
       sendMessage: function (message) {
 
         var newMesasge = {
-          _session: ciSingleSessionSvc.session._id,
+          _session: ciSingleSessionSvc.getCurrentSession()._id,
           _sender: Auth.getCurrentUser()._id,
           content: message
         };

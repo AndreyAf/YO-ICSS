@@ -104,36 +104,9 @@ exports.destroy = function (req, res) {
 // Gets a single Session by current participant id and second participant id
 exports.getSession = function (req, res) {
 
-  // TODO: check both sides
-  // Check If exists single session for current user and selected contact
-  SingleSession.findOne(
-    {'participantOne._participant': req.params.id},
-    {'participantTwo._participant': req.body._participantTwo}
-    //,
-    //{
-    //  $or: [
-    //      { 'participantOne._participant' :req.body._participantTwo},
-    //      { 'participantOne._participant':req.params.id}
-    //  ]
-    //}
-    , function (err, user){
-
-      if(user){
-        responseWithResult(user);
-      }
-      else {
-        var participantOne = {
-          _participant: req.params.id
-        }, participantTwo = {
-          _participant: req.body._participantTwo
-        }, session = {
-          participantOne: participantOne,
-          participantTwo: participantTwo
-        };
-
-        SingleSession.createAsync(session)
-          .then(responseWithResult(res, 201))
-          .catch(handleError(res));
-      }
-    });
+  // TODO rewrite by time before 15/12/2015 16:55
+  SingleSession.findByIdAsync("56701e398ff790300d19d18b")
+    .then(handleEntityNotFound(res))
+    .then(responseWithResult(res))
+    .catch(handleError(res));
 };

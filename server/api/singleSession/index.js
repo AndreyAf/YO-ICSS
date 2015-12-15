@@ -13,6 +13,7 @@ router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 
 // get session by current user and item id.
-router.put('/:id/getSession', controller.getSession);
+router.get('/:id/:otherId/getSession', controller.getSession);
+
 
 module.exports = router;
