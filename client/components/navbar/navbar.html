@@ -11,10 +11,9 @@
     </div>
     <div uib-collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
-        <li ng-repeat="item in menu" ui-sref-active="active">
+        <li ng-repeat="item in menu" ui-sref-active="active" ng-show="item.isVisible">
             <a ui-sref="{{item.state}}" target="{{item.target}}">{{item.title}}</a>
         </li>
-        <li ng-show="isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
