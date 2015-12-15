@@ -5,7 +5,9 @@ angular.module('icssApp')
 
     $scope.location = $location;
 
-    $scope.menu = [{
+    var isAdmin = Auth.isAdmin();
+
+    var menuItems = [{
       'title': 'Home',
       'state': 'main',
       'isVisible': true
@@ -13,6 +15,10 @@ angular.module('icssApp')
       'title': 'Services',
       'isVisible': true,
       'elementId': 'services'
+    },{
+      'title': 'Technology',
+      'isVisible': true,
+      'elementId': 'technology'
     },{
       'title': 'About us',
       'isVisible': true,
@@ -24,14 +30,21 @@ angular.module('icssApp')
     }, {
       'title': 'Chat',
       'state': 'chat',
-      'isVisible': Auth.isAdmin()
+      'isVisible': isAdmin
       //,
       //'target': '_blank'
     }, {
       'title': 'Admin',
       'state': 'admin',
-      'isVisible': Auth.isAdmin()
+      'isVisible': isAdmin
     }];
+
+    $scope.menu = menuItems;
+
+    $scope.$watch(function(){return Auth.isAdmin();},function(){
+      isAdmin = Auth.isAdmin();
+      $scope.menu = menuItems;
+    });
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
