@@ -1,15 +1,11 @@
 'use strict';
-(function() {
+(function () {
 
-function MainController(Auth) {
-  //var self = this;
+  function MainController(Auth, $scope) {
 
-  this.isLoggedIn = function(){
-    return Auth.isLoggedIn;
-  };
-}
+    $scope.isLoggedIn = Auth.isLoggedIn;
+  }
 
-angular.module('icssApp')
-  .controller('MainController', MainController);
+  angular.module('icssApp').controller('MainController', MainController);
 
 })();
