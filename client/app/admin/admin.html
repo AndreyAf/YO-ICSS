@@ -1,16 +1,86 @@
 <navbar></navbar>
 
-<div class="container">
-  <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
-  <ul class="list-group">
-    <li class="list-group-item" ng-repeat="user in users">
-        <strong>{{user.name}}</strong><br>
-        <span class="text-muted">{{user.email}}</span>
-        <label>Roles</label>
-        <ul>
-          <li ng-repeat="role in user.roles">{{role}}</li>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">Admin Menu</div>
+        <ul class="list-group">
+          <li class="list-group-item">Sessions</li>
         </ul>
-        <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
-    </li>
-  </ul>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">session</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <form name="filters" class="form-horizontal pull-left col-md-12">
+              <legend>Filters</legend>
+              <div class="form-group" style="height: 40px;">
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+              </div>
+              <div class="form-group" style="height: 40px;">
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="btn-group pull-right">
+                <label class="btn btn-success" ng-model="viewMode" uib-btn-radio="'map'" uncheckable>Map</label>
+                <label class="btn btn-success" ng-model="viewMode" uib-btn-radio="'table'" uncheckable>Table</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div ng-if="viewMode === 'map'">
+          <leaflet center="center" paths="paths" markers="markers" defaults="defaults" height="480px" width="100%"></leaflet>
+        </div>
+        <table st-table="sessions" class="table table-striped" ng-if="viewMode === 'table'">
+          <thead>
+          <tr>
+            <th>Company</th>
+            <th>Department</th>
+            <th>Client</th>
+            <th>Employee</th>
+            <th>Total messages</th>
+            <th st-sort="created_at">Created At</th>
+            <th st-sort="isOver">isOver</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="session in sessions">
+            <td>{{getCompanyById(session._company).name}}</td>
+            <td>{{getDepartmentById(session._department).name}}</td>
+            <td>{{getUserById(session.client._participant.id).name}}</td>
+            <td>{{getUserById(session.employee._participant.id).name}}</td>
+            <td>{{session.messages.length}}</td>
+            <td>{{session.created_at | date}}</td>
+            <td>{{session.isOver}}</td>
+            <td>
+              <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+            </td>
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr>
+            <td colspan="5" class="text-center">
+              <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+            </td>
+          </tr>
+          </tfoot>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
 </div>

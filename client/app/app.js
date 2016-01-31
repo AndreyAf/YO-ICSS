@@ -1,19 +1,21 @@
 'use strict';
 
 angular.module('icssApp', [
-    'ngCookies',
-    'ngResource',
-    'ngSanitize',
-    'btford.socket-io',
-    'ui.router',
-    'ui.bootstrap',
-    'validation.match',
-    'ngTouch',
-    'sun.scrollable',
-    'emojiApp',
-    'ngTextTruncate',
-    'ngLodash'
-  ])
+  'ngCookies',
+  'ngResource',
+  'ngSanitize',
+  'btford.socket-io',
+  'ui.router',
+  'ui.bootstrap',
+  'validation.match',
+  'ngTouch',
+  'sun.scrollable',
+  'emojiApp',
+  'ngTextTruncate',
+  'ngLodash',
+  'smart-table',
+  'leaflet-directive'
+])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
       .otherwise('/');
