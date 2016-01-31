@@ -7,9 +7,7 @@ angular.module('icssApp')
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.getCurrentUser = Auth.getCurrentUser;
-
-    var isAdmin = Auth.isAdmin();
-    $scope.isLoggedIn = Auth.isLoggedIn();
+    var isAdmin = Auth.isAdmin;
 
     var menuItems = [{
       'title': 'Home',
@@ -34,22 +32,18 @@ angular.module('icssApp')
     }, {
       'title': 'Chat',
       'state': 'chat',
-      'isVisible': $scope.isLoggedIn
+      'isVisible': $scope.isLoggedIn()
       //,
       //'target': '_blank'
     }, {
       'title': 'Admin',
       'state': 'admin',
-      'isVisible': isAdmin
+      'isVisible': isAdmin()
     }];
 
     $scope.menu = menuItems;
 
     $scope.$watch(function(){return null;},function(){
-      isAdmin = Auth.isAdmin();
-      $scope.isLoggedIn= Auth.isLoggedIn();
       $scope.menu = menuItems;
     });
-
-
   });
