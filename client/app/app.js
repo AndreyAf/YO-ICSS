@@ -55,7 +55,11 @@ angular.module('icssApp', [
     };
   })
 
-  .run(function ($rootScope, $state, Auth, lodash) {
+  .run(function ($rootScope, $state, Auth, lodash, $stateParams) {
+
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
+
     // Route state change (before open)
     $rootScope.$on('$stateChangeStart', function (event, next) {
 

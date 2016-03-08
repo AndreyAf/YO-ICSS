@@ -37,7 +37,7 @@ angular.module('icssApp')
       //'target': '_blank'
     }, {
       'title': 'Admin',
-      'state': 'admin',
+      'state': 'admin.sessions',
       'isVisible': isAdmin()
     }];
 

@@ -80,15 +80,9 @@
 
 <div class="chat-header-footer">
   <div class="chat-status" ng-show="vm.someoneTyping.status">{{vm.someoneTyping.name}} is typing...</div>
-  <div emoji-form emoji-message="vm.emojiMessage" class="send-message">
-        <textarea class="form-control send-message"
-                  id="messageInput"
-                  ng-model="vm.emojiMessage.messagetext"
-                  placeholder="Write a message..."
-                  ng-enter="vm.sendMessage()"></textarea>
-    <button id="emojibtn">
-      <i class="icon icon-emoji"></i>
-    </button>
+  <div class="send-message">
+    <textarea class="form-control" ng-model="vm.emojiMessage" placeholder="Write a message..."
+              ng-enter="vm.sendMessage()"></textarea>
   </div>
   <a href="" class="send-btn" ng-click="vm.sendMessage()">Send</a>
 </div>

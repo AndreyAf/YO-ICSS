@@ -1,13 +1,13 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!doctype html >
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" ng-app="icssApp"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" ng-app="icssApp"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" ng-app="icssApp"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" ng-app="icssApp"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <base href="/">
-    <title></title>
+    <title ng-bind="$state.current.data.pageTitle"></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -25,7 +25,7 @@
       <!-- endinjector -->
     <!-- endbuild -->
   </head>
-  <body ng-app="icssApp">
+  <body >
     <!--[if lt IE 7]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -82,6 +82,13 @@
       <script src="app/account/login/login.controller.js"></script>
       <script src="app/account/settings/settings.controller.js"></script>
       <script src="app/account/signup/signup.controller.js"></script>
+      <script src="app/admin.sessions/admin.sessions.controller.js"></script>
+      <script src="app/admin.sessions/admin.sessions.js"></script>
+      <script src="app/admin.sessions/service.js"></script>
+      <script src="app/admin.users/list.js"></script>
+      <script src="app/admin.users/model.js"></script>
+      <script src="app/admin.users/routes.js"></script>
+      <script src="app/admin.users/service.js"></script>
       <script src="app/admin/admin.controller.js"></script>
       <script src="app/admin/admin.js"></script>
       <script src="app/chat/chat.controller.js"></script>
