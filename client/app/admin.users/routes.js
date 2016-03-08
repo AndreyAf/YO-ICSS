@@ -9,7 +9,7 @@ angular.module('icssApp').config(function ($stateProvider) {
       url: '/users',
       views: {
         'content': {
-          templateUrl: '<ui-view></ui-view>'
+          template: '<ui-view></ui-view>'
         }
       }
     })

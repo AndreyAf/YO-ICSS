@@ -36,8 +36,12 @@
       <td><img src="{{user.img}}" style="width: 100%;"/></td>
       <td>{{user.statusMsg}}</td>
       <td>
-        <a ng-click="vm.deleteUser(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
-        <a ui-sref="admin.users.edit({id: user.id})" class="bg-success"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+        <a ng-click="vm.deleteUser(user)" class="trash">
+          <span class="glyphicon glyphicon-trash pull-right"></span>
+        </a>
+        <a ui-sref="admin.users.edit({id: user._id})" class="bg-success">
+          <span class="glyphicon glyphicon-pencil pull-right"></span>
+        </a>
       </td>
     </tr>
   </table>
