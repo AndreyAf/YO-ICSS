@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
+<div class="navbar navbar-default navbar-static-top">
   <div class="container">
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
@@ -12,21 +12,21 @@
     <div uib-collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
 
-        <li ng-repeat="item in menu"
+        <li ng-repeat="item in vm.menu"
             ng-show="item.isVisible"
-            ng-class="((item.elementId == location.hash()|| item.state =='main' && location.hash() == '') && 'active')">
+            ng-class="((item.elementId === vm.location.hash()|| item.state ==='main' && vm.location.hash() === '') && 'active')">
           <a ng-if="item.state" ui-sref="{{item.state}}" target="{{item.target}}">{{item.title}}</a>
           <a ng-if="!item.state" target="{{item.target}}" href="/#{{item.elementId}}">{{item.title}}</a>
         </li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li ng-if="!isLoggedIn()" ui-sref-active="active"><a ui-sref="signup">Sign up</a></li>
-        <li ng-if="!isLoggedIn()" ui-sref-active="active"><a ui-sref="login">Login</a></li>
-        <li ng-if="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p></li>
-        <li ng-if="isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><span
+        <li ng-show="!vm.isLoggedIn" ui-sref-active="active"><a ui-sref="signup">Sign up</a></li>
+        <li ng-show="!vm.isLoggedIn" ui-sref-active="active"><a ui-sref="login">Login</a></li>
+        <li ng-show="vm.isLoggedIn"><p class="navbar-text">Hello {{ vm.currentUser.name }}</p></li>
+        <li ng-show="vm.isLoggedIn" ui-sref-active="active"><a ui-sref="settings"><span
           class="glyphicon glyphicon-cog"></span></a></li>
-        <li ng-if="isLoggedIn()"><a ui-sref="logout">Logout</a></li>
+        <li ng-show="vm.isLoggedIn"><a ui-sref="logout">Logout</a></li>
       </ul>
     </div>
   </div>

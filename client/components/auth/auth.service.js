@@ -12,7 +12,7 @@ angular.module('icssApp')
         return (angular.isFunction(cb)) ? cb : angular.noop;
       },
 
-      currentUser = {};
+      currentUser = null;
 
     if ($cookies.get('token')) {
       currentUser = User.get();
@@ -107,7 +107,7 @@ angular.module('icssApp')
           return currentUser;
         }
 
-        var value = (currentUser.hasOwnProperty('$promise')) ? currentUser.$promise : currentUser;
+        var value = (currentUser && currentUser.hasOwnProperty('$promise')) ? currentUser.$promise : currentUser;
         return $q.when(value)
           .then(function (user) {
             safeCb(callback)(user);
@@ -127,12 +127,12 @@ angular.module('icssApp')
        */
       isLoggedIn: function (callback) {
         if (arguments.length === 0) {
-          return currentUser.hasOwnProperty('roles');
+          return currentUser && currentUser.hasOwnProperty('roles');
         }
 
         return this.getCurrentUser(null)
           .then(function (user) {
-            var is = user.hasOwnProperty('roles');
+            var is = currentUser &&  user.hasOwnProperty('roles');
             safeCb(callback)(is);
             return is;
           });
