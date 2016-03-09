@@ -21,7 +21,7 @@ module.exports = function(config) {
       'client/bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js',
       'client/bower_components/angular-nanoscroller/scrollable.js',
       'client/bower_components/angular-touch/angular-touch.js',
-      'client/bower_components/rtcmulticonnection/RTCMultiConnection.js',
+      'client/bower_components/rtcmulticonnection/rtcmulticonnection.js',
       'client/bower_components/angular-ui-router/release/angular-ui-router.js',
       'client/bower_components/angular-validation-match/dist/angular-validation-match.min.js',
       'client/bower_components/ng-text-truncate/ng-text-truncate.js',

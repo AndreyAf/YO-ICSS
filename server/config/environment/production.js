@@ -11,6 +11,6 @@ module.exports = {
 
   // MongoDB connection options
   mongo: {
-    uri:    "mongodb://ninickname:oneXone1@ds061974.mongolab.com:61974/icssyo"
+    uri:    "mongodb://ninickname:oneXone1@ds061974.mlab.com:61974/icssyo"
   }
 };

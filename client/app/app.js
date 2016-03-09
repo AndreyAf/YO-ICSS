@@ -13,7 +13,8 @@ angular.module('icssApp', [
   'emojiApp',
   'ngTextTruncate',
   'ngLodash',
-  'smart-table'
+  'smart-table',
+  'ui.grid'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

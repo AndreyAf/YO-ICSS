@@ -16,7 +16,10 @@ angular.module('icssApp').config(function ($stateProvider) {
     .state({
       name: 'admin.users.list',
       url: '',
-      templateUrl: 'app/admin.users/list.html',
+      template: '' +
+      '<ic-admin-panel-content title="\'Users\'" create-title="\'Add new user\'" create-sref="\'admin.users.create\'"> ' +
+      ' <div class="admin-panel-grid" id="usersGrid" ui-grid="vm.gridOptions"></div> ' +
+      '</ic-admin-panel-content>',
       data: {pageTitle: 'Users Panel - List'},
       controller: 'AdminUsersListCtrl',
       controllerAs: 'vm'

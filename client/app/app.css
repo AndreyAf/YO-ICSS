@@ -8830,6 +8830,10 @@ button.close {
 .signup-screen .form-control {
   border: solid #CCCCCC 1px;
 }
+.admin-panel-grid {
+  width: 100%;
+  height: 250px;
+}
 .trash {
   color: #d15b47;
 }
