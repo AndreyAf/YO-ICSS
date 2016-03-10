@@ -51,10 +51,7 @@ function navbar() {
           vm.currentUser = user;
 
           if (vm.isLoggedIn) {
-console.log(user);
             for (var i in user.roles) {
-              console.log(i);
-              console.log(user.roles[i]);
               if (user.roles[i] === 'admin') {
                 vm.isAdmin = true;
                 break;
