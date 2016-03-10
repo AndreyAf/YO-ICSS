@@ -25,7 +25,7 @@
     </div>
   </div>
 </div>
-<div class="chat-header-content">
+<div id="content" class="chat-header-content">
   <div ng-hide="vm.isVideoChat" style="height:100%">
     <scrollable>
       <div class="scrollable-chat-container">
@@ -80,9 +80,8 @@
 
 <div class="chat-header-footer">
   <div class="chat-status" ng-show="vm.someoneTyping.status">{{vm.someoneTyping.name}} is typing...</div>
-  <div class="send-message">
-    <textarea class="form-control" ng-model="vm.emojiMessage" placeholder="Write a message..."
-              ng-enter="vm.sendMessage()"></textarea>
+  <div class="send-message" style="height: 100%">
+    <textarea id="message" class="form-control" ng-model="vm.message" placeholder="Write a message..." ng-enter="vm.sendMessage()" style="height: 100%;resize: none;"></textarea>
   </div>
   <a href="" class="send-btn" ng-click="vm.sendMessage()">Send</a>
 </div>

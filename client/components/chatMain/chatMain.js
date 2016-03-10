@@ -8,12 +8,12 @@
     function icChatMain(ciChatSvc, $rootScope, Auth, $timeout, socket, $sce, VideoStream, $location, Room, ciSingleSessionSvc, $scope) {
       var vm = this; //jshint ignore:line
 
-      vm.emojiMessage = {};
-
-      vm.someoneTyping = {status: false, name: null};
-
+      vm.message = null;
+      vm.someoneTyping = {
+        status: false,
+        name: null
+      };
       vm.isVideoChat = false;
-
       vm.currentChat = ciChatSvc.getCurrentChat();
 
       $scope.$watch(function () {
@@ -74,13 +74,12 @@
 
       vm.sendMessage = function () {
 
-        ciChatSvc.sendMessage(vm.emojiMessage.messagetext);
+        ciChatSvc.sendMessage(vm.message);
 
         // TODO: rewrite - not the correct angular way
         $(".nano").nanoScroller({scrollBottom: 5});
 
-        vm.emojiMessage.messagetext = '';
-        vm.emojiMessage.rawhtml = '';
+        vm.sendMessage = '';
       };
 
       // #######################################
@@ -133,7 +132,6 @@
       // #######################################
       // TESTING END
       // #######################################
-
     }
 
     return {
