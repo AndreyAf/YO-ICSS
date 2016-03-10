@@ -72,7 +72,7 @@ console.log(user);
 
             vm.menu.push({
               'title': 'Admin',
-              'state': 'admin.sessions',
+              'state': 'admin.users.list',
               'isVisible': vm.isAdmin
             });
           }
