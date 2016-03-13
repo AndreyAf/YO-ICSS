@@ -28,6 +28,26 @@
     </uib-tab>
     <uib-tab>
       <uib-tab-heading>
+        <span class="fa fa-users"></span>
+        <span class="badge">+99</span>
+      </uib-tab-heading>
+
+      <div class="full-height" scrollable>
+        <ul class="list-group">
+          <div ng-if="vm.groups">
+            <ic-sidebar-list-item-single ng-repeat="groups in vm.groups | filter : search"
+                                         item="groups"></ic-sidebar-list-item-single>
+          </div>
+          <div ng-if="vm.groups.length == 0">
+            <label>You have no groups you poor bastard!! <a href="" ng-click="vm.changeState('addGroup')"> click
+              here</a> to add new group :) </label>
+          </div>
+        </ul>
+      </div>
+
+    </uib-tab>
+    <uib-tab>
+      <uib-tab-heading>
         <span class="glyphicon glyphicon-briefcase"></span>
         <span class="badge">+99</span>
       </uib-tab-heading>

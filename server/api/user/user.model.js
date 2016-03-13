@@ -46,6 +46,7 @@ var UserSchema = new Schema({
     enum: ['client', 'employee', 'manager', 'admin']
   }],
   contacts: [Contact],
+  groups: [{type: Schema.Types.ObjectId, ref: 'Group'}],
   blackList: [{
     _id: {
       type: Schema.Types.ObjectId,

@@ -1,11 +1,13 @@
 <li class="list-group-item ic-sidebar-list-item" ng-click="vm.selectItem(item)">
   <div class="row">
     <div class="col-xs-3">
-      <img ng-src="{{item.img}}" class="user-img img-circle img-responsive">
+      <img ng-src="{{item.img ? item.img : item.logo_url}}" class="user-img img-circle img-responsive">
     </div>
     <div class="col-xs-9">
       <label class="user-info-name" ng-text-truncate="item.name" ng-tt-chars-threshold="20" ng-tt-no-toggling></label>
-      <small class="user-info-status" ng-text-truncate="item.statusMsg" ng-tt-chars-threshold="20"
+      <small ng-if="item.statusMsg" class="user-info-status" ng-text-truncate="item.statusMsg" ng-tt-chars-threshold="20"
+             ng-tt-no-toggling></small>
+      <small ng-if="item.description" class="user-info-status" ng-text-truncate="item.description" ng-tt-chars-threshold="20"
              ng-tt-no-toggling></small>
       <div class="ic-sidebar-list-item-settings">
         <span uib-dropdown on-toggle="toggled(open)">
@@ -14,8 +16,6 @@
           </a>
           <ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
             <li><a href="" ng-click="vm.changeState('addContact')">Add contact</a></li>
-            <li><a href="">Add group</a></li>
-            <li><a href="">Add company</a></li>
             <li><a href="">Setting</a></li>
             <li><a href="" ng-click="vm.setFullScreenStatus()"><span
               ng-class="vm.isFullscreen ? 'glyphicon glyphicon-ok' : ''"></span> Full screen</a></li>

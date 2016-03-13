@@ -12,7 +12,8 @@
     var safeCb = function (cb) {
         return (angular.isFunction(cb)) ? cb : angular.noop;
       },
-      session = null;
+    // TODO: set null
+      session = {_id: '123123'};
 
     return {
       getCurrentSession: function () {

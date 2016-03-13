@@ -1,0 +1,126 @@
+<ic-admin-panel-content title="'Create/Edit new Company'">
+  <div class="panel-body">
+    <div class="row">
+      <form name="user" class="form-horizontal">
+        <div class="form-group">
+          <label class="control-label col-md-2">Name:</label>
+
+          <div class="col-md-10">
+            <input type="text" class="form-control" ng-model="vm.company.name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-2">Slogan:</label>
+
+          <div class="col-md-10">
+            <input type="text" class="form-control" ng-model="vm.company.slogan">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-2">Description:</label>
+
+          <div class="col-md-10">
+            <input type="text" class="form-control" ng-model="vm.company.description">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-2">Logo URL:</label>
+
+          <div class="col-md-10">
+            <input type="text" class="form-control" ng-model="vm.company.logo_url">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-2">Departments:</label>
+
+          <div class="col-md-10">
+            <uib-accordion close-others="true">
+              <uib-accordion-group ng-repeat="department in vm.company.departments">
+                <uib-accordion-heading>
+                  {{department.name}} <span class="pull-right glyphicon glyphicon-remove"
+                                            ng-click="$event.stopPropagation();$event.preventDefault();vm.removeDepartment($index)"></span>
+                </uib-accordion-heading>
+                <ng-form class="form-horizontal">
+                  <div class="form-group">
+                    <label class="control-label col-md-2">Name:</label>
+
+                    <div class="col-md-10">
+                      <input type="text" class="form-control" ng-model="department.name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-2">Description:</label>
+
+                    <div class="col-md-10">
+                      <input type="text" class="form-control" ng-model="department.description">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-2">Email:</label>
+
+                    <div class="col-md-10">
+                      <input type="text" class="form-control" ng-model="department.email">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-2">Location:</label>
+
+                    <div class="col-md-10">
+                      <ng-form class="form-horizontal">
+                        <div class="form-group">
+                          <label class="control-label col-md-2">Country:</label>
+
+                          <div class="col-md-10">
+                            <input type="text" class="form-control" ng-model="department.location.country">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-md-2">City:</label>
+
+                          <div class="col-md-10">
+                            <input type="text" class="form-control" ng-model="department.location.city">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-md-2">Address:</label>
+
+                          <div class="col-md-10">
+                            <input type="text" class="form-control" ng-model="department.location.address">
+                          </div>
+                        </div>
+                      </ng-form>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-2">Phone:</label>
+
+                    <div class="col-md-10">
+                      <input type="text" class="form-control" ng-model="department.phone">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-2">Fax:</label>
+
+                    <div class="col-md-10">
+                      <input type="text" class="form-control" ng-model="department.fax">
+                    </div>
+                  </div>
+                </ng-form>
+              </uib-accordion-group>
+            </uib-accordion>
+          </div>
+          <div class="col-md-10 col-md-offset-2">
+            <a href="" ng-click="vm.addDepartment()"><span class="glyphicon glyphicon-plus"></span>Add
+              department</a>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-offset-2">
+            <a class="btn btn-success" ng-click="vm.addCompany()">Create</a>
+            <a class="btn btn-warning" ui-sref="admin.companies.list">Back</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</ic-admin-panel-content>

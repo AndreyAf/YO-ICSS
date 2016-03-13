@@ -8,15 +8,18 @@
     function icSidebarTabs(User, Auth, ciChatSvc) {
       var vm = this; //jshint ignore:line
 
-      // Get current user contacts
-      Auth.getCurrentUser(function(user){
-        vm.contacts = user.contacts;
-      });
-
       vm.users = User.query();
       vm.companies = [];
+      vm.contacts = [];
+      vm.groups = [];
 
-      vm.changeState = function(state){
+      // Get current user contacts
+      Auth.getCurrentUser(function (user) {
+        vm.contacts = user.contacts;
+        vm.groups = user.groups;
+      });
+
+      vm.changeState = function (state) {
         ciChatSvc.setCurrentState(state);
       };
     }

@@ -79,7 +79,7 @@
         // TODO: rewrite - not the correct angular way
         $(".nano").nanoScroller({scrollBottom: 5});
 
-        vm.sendMessage = '';
+        vm.message = '';
       };
 
       // #######################################

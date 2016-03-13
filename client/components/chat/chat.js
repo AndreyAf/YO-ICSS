@@ -62,6 +62,8 @@
           content: message
         };
 
+        currentChat.messages.push(newMesasge);
+
         // Send message to socket
         socket.socket.emit('new message', newMesasge);
       }

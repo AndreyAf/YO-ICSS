@@ -93,6 +93,7 @@ exports.show = function (req, res, next) {
 
   User.find({_id: userId})
     .populate('contacts._contact')
+    .populate('groups')
     .execAsync()
     .then(function (user) {
       if (!user) {
@@ -158,6 +159,15 @@ exports.addContact = function (req, res, next) {
 };
 
 /**
+ * Add group to user
+ */
+exports.addGroup = function (req, res, next) {
+  var userId = req.user._id;
+
+  // TODO: create new group and add user as it admin
+};
+
+/**
  * Add contact to user
  */
 exports.getPossibleContacts = function (req, res, next) {
@@ -172,6 +182,7 @@ exports.getPossibleContacts = function (req, res, next) {
             {"_id": {$nin: contactsIds}}
           ]
         }, '-salt -hashedPassword')
+        .populate('groups')
         .then(function (users) {
           res.status(200).json(users);
         })
@@ -189,6 +200,7 @@ exports.me = function (req, res, next) {
 
   User.findOne({_id: userId}, '-salt -hashedPassword')
     .populate('contacts._contact')
+    .populate('groups')
     .execAsync()
     .then(function (user) { // don't ever give out the password or salt
       if (!user) {

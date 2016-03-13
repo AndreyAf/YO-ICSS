@@ -19,19 +19,22 @@
 @import 'account/login/login.less';
 @import 'account/settings/settings.less';
 @import 'account/signup/signup.less';
+@import 'admin.companies/_style.less';
 @import 'admin.users/_style.less';
 @import 'admin/admin.less';
 @import 'chat/chat.less';
 @import 'main/main.less';
 @import '../components/chatMain/chatMain.less';
+@import '../components/chatMainAddCompany/chatMainAddCompany.less';
 @import '../components/chatMainAddContact/chatMainAddContact.less';
+@import '../components/chatMainAddGroup/chatMainAddGroup.less';
+@import '../components/chatMainSettings/chatMainSettings.less';
 @import '../components/chatSidebarListItemSingle/sidebarListItemSingle.less';
 @import '../components/chatSidebarProfile/chatSidebarProfile.less';
 @import '../components/chatSidebarTabs/chatSidebarTabs.less';
 @import '../components/footer/footer.less';
 @import '../components/modal/modal.less';
 // endinjector
-
 
 html,
 body {
@@ -86,7 +89,7 @@ body {
 
 .chat-header-content {
   height: ~"calc(100% - 110px)";
-  background-color: #CACAB4;
+  background-color: whitesmoke;
   width: 100%;
 }
 
@@ -94,14 +97,7 @@ body {
   height: 45px;
 }
 
-.message {
-  padding-left: 0;
-}
 
-.message-sender {
-  top: 20px;
-  padding: 5px;
-}
 
 .user-info-name {
   font-size: 14px;
@@ -113,23 +109,16 @@ body {
   color: gray;
 }
 
-
-
-
 .chat-sidebar {
   border-right: solid 1px #D0D0D0;
   height: 100%;
-  float:left;
+  float: left;
   width: 270px;
   position: relative;
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
   display: block;
-}
-
-.message-list {
-  padding: 17px 9% 8px;
 }
 
 .chat-header-footer {
@@ -141,6 +130,7 @@ body {
 .chat-inf {
   height: 20px;
 }
+
 .content {
   border: solid 1px #E6E6E6;
   border-radius: 7.5px;
@@ -203,6 +193,7 @@ div#content::after {
 .input-group-addon:last-child {
   top: 0;
 }
+
 //
 //.message:before {
 //  content: '';
@@ -312,7 +303,7 @@ ic-sidebar-profile {
 }
 
 .full-width {
-  width: 100%!important;
+  width: 100% !important;
 }
 
 .chat-container {

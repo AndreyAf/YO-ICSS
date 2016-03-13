@@ -15,6 +15,8 @@ module.exports = function(app) {
   app.use('/api/groupSessions', require('./api/groupSession'));
   app.use('/api/messages', require('./api/message'));
   app.use('/api/users', require('./api/user'));
+  app.use('/api/groups', require('./api/group'));
+  app.use('/api/companies', require('./api/company'));
 
   app.use('/auth', require('./auth'));
 
