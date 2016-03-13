@@ -1,0 +1,35 @@
+<ic-admin-panel-content title="'Create/Edit new group'">
+  <div class="panel-body">
+    <div class="row">
+      <form name="group" class="form-horizontal">
+        <div class="form-group">
+        <label class="control-label col-md-2">Group name:</label>
+
+        <div class="col-md-10">
+          <input type="text" class="form-control" ng-model="vm.group.name">
+        </div>
+      </div>
+        <div class="form-group">
+          <label class="control-label col-md-2">Description:</label>
+
+          <div class="col-md-10">
+            <input type="text" class="form-control" ng-model="vm.group.description">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-2">Logo URL:</label>
+
+          <div class="col-md-10">
+            <input type="text" class="form-control" ng-model="vm.group.logo_url">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-offset-2">
+            <a class="btn btn-success" ng-click="vm.addGroup()">Create</a>
+            <a class="btn btn-warning" ui-sref="admin.groups.list">Back</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</ic-admin-panel-content>
