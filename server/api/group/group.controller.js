@@ -60,9 +60,9 @@ function removeEntity(res) {
   };
 }
 
-function addGroupToUser(groupRes, status){
+function addGroupToUser(groupRes, status) {
   //After creation of group add group to each user
-  if(groupRes.users) {
+  if (groupRes.users) {
     for (var i = 0; i < groupRes.users.length; i++) {
       User.findByIdAsync(groupRes.users[i])
         .then(function (res, pos) {
@@ -75,6 +75,23 @@ function addGroupToUser(groupRes, status){
     }
   }
   return responseWithResult(groupRes, status);
+}
+
+function removeGroupFromUser(groupRes) {
+  console.log(groupRes);
+  // TODO: rewrite
+  //for (var i = 0; i < groupRes.users.length; i++) {
+  //  User.findByIdAsync(groupRes.users[i])
+  //    .then(function (res, pos) {
+  //      res.groups.pull({_id: groupRes._id});
+  //      res.saveAsync();
+  //    })
+  //    .catch(function (res) {
+  //      handleError(res);
+  //    });
+  //}
+
+  return removeEntity(groupRes);
 }
 
 // Gets a list of groups by session id
@@ -93,7 +110,6 @@ exports.show = function (req, res) {
     .then(responseWithResult(res))
     .catch(handleError(res));
 };
-
 
 // Creates a new group in the DB
 exports.create = function (req, groupRes) {
@@ -118,21 +134,6 @@ exports.update = function (req, res) {
 exports.destroy = function (req, res) {
   group.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
-    .then(function(res){
-
-      // on delete group remove group from all group users
-      for (var i = 0; i < res.users.length; i++) {
-        User.findByIdAsync(res.users[i])
-          .then(function (resUser, pos) {
-            resUser.groups.pull({_id: res._id});
-            resUser.saveAsync();
-          })
-          .catch(function (res) {
-            handleError(res);
-          });
-      }
-
-      removeEntity(res);
-    })
+    .then(removeGroupFromUser(res))
     .catch(handleError(res));
 };

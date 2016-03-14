@@ -25,6 +25,8 @@ function adminGroupsListCtrl(GroupSvc, uiGridConstants, $state) {
         field: 'description'
       },
       {
+        enableFiltering: false,
+        enableSorting: false,
         name: 'Logo',
         field: 'logo_url',
         cellTemplate: "<img width=\"50px\" ng-src=\"{{grid.getCellValue(row, col)}}\" lazy-src>"
@@ -37,6 +39,10 @@ function adminGroupsListCtrl(GroupSvc, uiGridConstants, $state) {
       {
         name: '',
         field: '_id',
+        enableFiltering: false,
+        enableSorting: false,
+        enableHiding: false,
+        enableColumnMenu: false,
         cellTemplate: '' +
         '<span style="display:block; text-align:center;">' +
         ' <button ng-click="grid.appScope.editGroup(grid.getCellValue(row, col))" class="btn btn-xs btn-default">' +
@@ -67,6 +73,10 @@ function adminGroupsListCtrl(GroupSvc, uiGridConstants, $state) {
   function deleteGroup(id) {
     if (confirm('Are You sure you want to delete this group')) {
       GroupSvc.remove(id);
+
+      vm.gridOptions.data = vm.gridOptions.data.filter(function (item) {
+        return item._id !== id;
+      });
     }
   }
 
