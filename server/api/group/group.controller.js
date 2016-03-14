@@ -60,6 +60,23 @@ function removeEntity(res) {
   };
 }
 
+function addGroupToUser(groupRes, status){
+  //After creation of group add group to each user
+  if(groupRes.users) {
+    for (var i = 0; i < groupRes.users.length; i++) {
+      User.findByIdAsync(groupRes.users[i])
+        .then(function (res, pos) {
+          res.groups.push({_id: groupRes._id});
+          res.saveAsync();
+        })
+        .catch(function (res) {
+          handleError(res);
+        });
+    }
+  }
+  return responseWithResult(groupRes, status);
+}
+
 // Gets a list of groups by session id
 exports.index = function (req, res) {
   group.findAsync({
@@ -77,25 +94,11 @@ exports.show = function (req, res) {
     .catch(handleError(res));
 };
 
+
 // Creates a new group in the DB
 exports.create = function (req, groupRes) {
   group.createAsync(req.body)
-    .then(function (groupRes) {
-
-      // After creation of group add group to each user
-      for (var i = 0; i < groupRes.users.length; i++) {
-        User.findByIdAsync(groupRes.users[i])
-          .then(function (res,pos) {
-            res.groups.push({_id: groupRes._id});
-            res.saveAsync();
-          })
-          .catch(function (res) {
-            handleError(res);
-          });
-      }
-
-      responseWithResult(groupRes, 201);
-    })
+    .then(addGroupToUser(groupRes, 201))
     .catch(handleError(groupRes));
 };
 

@@ -12,8 +12,7 @@
     <div uib-collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
 
-        <li ng-repeat="item in vm.menu"
-            ng-show="item.isVisible"
+        <li ng-repeat="item in vm.menu" ng-show="item.isVisible"
             ng-class="((item.elementId === vm.location.hash()|| item.state ==='main' && vm.location.hash() === '') && 'active')">
           <a ng-if="item.state" ui-sref="{{item.state}}" target="{{item.target}}">{{item.title}}</a>
           <a ng-if="!item.state" target="{{item.target}}" href="/#{{item.elementId}}">{{item.title}}</a>

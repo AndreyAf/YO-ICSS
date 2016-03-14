@@ -36,8 +36,7 @@ function adminGroupsModelCtrl(GroupSvc, $state, $q) {
     vm.loading = true;
     var promise = vm.group._id ? GroupSvc.update(vm.group): GroupSvc.create(vm.group);
 
-    promise.finally(function(){
-      vm.loading = false;
+    promise.then(function(){
       $state.go('admin.groups.list');
     });
   }
