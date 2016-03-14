@@ -31,6 +31,29 @@
           </div>
         </div>
         <div class="form-group">
+          <label class="control-label col-md-4">Users:</label>
+
+          <div class="col-md-8">
+            <ul class="list-group">
+              <li class="list-group-item" ng-repeat="user in vm.group.users">{{($index+1)+'. '+ user.name}}
+                <a href="" ng-click="vm.removeUser(user)">
+                  <span class="glyphicon glyphicon-remove pull-right text-danger"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-offset-4 col-md-8">
+            <div class="input-group">
+              <select class="form-control" ng-model="vm.newUser"
+                      ng-options="userOpt.name for userOpt in vm.usersOpt track by userOpt._id"></select>
+
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-info" ng-click="vm.addUser(vm.newUser)">Add user</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
           <div class="col-md-offset-4 col-md-8">
             <a class="btn btn-success"
                ng-click="vm.saveGroup()"

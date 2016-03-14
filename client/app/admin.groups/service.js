@@ -2,7 +2,8 @@
 
 angular.module('icssApp').factory('GroupSvc', groupSvc);
 
-function groupSvc($resource) {
+/* @ngInject */
+function groupSvc($resource, $q, $http) {
 
   var groupRsc = $resource('/api/groups/:id', {id: '@_id'}, {'update': {method: 'PUT'}});
 
@@ -11,7 +12,9 @@ function groupSvc($resource) {
     getById: getById,
     remove: remove,
     create: create,
-    update: update
+    update: update,
+    addUser: addUser,
+    removeUser: removeUser
   };
 
   return service;
@@ -40,5 +43,13 @@ function groupSvc($resource) {
 
   function update(group) {
     return groupRsc.update(group).$promise;
+  }
+
+  function addUser(groupId, userId) {
+    return $http({method: 'GET', url: '/api/groups/' + groupId + '/addUser/' + userId});
+  }
+
+  function removeUser(groupId, userId) {
+    return $http({method: 'GET', url: '/api/groups/' + groupId + '/removeUser/' + userId});
   }
 }

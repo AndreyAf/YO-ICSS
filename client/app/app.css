@@ -9167,8 +9167,8 @@ tfoot td {
 .ic-sidebar-list-item:hover .ic-sidebar-list-item-settings {
   display: block;
 }
-.list-group-item:first-child,
-.list-group-item:last-child {
+.ic-sidebar-list-item .list-group-item:first-child,
+.ic-sidebar-list-item .list-group-item:last-child {
   border-radius: inherit;
   border-top: none;
   border-left: none;

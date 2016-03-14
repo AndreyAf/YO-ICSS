@@ -60,25 +60,7 @@ function removeEntity(res) {
   };
 }
 
-function addGroupToUser(groupRes, status) {
-  //After creation of group add group to each user
-  if (groupRes.users) {
-    for (var i = 0; i < groupRes.users.length; i++) {
-      User.findByIdAsync(groupRes.users[i])
-        .then(function (res, pos) {
-          res.groups.push({_id: groupRes._id});
-          res.saveAsync();
-        })
-        .catch(function (res) {
-          handleError(res);
-        });
-    }
-  }
-  return responseWithResult(groupRes, status);
-}
-
 function removeGroupFromUser(groupRes) {
-  console.log(groupRes);
   // TODO: rewrite
   //for (var i = 0; i < groupRes.users.length; i++) {
   //  User.findByIdAsync(groupRes.users[i])
@@ -105,7 +87,9 @@ exports.index = function (req, res) {
 
 // Gets a single group from the DB
 exports.show = function (req, res) {
-  group.findByIdAsync(req.params.id)
+  group.findOne({_id: req.params.id})
+    .populate('users')
+    .execAsync()
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));
@@ -113,8 +97,32 @@ exports.show = function (req, res) {
 
 // Creates a new group in the DB
 exports.create = function (req, groupRes) {
+
+  // map users by id
+  req.body.users = _.map(req.body.users, function (user) {
+    return user._id;
+  });
+
   group.createAsync(req.body)
-    .then(addGroupToUser(groupRes, 201))
+    .then((function (res) {
+      return function (entity) {
+        if (entity) {
+
+          for (var i = 0; i < entity.users.length; i++) {
+            User.findByIdAsync(entity.users[i])
+              .then(function (res, pos) {
+                res.groups.push({_id: groupRes._id});
+                res.saveAsync();
+              })
+              .catch(function (res) {
+                handleError(res);
+              });
+          }
+
+          res.status(200).json(entity);
+        }
+      };
+    })(groupRes))
     .catch(handleError(groupRes));
 };
 
@@ -125,7 +133,21 @@ exports.update = function (req, res) {
   }
   group.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
-    .then(saveUpdates(req.body))
+    .then((function (updates) {
+      return function (entity) {
+
+        // map users by id
+        updates.users = _.map(updates.users, function (user) {
+          return user._id;
+        });
+
+        var updated = _.merge(entity, updates);
+        return updated.saveAsync()
+          .spread(function (updated) {
+            return updated;
+          });
+      };
+    })(req.body))
     .then(responseWithResult(res))
     .catch(handleError(res));
 };
@@ -135,5 +157,65 @@ exports.destroy = function (req, res) {
   group.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(removeGroupFromUser(res))
+    .catch(handleError(res));
+};
+
+exports.addUser = function (req, res) {
+
+  function entityFound(res) {
+    return function (entity) {
+      if (entity) {
+
+        entity.users.push({_id: req.params.userId});
+        entity.saveAsync();
+
+        // add group to user
+        User.findByIdAsync(req.params.userId)
+          .then(function (res, pos) {
+            res.groups.push({_id: group._id});
+            res.saveAsync();
+          })
+          .catch(function (res) {
+            handleError(res);
+          });
+
+        res.status(200).json(entity);
+      }
+    };
+  }
+
+  group.findByIdAsync(req.params.groupId)
+    .then(handleEntityNotFound(res))
+    .then(entityFound(res))
+    .catch(handleError(res));
+};
+
+exports.removeUser = function (req, res) {
+
+  function entityFound(res) {
+    return function (entity) {
+      if (entity) {
+
+        entity.users.pull({_id: req.params.userId});
+        entity.saveAsync();
+
+        // add group to user
+        User.findByIdAsync(req.params.userId)
+          .then(function (res, pos) {
+            res.groups.pull({_id: group._id});
+            res.saveAsync();
+          })
+          .catch(function (res) {
+            handleError(res);
+          });
+
+        res.status(200).json(entity);
+      }
+    };
+  }
+
+  group.findByIdAsync(req.params.groupId)
+    .then(handleEntityNotFound(res))
+    .then(entityFound(res))
     .catch(handleError(res));
 };
