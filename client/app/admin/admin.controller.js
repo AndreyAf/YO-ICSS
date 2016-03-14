@@ -5,6 +5,19 @@ angular.module('icssApp')
 
     $scope.itemsByPage = 5;
     $scope.displayed = [];
+    $scope.adminMenuItems = [
+      {
+        sref: 'admin.users',
+        title: 'Users'
+      },
+      {
+        sref: 'admin.companies',
+        title: 'Companies'
+      },
+      {
+        sref: 'admin.groups',
+        title: 'Groups'
+      }];
 
     // Use the User $resource to fetch all users
     //$scope.users = User.query(function (users) {
@@ -89,7 +102,7 @@ angular.module('icssApp')
 
           if (sender === employeeId) {
 
-            if($scope.getUserById(employeeId).companies[0]._company === 1) {
+            if ($scope.getUserById(employeeId).companies[0]._company === 1) {
 
               position = {
                 latitude: 31.3271801,
@@ -165,10 +178,9 @@ angular.module('icssApp')
         };
       }
 
-
       for (var i = 0; i < 100; i = i + 2) {
         generateClient(i);
-        generateEmployee(i + 1, (~~(Math.random()*1545454)) % 2)
+        generateEmployee(i + 1, (~~(Math.random() * 1545454)) % 2)
       }
 
       for (var i = 0; i < 1000; i++) {
@@ -227,7 +239,6 @@ angular.module('icssApp')
       return null;
     };
 
-
     $scope.getDepartmentById = function (id) {
 
       for (var i = 0; i < $scope.departments.length; i++) {
@@ -237,8 +248,6 @@ angular.module('icssApp')
       }
       return null;
     };
-
-
 
     $scope.delete = function (user) {
       User.remove({id: user._id});
@@ -279,17 +288,14 @@ angular.module('icssApp')
 
         if (sideTwoSent && sideOneSent) {
 
-
           var color = null;
 
-          if(session._department === 1)
-          {
+          if (session._department === 1) {
             color = '#F90903';
           }
           else {
             color = '#155950';
           }
-
 
           $scope.paths["p" + session.id] = {
             color: color,

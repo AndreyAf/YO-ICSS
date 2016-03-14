@@ -17,8 +17,9 @@ angular.module('icssApp').config(function ($stateProvider) {
       name: 'admin.groups.list',
       url: '',
       template: '' +
-      '<ic-admin-panel-content title="\'Groups\'" create-title="\'Add new group\'" create-sref="\'admin.groups.create\'"> ' +
-      ' <div class="admin-panel-grid" id="groupsGrid" ui-grid="vm.gridOptions"></div> ' +
+      '<ic-admin-panel-content title="\'Groups\'" create-title="\'Add new group\'" create-sref="\'admin.groups.create\'">' +
+      ' <ic-loading is-loading="vm.loading"></ic-loading>'+
+      ' <div ng-if="!vm.loading" class="admin-panel-grid" id="groupsGrid" ui-grid="vm.gridOptions" ui-grid-auto-resize></div>' +
       '</ic-admin-panel-content>',
       data: {pageTitle: 'Groups Panel - List'},
       controller: 'AdminGroupsListCtrl',

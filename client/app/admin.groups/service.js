@@ -4,12 +4,14 @@ angular.module('icssApp').factory('GroupSvc', groupSvc);
 
 function groupSvc($resource) {
 
-  var groupRsc = $resource('/api/groups/:id', {id: '@_id'});
+  var groupRsc = $resource('/api/groups/:id', {id: '@_id'}, {'update': {method: 'PUT'}});
 
   var service = {
     query: query,
     getById: getById,
-    remove: remove
+    remove: remove,
+    create: create,
+    update: update
   };
 
   return service;
@@ -29,6 +31,14 @@ function groupSvc($resource) {
   }
 
   function remove(id) {
-    return groupRsc.remove({id: id}).$promise;
+    return groupRsc.delete({id: id}).$promise;
+  }
+
+  function create(group) {
+    return groupRsc.save(group).$promise;
+  }
+
+  function update(group) {
+    return groupRsc.update(group).$promise;
   }
 }

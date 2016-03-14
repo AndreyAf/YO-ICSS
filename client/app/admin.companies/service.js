@@ -34,6 +34,6 @@ function companySvc($resource) {
   }
 
   function update(){
-
+    return companyRsc.update(company).$promise;
   }
 }

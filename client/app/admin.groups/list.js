@@ -2,6 +2,7 @@
 
 angular.module('icssApp').controller('AdminGroupsListCtrl', adminGroupsListCtrl);
 
+/* @ngInject */
 function adminGroupsListCtrl(GroupSvc, uiGridConstants, $state) {
   var vm = this;
 
@@ -18,7 +19,8 @@ function adminGroupsListCtrl(GroupSvc, uiGridConstants, $state) {
       {
         name: 'Name',
         field: 'name'
-      }, {
+      },
+      {
         name: 'Description',
         field: 'description'
       },
@@ -31,8 +33,7 @@ function adminGroupsListCtrl(GroupSvc, uiGridConstants, $state) {
         name: 'Users num',
         field: 'users',
         cellTemplate: "<p>{{(grid.getCellValue(row, col)).length}}</p>"
-      }
-      ,
+      },
       {
         name: '',
         field: '_id',
@@ -51,12 +52,15 @@ function adminGroupsListCtrl(GroupSvc, uiGridConstants, $state) {
 
   activate();
 
-//////////
+  //////////
 
   function activate() {
+    vm.loading = true;
     GroupSvc.query().then(function (groups) {
       vm.groups = groups;
       vm.gridOptions.data = groups;
+    }).finally(function () {
+      vm.loading = false;
     });
   }
 
@@ -69,5 +73,4 @@ function adminGroupsListCtrl(GroupSvc, uiGridConstants, $state) {
   function editGroup(id) {
     $state.go('admin.groups.edit', {id: id});
   }
-
 }

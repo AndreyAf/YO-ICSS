@@ -1,35 +1,50 @@
-<ic-admin-panel-content title="'Create/Edit new group'">
-  <div class="panel-body">
-    <div class="row">
-      <form name="group" class="form-horizontal">
+<ic-admin-panel-content title="$state.params.id ? 'Edit new group' : 'Create new group'">
+  <ic-loading is-loading="vm.loading">
+  </ic-loading>
+  <div ng-hide="vm.loading" class="panel-body">
+    <form name="groupForm" class="form-horizontal">
+      <div class="col-md-6">
         <div class="form-group">
-        <label class="control-label col-md-2">Group name:</label>
+          <label class="control-label col-md-4">Name* :</label>
 
-        <div class="col-md-10">
-          <input type="text" class="form-control" ng-model="vm.group.name">
+          <div class="col-md-8">
+            <input name="name" type="text" class="form-control" ng-model="vm.group.name" required>
+            <small class="text-danger" ng-show="groupForm.name.$error.required">* Please enter group name.</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-4">Description* :</label>
+
+          <div class="col-md-8">
+            <input name="description" type="text" class="form-control" ng-model="vm.group.description" required>
+            <small class="text-danger" ng-show="groupForm.description.$error.required">* Please enter group
+              description.
+            </small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-4">Logo URL:</label>
+
+          <div class="col-md-8">
+            <input type="url" name="url" class="form-control" ng-model="vm.group.logo_url">
+            <small class="text-danger" ng-show="groupForm.url.$error.url">* Please enter valid url address.</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-offset-4 col-md-8">
+            <a class="btn btn-success"
+               ng-click="vm.saveGroup()"
+               ng-disabled="groupForm.$invalid || groupForm.$pristine"
+               ng-bind="$state.params.id ? 'Update' : 'Create'"
+               title="{{$state.params.id ? 'Update' : 'Create'}}"></a>
+            <a class="btn btn-warning" ui-sref="admin.groups.list" title="Back">Back</a>
+          </div>
         </div>
       </div>
-        <div class="form-group">
-          <label class="control-label col-md-2">Description:</label>
-
-          <div class="col-md-10">
-            <input type="text" class="form-control" ng-model="vm.group.description">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-md-2">Logo URL:</label>
-
-          <div class="col-md-10">
-            <input type="text" class="form-control" ng-model="vm.group.logo_url">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-md-offset-2">
-            <a class="btn btn-success" ng-click="vm.addGroup()">Create</a>
-            <a class="btn btn-warning" ui-sref="admin.groups.list">Back</a>
-          </div>
-        </div>
-      </form>
-    </div>
+      <div class="col-md-6">
+        <img ng-src="{{vm.group.logo_url}}" ng-show="vm.group.logo_url && !groupForm.url.$error.url"
+             class="img-responsive center-block"/>
+      </div>
+    </form>
   </div>
 </ic-admin-panel-content>

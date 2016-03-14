@@ -2,10 +2,9 @@
 
 angular.module('icssApp').controller('AdminGroupsModelCtrl', adminGroupsModelCtrl);
 
+/* @ngInject */
 function adminGroupsModelCtrl(GroupSvc, $state, $q) {
   var vm = this;
-
-  var orgGroup = null;
 
   vm.loading = true;
   vm.group = {
@@ -14,9 +13,7 @@ function adminGroupsModelCtrl(GroupSvc, $state, $q) {
     logo_url: null
   };
 
-  vm.deleteGroup = deleteGroup;
-  vm.addGroup = addGroup;
-  vm.updateGroup = updateGroup;
+  vm.saveGroup = saveGroup;
 
   activate();
 
@@ -27,8 +24,7 @@ function adminGroupsModelCtrl(GroupSvc, $state, $q) {
     var promise = $state.params.id ? GroupSvc.getById($state.params.id) : $q.resolve();
 
     promise.then(function (group) {
-      orgGroup = group;
-      vm.group = angular.copy(group);
+      vm.group = group;
     }).catch(function (err) {
       // TODO : add error handler
     }).finally(function () {
@@ -36,15 +32,13 @@ function adminGroupsModelCtrl(GroupSvc, $state, $q) {
     });
   }
 
-  function deleteGroup(group) {
+  function saveGroup() {
+    vm.loading = true;
+    var promise = vm.group._id ? GroupSvc.update(vm.group): GroupSvc.create(vm.group);
 
-  }
-
-  function addGroup() {
-
-  }
-
-  function updateGroup() {
-
+    promise.finally(function(){
+      vm.loading = false;
+      $state.go('admin.groups.list');
+    });
   }
 }

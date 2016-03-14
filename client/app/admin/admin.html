@@ -6,10 +6,10 @@
       <div class="panel panel-default">
         <div class="panel-heading">Admin Menu</div>
         <ul class="list-group">
-          <!--<li class="list-group-item"><a ui-sref="admin.sessions">Sessions</a></li>-->
-          <li class="list-group-item"><a ui-sref="admin.users.list">Users</a></li>
-          <li class="list-group-item"><a ui-sref="admin.companies.list">Companies</a></li>
-          <li class="list-group-item"><a ui-sref="admin.groups.list">Groups</a></li>
+          <li class="list-group-item" ng-repeat="menuItem in adminMenuItems"
+              ng-class="{active: $state.includes(menuItem.sref)}">
+            <a ui-sref="{{menuItem.sref+'.list'}}" class="list-group-item-text" ng-bind="menuItem.title"></a>
+          </li>
         </ul>
       </div>
     </div>
@@ -17,5 +17,4 @@
       <div ui-view="content"></div>
     </div>
   </div>
-
 </div>
