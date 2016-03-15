@@ -35,9 +35,14 @@
 
           <div class="col-md-8">
             <ul class="list-group">
-              <li class="list-group-item" ng-repeat="user in vm.group.users">{{($index+1)+'. '+ user.name}}
-                <a href="" ng-click="vm.removeUser(user)">
-                  <span class="glyphicon glyphicon-remove pull-right text-danger"></span>
+              <li class="list-group-item clearfix" ng-repeat="user in vm.group.users">
+                <p class="pull-left">{{($index+1)+'. '+ user.name}}</p>
+                <a class="pull-right btn btn-default btn-xs"
+                   ng-click="vm.removeUser(user)"
+                   style="border:none;width:24px;"
+                   ladda="user.loading"
+                   data-style="contract">
+                  <span class="glyphicon glyphicon-remove text-danger"></span>
                 </a>
               </li>
             </ul>
@@ -45,10 +50,14 @@
           <div class="col-md-offset-4 col-md-8">
             <div class="input-group">
               <select class="form-control" ng-model="vm.newUser"
-                      ng-options="userOpt.name for userOpt in vm.usersOpt track by userOpt._id"></select>
+                      ng-options="userOpt.name for userOpt in vm.usersOpt track by userOpt._id"
+                      ng-disabled="vm.loadingNewUser">
+                <option value="">-- Select user --</option>
+              </select>
 
               <div class="input-group-btn">
-                <button type="button" class="btn btn-info" ng-click="vm.addUser(vm.newUser)">Add user</button>
+                <button type="button" class="btn btn-info" ng-click="vm.addUser(vm.newUser)"
+                        ladda="vm.loadingNewUser" data-style="expand-right" ng-disabled="!vm.newUser">Add user</button>
               </div>
             </div>
           </div>

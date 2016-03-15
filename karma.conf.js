@@ -21,7 +21,7 @@ module.exports = function(config) {
       'client/bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js',
       'client/bower_components/angular-nanoscroller/scrollable.js',
       'client/bower_components/angular-touch/angular-touch.js',
-      'client/bower_components/rtcmulticonnection/rtcmulticonnection.js',
+      'client/bower_components/rtcmulticonnection/RTCMultiConnection.js',
       'client/bower_components/angular-ui-router/release/angular-ui-router.js',
       'client/bower_components/angular-validation-match/dist/angular-validation-match.min.js',
       'client/bower_components/ng-text-truncate/ng-text-truncate.js',
@@ -30,6 +30,9 @@ module.exports = function(config) {
       'client/bower_components/ng-lodash/build/ng-lodash.js',
       'client/bower_components/angular-socket-io/socket.js',
       'client/bower_components/angular-smart-table/dist/smart-table.js',
+      'client/bower_components/spin.js/spin.js',
+      'client/bower_components/ladda/dist/ladda.min.js',
+      'client/bower_components/angular-ladda/dist/angular-ladda.min.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'node_modules/socket.io-client/socket.io.js',

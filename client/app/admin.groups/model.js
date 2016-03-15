@@ -43,7 +43,7 @@ function adminGroupsModelCtrl(UserSvc, GroupSvc, $state, $q) {
     });
   }
 
-  function filterUsers(){
+  function filterUsers() {
     vm.usersOpt = vm.users.filter(function (item) {
       for (var i = 0; i < vm.group.users.length; i++) {
         if (item._id === vm.group.users[i]._id) {
@@ -64,14 +64,17 @@ function adminGroupsModelCtrl(UserSvc, GroupSvc, $state, $q) {
   }
 
   function addUser(user) {
+    vm.loadingNewUser = true;
     GroupSvc.addUser(vm.group._id, user._id)
       .then(function () {
         vm.group.users.push(user);
         filterUsers();
+        vm.loadingNewUser = false;
       });
   }
 
   function removeUser(user) {
+    user.loading = true;
     GroupSvc.removeUser(vm.group._id, user._id)
       .then(function () {
         var index = vm.group.users.indexOf(user);

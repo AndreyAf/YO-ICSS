@@ -128,28 +128,40 @@ exports.create = function (req, groupRes) {
 
 // Updates an existing group in the DB
 exports.update = function (req, res) {
+
+  function entityFound(updates){
+    return function (entity) {
+
+      // map users by id
+      updates.users = _.map(updates.users, function (user) {
+        return user._id;
+      });
+
+      var updated = _.merge(entity, updates);
+      return updated.saveAsync()
+        .spread(function (updated) {
+          return updated;
+        });
+    };
+  }
+
+  function response(res){
+    return function (entity) {
+      if (entity) {
+        console.log(entity);
+        res.status(200).json(entity);
+      }
+    };
+  }
+
   if (req.body._id) {
     delete req.body._id;
   }
   group.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
-    .then((function (updates) {
-      return function (entity) {
-
-        // map users by id
-        updates.users = _.map(updates.users, function (user) {
-          return user._id;
-        });
-
-        var updated = _.merge(entity, updates);
-        return updated.saveAsync()
-          .spread(function (updated) {
-            return updated;
-          });
-      };
-    })(req.body))
+    .then(entityFound(req.body))
     .then(responseWithResult(res))
-    .catch(handleError(res));
+    .catch(response(res));
 };
 
 // Deletes a group from the DB
