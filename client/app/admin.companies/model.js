@@ -2,17 +2,13 @@
 
 angular.module('icssApp').controller('AdminCompanyModelCtrl', adminCompanyModelCtrl);
 
+/* @ngInject */
 function adminCompanyModelCtrl(CompanySvc, $state, $q) {
   var vm = this;
 
-  var orgCompany = null;
-
-  vm.loading = true;
   vm.company = null;
 
-  vm.deleteCompany = deleteCompany;
-  vm.addCompany = addCompany;
-  vm.updateCompany = updateCompany;
+  vm.saveCompany = saveCompany;
   vm.addDepartment = addDepartment;
   vm.removeDepartment = removeDepartment;
 
@@ -21,9 +17,9 @@ function adminCompanyModelCtrl(CompanySvc, $state, $q) {
   //////////
 
   function activate() {
-
+    vm.loading = true;
     var promise = $state.params.id ? CompanySvc.getById($state.params.id) : $q.resolve({
-      name: 'h',
+      name: null,
       slogan: null,
       description: null,
       departments: [],
@@ -31,8 +27,7 @@ function adminCompanyModelCtrl(CompanySvc, $state, $q) {
     });
 
     promise.then(function (company) {
-      orgCompany = company;
-      vm.company = angular.copy(company);
+      vm.company = company;
     }).catch(function (err) {
       // TODO : add error handler
     }).finally(function () {
@@ -40,19 +35,13 @@ function adminCompanyModelCtrl(CompanySvc, $state, $q) {
     });
   }
 
-  function deleteCompany(company) {
+  function saveCompany() {
+    vm.loading = true;
+    var promise = vm.company._id ? CompanySvc.update(vm.company) : CompanySvc.create(vm.company);
 
-  }
-
-  function addCompany() {
-    CompanySvc.create(vm.company)
-      .then(function () {
-        $state.go('admin.companies.list');
-      });
-  }
-
-  function updateCompany() {
-
+    promise.then(function () {
+      $state.go('admin.companies.list');
+    });
   }
 
   function addDepartment() {

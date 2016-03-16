@@ -6,7 +6,6 @@ angular.module('icssApp').controller('AdminGroupsModelCtrl', adminGroupsModelCtr
 function adminGroupsModelCtrl(UserSvc, GroupSvc, $state, $q) {
   var vm = this;
 
-  vm.loading = true;
   vm.users = [];
   vm.usersOpt = [];
   vm.group = {
@@ -25,13 +24,13 @@ function adminGroupsModelCtrl(UserSvc, GroupSvc, $state, $q) {
   //////////
 
   function activate() {
+    vm.loading = true;
 
     var groupPromise = $state.params.id ? GroupSvc.getById($state.params.id) : $q.resolve(vm.group);
-    var usersPromise = UserSvc.query();
 
     $q.all([
       groupPromise,
-      usersPromise
+      UserSvc.query()
     ]).then(function (data) {
       vm.group = data[0];
       vm.users = data[1];

@@ -2,12 +2,13 @@
 
 angular.module('icssApp').controller('AdminCompaniesListCtrl', adminCompaniesListCtrl);
 
-function adminCompaniesListCtrl(CompanySvc, uiGridConstants) {
+/* @ngInject */
+function adminCompaniesListCtrl(CompanySvc, uiGridConstants, $state) {
   var vm = this;
 
-  vm.companies = [];
   vm.gridOptions = {
     data: [],
+    appScopeProvider: vm,
     enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
     enableFiltering: true,
     columnDefs: [
@@ -30,18 +31,56 @@ function adminCompaniesListCtrl(CompanySvc, uiGridConstants) {
         "<ul>" +
         "   <li ng-repeat='department in grid.getCellValue(row, col)'>{{department.name}}</li>" +
         "</ul>"
+      },
+      {
+        name: '',
+        field: '_id',
+        enableFiltering: false,
+        enableSorting: false,
+        enableHiding: false,
+        enableColumnMenu: false,
+        cellTemplate: '' +
+        '<span style="display:block; text-align:center;">' +
+        ' <a href="" ui-sref="admin.companies.edit({id:grid.getCellValue(row, col)})" class="btn btn-xs btn-default">' +
+        '   <i class="fa fa-pencil"></i>' +
+        ' </a>' +
+        ' <button ng-click="grid.appScope.deleteCompany(grid.getCellValue(row, col))" class="btn btn-xs btn-default">' +
+        '   <i class="fa fa-times"></i>' +
+        ' </button>' +
+        '</span>'
       }
     ]
   };
 
+  vm.deleteCompany = deleteCompany;
+
   activate();
 
-//////////
+  //////////
 
   function activate() {
-    CompanySvc.query().then(function (companies) {
-      vm.companies = companies;
-      vm.gridOptions.data = companies;
-    });
+    vm.loading = true;
+    CompanySvc.query()
+      .then(function (companies) {
+        vm.gridOptions.data = companies;
+      })
+      .finally(function () {
+        vm.loading = false;
+      });
+  }
+
+  function deleteCompany(id) {
+    if (confirm('Are You sure you want to delete this company')) {
+      vm.loading = true;
+      CompanySvc.remove(id)
+        .then(function () {
+          vm.gridOptions.data = vm.gridOptions.data.filter(function (item) {
+            return item._id !== id;
+          });
+        })
+        .finally(function () {
+          vm.loading = false;
+        });
+    }
   }
 }

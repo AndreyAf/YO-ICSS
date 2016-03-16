@@ -3,13 +3,9 @@
 angular.module('icssApp').controller('AdminGroupsListCtrl', adminGroupsListCtrl);
 
 /* @ngInject */
-function adminGroupsListCtrl(GroupSvc, uiGridConstants, $state) {
+function adminGroupsListCtrl(GroupSvc, uiGridConstants) {
   var vm = this;
 
-  vm.deleteGroup = deleteGroup;
-  vm.editGroup = editGroup;
-
-  vm.groups = [];
   vm.gridOptions = {
     data: [],
     appScopeProvider: vm,
@@ -45,16 +41,18 @@ function adminGroupsListCtrl(GroupSvc, uiGridConstants, $state) {
         enableColumnMenu: false,
         cellTemplate: '' +
         '<span style="display:block; text-align:center;">' +
-        ' <button ng-click="grid.appScope.editGroup(grid.getCellValue(row, col))" class="btn btn-xs btn-default">' +
+        ' <a href="" ui-sref="admin.groups.edit({id:grid.getCellValue(row, col)})" class="btn btn-xs btn-default">' +
         '   <i class="fa fa-pencil"></i>' +
-        ' </button>' +
-        ' <button ng-click="grid.appScope.deleteGroup(grid.getCellValue(row, col))" class="btn btn-xs btn-default">' +
+        ' </a>' +
+        ' <a href="" ng-click="grid.appScope.deleteGroup(grid.getCellValue(row, col))" class="btn btn-xs btn-default">' +
         '   <i class="fa fa-times"></i>' +
-        ' </button>' +
+        ' </a>' +
         '</span>'
       }
     ]
   };
+
+  vm.deleteGroup = deleteGroup;
 
   activate();
 
@@ -62,25 +60,27 @@ function adminGroupsListCtrl(GroupSvc, uiGridConstants, $state) {
 
   function activate() {
     vm.loading = true;
-    GroupSvc.query().then(function (groups) {
-      vm.groups = groups;
-      vm.gridOptions.data = groups;
-    }).finally(function () {
-      vm.loading = false;
-    });
+    GroupSvc.query()
+      .then(function (groups) {
+        vm.gridOptions.data = groups;
+      })
+      .finally(function () {
+        vm.loading = false;
+      });
   }
 
   function deleteGroup(id) {
     if (confirm('Are You sure you want to delete this group')) {
-      GroupSvc.remove(id);
+      vm.loading = true;
+      GroupSvc.remove(id).then(function () {
+          vm.gridOptions.data = vm.gridOptions.data.filter(function (item) {
+            return item._id !== id;
+          });
+        })
+        .finally(function () {
 
-      vm.gridOptions.data = vm.gridOptions.data.filter(function (item) {
-        return item._id !== id;
-      });
+          vm.loading = false;
+        });
     }
-  }
-
-  function editGroup(id) {
-    $state.go('admin.groups.edit', {id: id});
   }
 }
