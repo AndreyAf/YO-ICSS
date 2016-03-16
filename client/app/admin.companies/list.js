@@ -25,12 +25,9 @@ function adminCompaniesListCtrl(CompanySvc, uiGridConstants, $state) {
         cellTemplate: "<img width=\"50px\" ng-src=\"{{grid.getCellValue(row, col)}}\" lazy-src>"
       },
       {
-        name: 'Departments',
+        name: 'Departments Num',
         field: 'departments',
-        cellTemplate: "" +
-        "<ul>" +
-        "   <li ng-repeat='department in grid.getCellValue(row, col)'>{{department.name}}</li>" +
-        "</ul>"
+        cellTemplate: "<p class='text-center' ng-bind='grid.getCellValue(row, col).length'></p>"
       },
       {
         name: '',
@@ -60,6 +57,7 @@ function adminCompaniesListCtrl(CompanySvc, uiGridConstants, $state) {
 
   function activate() {
     vm.loading = true;
+    // TODO: get my companies
     CompanySvc.query()
       .then(function (companies) {
         vm.gridOptions.data = companies;
