@@ -4,11 +4,14 @@ angular.module('icssApp').factory('UserSvc', userSvc);
 
 function userSvc($resource) {
 
-  var userRsc = $resource('/api/users/:id', {id: '@_id'});
+  var userRsc = $resource('/api/users/:id', {id: '@_id'}, {'update': {method: 'PUT'}});
 
   var service = {
     query: query,
-    getById: getById
+    getById: getById,
+    remove: remove,
+    create: create,
+    update: update
   };
 
   return service;
@@ -25,5 +28,17 @@ function userSvc($resource) {
 
   function getById(id) {
     return userRsc.get({id: id}).$promise;
+  }
+
+  function remove(id) {
+    return userRsc.delete({id: id}).$promise;
+  }
+
+  function create(group) {
+    return userRsc.save(group).$promise;
+  }
+
+  function update(group) {
+    return userRsc.update(group).$promise;
   }
 }

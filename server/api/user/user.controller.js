@@ -91,16 +91,19 @@ exports.create = function (req, res, next) {
 exports.show = function (req, res, next) {
   var userId = req.params.id;
 
-  User.find({_id: userId})
+  User.findOne({_id: userId})
     .populate('contacts._contact')
     .populate('groups')
     .execAsync()
-    .then(function (user) {
-      if (!user) {
-        return res.status(404).end();
-      }
-      res.json(user.profile);
-    })
+    .then(handleEntityNotFound(res))
+    .then(responseWithResult(res))
+    //.then(function (user) {
+    //  if (!user) {
+    //    return res.status(404).end();
+    //  }
+    //  //res.json(user.profile);
+    //  res.json(user);
+    //})
     .catch(function (err) {
       return next(err);
     });

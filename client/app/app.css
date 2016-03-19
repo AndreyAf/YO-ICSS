@@ -8834,6 +8834,10 @@ button.close {
   width: 100%;
   height: 250px;
 }
+#companiesGrid {
+  height: calc(100vh - 150px);
+  display: flex;
+}
 .admin-panel-grid {
   width: 100%;
   height: 250px;

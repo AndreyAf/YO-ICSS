@@ -5,8 +5,6 @@ angular.module('icssApp').controller('AdminUsersModelCtrl', adminUsersModelCtrl)
 function adminUsersModelCtrl(UserSvc, $state, $q) {
   var vm = this;
 
-  var orgUser = null;
-
   vm.loading = true;
   vm.user = {
     name: null,
@@ -15,9 +13,7 @@ function adminUsersModelCtrl(UserSvc, $state, $q) {
     email: null
   };
 
-  vm.deleteUser = deleteUser;
-  vm.addUser = addUser;
-  vm.updateUser = updateUser;
+  vm.saveUser = saveUser;
 
   activate();
 
@@ -28,24 +24,21 @@ function adminUsersModelCtrl(UserSvc, $state, $q) {
     var promise = $state.params.id ? UserSvc.getById($state.params.id) : $q.resolve();
 
     promise.then(function (user) {
-      orgUser = user;
-      vm.user = angular.copy(user);
-    }).catch(function (err) {
-      // TODO : add error handler
+      vm.user = user;
+    }).catch(function () {
+      vm.loading = false;
+      $state.go('admin.users.list');
     }).finally(function () {
       vm.loading = false;
     });
   }
 
-  function deleteUser(user) {
+  function saveUser() {
+    vm.loading = true;
+    var promise = vm.user._id ? UserSvc.update(vm.user) : UserSvc.create(vm.user);
 
-  }
-
-  function addUser() {
-
-  }
-
-  function updateUser() {
-
+    promise.then(function () {
+      $state.go('admin.users.list');
+    });
   }
 }

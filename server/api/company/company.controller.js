@@ -59,6 +59,22 @@ function removeEntity(res) {
     }
   };
 }
+function removeCompany(groupRes) {
+  // TODO: rewrite
+  //for (var i = 0; i < groupRes.users.length; i++) {
+  //  User.findByIdAsync(groupRes.users[i])
+  //    .then(function (res, pos) {
+  //      res.groups.pull({_id: groupRes._id});
+  //      res.saveAsync();
+  //    })
+  //    .catch(function (res) {
+  //      handleError(res);
+  //    });
+  //}
+
+  return removeEntity(groupRes);
+}
+
 
 // Gets a list of companies by session id
 exports.index = function (req, res) {
@@ -115,21 +131,6 @@ exports.update = function (req, res) {
 exports.destroy = function (req, res) {
   company.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
-    .then(function(res){
-
-      //// on delete company remove company from all company users
-      //for (var i = 0; i < res.users.length; i++) {
-      //  User.findByIdAsync(res.users[i])
-      //    .then(function (resUser, pos) {
-      //      resUser.companys.pull({_id: res._id});
-      //      resUser.saveAsync();
-      //    })
-      //    .catch(function (res) {
-      //      handleError(res);
-      //    });
-      //}
-
-      removeEntity(res);
-    })
+    .then(removeCompany(res))
     .catch(handleError(res));
 };

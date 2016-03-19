@@ -19,8 +19,29 @@ var Contact = new Schema({
   }
 });
 
+var Group = new Schema({
+  _group : 		{ type: Schema.Types.ObjectId, ref : 'User' },
+  _session:		{ type: Schema.Types.ObjectId, ref : 'Session' },
+  isAdmin: 		{ type: Boolean, default : false }
+});
+
+var companyRoles 	= 	['client-pending','client','employee','manager'];
+var statuses 	= 	['online','offline'];
+
+var Company = new Schema({
+  _company : { type: Schema.Types.ObjectId, ref : 'Company' },
+  role: 	 { type: String, enum: companyRoles, default: companyRoles[0] }
+});
+
+var Address = new Schema({
+  country:	{ type: String, required: true },
+  city:		{ type: String, required: true },
+  street:	{ type: String, required: true }
+});
+
 var UserSchema = new Schema({
   name: String,
+  lastName: 	String,
   status: {
     type: String,
     default: 'live'
@@ -30,6 +51,10 @@ var UserSchema = new Schema({
     default: 'My personal status'
   },
   img: {
+    type: String,
+    default: 'assets/images/user.png'
+  },
+  bgImg: {
     type: String,
     default: 'assets/images/user.png'
   },
@@ -46,16 +71,17 @@ var UserSchema = new Schema({
     enum: ['client', 'employee', 'manager', 'admin']
   }],
   contacts: [Contact],
+  address: 		Address,
+  phone: 	 	String,
   groups: [{type: Schema.Types.ObjectId, ref: 'Group'}],
-  blackList: [{
-    _id: {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
-    }
-  }],
+  companies: [Company],
+  blackList: [{type: Schema.Types.ObjectId, ref: 'User'}],
+  loginCounter: 	{ type: Number, default: 0 },
   password: String,
   provider: String,
-  salt: String
+  salt: String,
+  created_at: 	{ type: Date,default: Date.now },
+  updated_at: 	{ type: Date,default: Date.now }
 });
 
 /**

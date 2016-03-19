@@ -18,7 +18,8 @@ angular.module('icssApp').config(function ($stateProvider) {
       url: '',
       template: '' +
       '<ic-admin-panel-content title="\'Companies\'" create-title="\'Add new company\'" create-sref="\'admin.companies.create\'"> ' +
-      ' <div class="admin-panel-grid" id="companiesGrid" ui-grid="vm.gridOptions"></div> ' +
+      ' <ic-loading is-loading="vm.loading"></ic-loading>'+
+      ' <div ng-if="!vm.loading" class="admin-panel-grid" id="companiesGrid" ui-grid="vm.gridOptions"></div> ' +
       '</ic-admin-panel-content>',
       data: {pageTitle: 'Companies Panel - List'},
       controller: 'AdminCompaniesListCtrl',

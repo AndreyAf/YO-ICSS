@@ -3,7 +3,7 @@
 angular.module('icssApp').controller('AdminCompaniesListCtrl', adminCompaniesListCtrl);
 
 /* @ngInject */
-function adminCompaniesListCtrl(CompanySvc, uiGridConstants, $state) {
+function adminCompaniesListCtrl(CompanySvc, uiGridConstants) {
   var vm = this;
 
   vm.gridOptions = {

@@ -72,7 +72,8 @@ function adminGroupsListCtrl(GroupSvc, uiGridConstants) {
   function deleteGroup(id) {
     if (confirm('Are You sure you want to delete this group')) {
       vm.loading = true;
-      GroupSvc.remove(id).then(function () {
+      GroupSvc.remove(id)
+        .then(function () {
           vm.gridOptions.data = vm.gridOptions.data.filter(function (item) {
             return item._id !== id;
           });
