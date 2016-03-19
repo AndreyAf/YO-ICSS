@@ -23,18 +23,25 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-4">Logo URL:</label>
+          <label class="control-label col-md-4">Logo URL* :</label>
 
           <div class="col-md-8">
-            <input type="url" name="url" class="form-control" ng-model="vm.group.logo_url">
+            <div class="input-group">
+              <input type="url" name="url" class="form-control" ng-model="vm.group.logo_url" required>
+
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-info" ng-click="vm.group.logo_url = vm.groupDefaultImgUrl" ng-disabled="vm.group.logo_url === vm.groupDefaultImgUrl">Set default</button>
+              </div>
+            </div>
             <small class="text-danger" ng-show="groupForm.url.$error.url">* Please enter valid url address.</small>
+            <small class="text-danger" ng-show="groupForm.url.$error.required">* Please enter group logo url.</small>
           </div>
         </div>
         <div class="form-group">
           <label class="control-label col-md-4">Users:</label>
 
           <div class="col-md-8">
-            <ul class="list-group">
+            <ul class="list-group" ng-show="vm.group.users.length">
               <li class="list-group-item clearfix" ng-repeat="user in vm.group.users">
                 <p class="pull-left">{{($index+1)+'. '+ user.name}}</p>
                 <a class="pull-right btn btn-default btn-xs"
@@ -46,8 +53,6 @@
                 </a>
               </li>
             </ul>
-          </div>
-          <div class="col-md-offset-4 col-md-8">
             <div class="input-group">
               <select class="form-control" ng-model="vm.newUser"
                       ng-options="userOpt.name for userOpt in vm.usersOpt track by userOpt._id"
@@ -57,7 +62,8 @@
 
               <div class="input-group-btn">
                 <button type="button" class="btn btn-info" ng-click="vm.addUser(vm.newUser)"
-                        ladda="vm.loadingNewUser" data-style="expand-right" ng-disabled="!vm.newUser">Add user</button>
+                        ladda="vm.loadingNewUser" data-style="expand-right" ng-disabled="!vm.newUser">Add user
+                </button>
               </div>
             </div>
           </div>

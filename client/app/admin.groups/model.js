@@ -3,15 +3,17 @@
 angular.module('icssApp').controller('AdminGroupsModelCtrl', adminGroupsModelCtrl);
 
 /* @ngInject */
-function adminGroupsModelCtrl(UserSvc, GroupSvc, $state, $q) {
+function adminGroupsModelCtrl(UserSvc, GroupSvc, $state, $q, $location) {
   var vm = this;
+
+  vm.groupDefaultImgUrl = 'http://' + $location.host() + ':' + $location.port() + '/assets/images/group_default.jpg';
 
   vm.users = [];
   vm.usersOpt = [];
   vm.group = {
     name: null,
     description: null,
-    logo_url: null,
+    logo_url: vm.groupDefaultImgUrl,
     users: []
   };
 
@@ -64,21 +66,37 @@ function adminGroupsModelCtrl(UserSvc, GroupSvc, $state, $q) {
 
   function addUser(user) {
     vm.loadingNewUser = true;
-    GroupSvc.addUser(vm.group._id, user._id)
-      .then(function () {
-        vm.group.users.push(user);
-        filterUsers();
-        vm.loadingNewUser = false;
-      });
+    if (vm.group._id) {
+      GroupSvc.addUser(vm.group._id, user._id)
+        .then(function () {
+          vm.group.users.push(user);
+          filterUsers();
+          vm.loadingNewUser = false;
+        });
+    }
+    else {
+      vm.group.users.push(user);
+      filterUsers();
+      vm.loadingNewUser = false;
+    }
   }
 
   function removeUser(user) {
     user.loading = true;
-    GroupSvc.removeUser(vm.group._id, user._id)
-      .then(function () {
-        var index = vm.group.users.indexOf(user);
-        vm.group.users.splice(index, 1);
-        filterUsers();
-      });
+    if (vm.group._id) {
+      GroupSvc.removeUser(vm.group._id, user._id)
+        .then(function () {
+          var index = vm.group.users.indexOf(user);
+          vm.group.users.splice(index, 1);
+          filterUsers();
+          user.loading = false;
+        });
+    }
+    else {
+      var index = vm.group.users.indexOf(user);
+      vm.group.users.splice(index, 1);
+      filterUsers();
+      user.loading = false;
+    }
   }
 }
