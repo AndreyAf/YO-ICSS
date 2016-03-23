@@ -34,11 +34,11 @@ function userSvc($resource) {
     return userRsc.delete({id: id}).$promise;
   }
 
-  function create(group) {
-    return userRsc.save(group).$promise;
+  function create(user) {
+    return userRsc.save(user).$promise;
   }
 
-  function update(group) {
-    return userRsc.update(group).$promise;
+  function update(user) {
+    return userRsc.update(user).$promise;
   }
 }

@@ -4,7 +4,6 @@
   <div ng-hide="vm.loading" class="panel-body">
     <form name="userForm" class="form-horizontal">
       <div class="col-md-6">
-
         <div class="form-group">
           <label class="control-label col-md-4">First name* :</label>
 
@@ -13,7 +12,6 @@
             <small class="text-danger" ng-show="userForm.name.$error.required">* Please enter first name.</small>
           </div>
         </div>
-
         <div class="form-group">
           <label class="control-label col-md-4">Last name* :</label>
 
@@ -23,7 +21,6 @@
             <small class="text-danger" ng-show="userForm.lastName.$error.required">* Please enter last name.</small>
           </div>
         </div>
-
         <div class="form-group">
           <label class="control-label col-md-4">Status Message* :</label>
 
@@ -34,7 +31,6 @@
             </small>
           </div>
         </div>
-
         <div class="form-group">
           <label class="control-label col-md-4">User Image URL* :</label>
 
@@ -43,7 +39,6 @@
             <small class="text-danger" ng-show="userForm.img.$error.required">* Please enter user image URL.</small>
           </div>
         </div>
-
         <div class="form-group">
           <label class="control-label col-md-4">Email* :</label>
 
@@ -52,25 +47,23 @@
             <small class="text-danger" ng-show="userForm.email.$error.required">* Please enter email address.</small>
           </div>
         </div>
-
         <div class="form-group">
           <label class="control-label col-md-4">Password* :</label>
 
           <div class="col-md-8">
-            <input name="password" type="password" class="form-control" ng-model="vm.user.password" required title="password">
+            <input name="password" type="password" class="form-control" ng-model="vm.user.password" required
+                   title="password">
             <small class="text-danger" ng-show="userForm.password.$error.required">* Please enter password.</small>
           </div>
         </div>
+        <!--<div class="form-group">-->
+          <!--<label class="control-label col-md-4">Address* :</label>-->
 
-        <div class="form-group">
-          <label class="control-label col-md-4">Address* :</label>
-
-          <div class="col-md-8">
-            <input name="address" type="text" class="form-control" ng-model="vm.user.address" required title="address">
-            <small class="text-danger" ng-show="userForm.address.$error.required">* Please enter address.</small>
-          </div>
-        </div>
-
+          <!--<div class="col-md-8">-->
+            <!--<input name="address" type="text" class="form-control" ng-model="vm.user.address" required title="address">-->
+            <!--<small class="text-danger" ng-show="userForm.address.$error.required">* Please enter address.</small>-->
+          <!--</div>-->
+        <!--</div>-->
         <div class="form-group">
           <label class="control-label col-md-4">Phone* :</label>
 

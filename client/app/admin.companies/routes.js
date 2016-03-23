@@ -23,7 +23,8 @@ angular.module('icssApp').config(function ($stateProvider) {
       '</ic-admin-panel-content>',
       data: {pageTitle: 'Companies Panel - List'},
       controller: 'AdminCompaniesListCtrl',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      authenticate: true
     })
     .state({
       name: 'admin.companies.create',
@@ -31,7 +32,8 @@ angular.module('icssApp').config(function ($stateProvider) {
       templateUrl: 'app/admin.companies/model.html',
       data: {pageTitle: 'Companies Panel - Create'},
       controller: 'AdminCompanyModelCtrl',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      authenticate: true
     })
     .state({
       name: 'admin.companies.edit',
@@ -39,6 +41,7 @@ angular.module('icssApp').config(function ($stateProvider) {
       templateUrl: 'app/admin.companies/model.html',
       data: {pageTitle: 'Companies Panel - Edit'},
       controller: 'AdminCompanyModelCtrl',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      authenticate: true
     });
 });

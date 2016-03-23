@@ -22,7 +22,8 @@ angular.module('icssApp').config(function ($stateProvider) {
       '</ic-admin-panel-content>',
       data: {pageTitle: 'Users Panel - List'},
       controller: 'AdminUsersListCtrl',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      authenticate: true
     })
     .state({
       name: 'admin.users.create',
@@ -30,7 +31,8 @@ angular.module('icssApp').config(function ($stateProvider) {
       templateUrl: 'app/admin.users/model.html',
       data: {pageTitle: 'Users Panel - Create'},
       controller: 'AdminUsersModelCtrl',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      authenticate: true
     })
     .state({
       name: 'admin.users.edit',
@@ -38,6 +40,7 @@ angular.module('icssApp').config(function ($stateProvider) {
       templateUrl: 'app/admin.users/model.html',
       data: {pageTitle: 'Users Panel - Edit'},
       controller: 'AdminUsersModelCtrl',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      authenticate: true
     });
 });

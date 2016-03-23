@@ -23,7 +23,8 @@ angular.module('icssApp').config(function ($stateProvider) {
       '</ic-admin-panel-content>',
       data: {pageTitle: 'Groups Panel - List'},
       controller: 'AdminGroupsListCtrl',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      authenticate: true
     })
     .state({
       name: 'admin.groups.create',
@@ -31,7 +32,8 @@ angular.module('icssApp').config(function ($stateProvider) {
       templateUrl: 'app/admin.groups/model.html',
       data: {pageTitle: 'Groups Panel - Create'},
       controller: 'AdminGroupsModelCtrl',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      authenticate: true
     })
     .state({
       name: 'admin.groups.edit',
@@ -39,6 +41,7 @@ angular.module('icssApp').config(function ($stateProvider) {
       templateUrl: 'app/admin.groups/model.html',
       data: {pageTitle: 'Groups Panel - Edit'},
       controller: 'AdminGroupsModelCtrl',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      authenticate: true
     });
 });
