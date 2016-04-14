@@ -1,6 +1,24 @@
-<article>
-    <section>
-        <h1>Hello</h1>
-    </section>
-
-</article>
+<div class="container-fluid">
+  <div class="col-xs-12">
+    <div class="text-center">
+      <img src="http://www.codelectrical.co.uk/assets/images/icon-chat.svg" class="img-responsive"
+           style="height: 150px;margin: 0 auto;"/>
+    </div>
+    <legend>Welcome to ICSS !</legend>
+    <p>Get support from large number of companies</p>
+    <p>Our main chat features:</p>
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="feature in vm.features">
+            <span ng-class="feature.icon"></span>
+            {{feature.title}}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center">
+      <small>All rights reserved to ICSS, 2016</small>
+    </div>
+  </div>
+</div>

@@ -2,7 +2,7 @@
 
   'use strict';
 
-  function ciChatSvc(socket, Auth, ciMessageSvc, ciSingleSessionSvc) {
+  function ciChatSvc(socket, Auth, ciMessageSvc, ciSingleSessionSvc, $state) {
 
     var currentChat = {
       title: null,
@@ -52,6 +52,8 @@
           currentChat.messages = ciMessageSvc.getLastMessages();
 
           currentChat.isActive = true;
+
+          $state.go('chat.conversation');
         });
       },
       sendMessage: function (message) {

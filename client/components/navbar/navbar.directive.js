@@ -60,7 +60,7 @@ function navbar() {
 
             vm.menu.push({
               'title': 'Chat',
-              'state': 'chat',
+              'state': 'chat.main',
               'isVisible': vm.isLoggedIn
               //,
               //'target': '_blank'

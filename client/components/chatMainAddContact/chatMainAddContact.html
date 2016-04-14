@@ -1,14 +1,16 @@
-<div class="chat-main-add-content">
-  <header class="chat-main-header">
-    <h4>Add new contact</h4>
-  </header>
-  <div class="chat-main-content">
-    <input type="text" class="search" ng-model="vm.search" placeholder="Type here to search new contact">
-    <ul class="users-list">
-      <li ng-repeat="user in vm.users | filter: vm.search">
-        <p>{{user.name}}</p>
-        <button type="submit" class="btn btn-default" ng-click="vm.addContact(user)">+</button>
-      </li>
-    </ul>
+<div class="chat-header">
+  <div class="chat-info">
+    <div class="chat-info-details">
+      <label>Add new contact</label>
+    </div>
   </div>
+</div>
+<div class="chat-main-content">
+  <input type="text" class="search" ng-model="vm.search" placeholder="Type here to search new contact">
+  <ul class="users-list">
+    <li ng-repeat="user in vm.users | filter: vm.search">
+      <p>{{user.name}}</p>
+      <button type="submit" class="btn btn-default" ng-click="vm.addContact(user)">+</button>
+    </li>
+  </ul>
 </div>

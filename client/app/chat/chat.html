@@ -4,7 +4,6 @@
      ng-swipe-left="showSidebar = false"
      ng-swipe-right="showSidebar = true">
   <div class="full-height">
-
     <div class="chat-sidebar" ng-show="showSidebar">
       <ic-sidebar-profile></ic-sidebar-profile>
       <ic-sidebar-tabs></ic-sidebar-tabs>
@@ -13,12 +12,7 @@
       <div class="doggle-btn" ng-click="showSidebar = !showSidebar">
         <span class="glyphicon" ng-class="showSidebar ? 'glyphicon-chevron-left' : 'glyphicon-chevron-right'"></span>
       </div>
-      <ic-chat-main ng-if="state === 'chat'"></ic-chat-main>
-      <ic-chat-main-empty ng-if="state === 'empty'"></ic-chat-main-empty>
-      <ic-chat-main-add-contact ng-if="state === 'addContact'"></ic-chat-main-add-contact>
-      <ic-chat-main-add-group ng-if="state === 'addGroup'"></ic-chat-main-add-group>
-      <ic-chat-main-add-company ng-if="state === 'addCompany'"></ic-chat-main-add-company>
-      <ic-chat-main-settings ng-if="state === 'settings'"></ic-chat-main-settings>
+      <div ui-view=""></div>
     </div>
   </div>
 </div>

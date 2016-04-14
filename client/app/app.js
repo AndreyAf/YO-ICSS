@@ -62,7 +62,12 @@ angular.module('icssApp', [
     $rootScope.$stateParams = $stateParams;
 
     // Route state change (before open)
-    $rootScope.$on('$stateChangeStart', function (event, next) {
+    $rootScope.$on('$stateChangeStart', function (event, next, params) {
+
+      if (next.redirectTo) {
+        event.preventDefault();
+        $state.go(next.redirectTo, params)
+      }
 
       // Check if the user need to login before open this route
       if (next.authenticate) {

@@ -1,4 +1,4 @@
-<li class="list-group-item ic-sidebar-list-item" ng-click="vm.selectItem(item)">
+<li class="list-group-item ic-sidebar-list-item" ui-sref="chat.conversation({type:'user',id:item._id})" ui-sref-active="list-group-item-success">
   <div class="row">
     <div class="col-xs-3">
       <img ng-src="{{item.img ? item.img : item.logo_url}}" class="user-img img-circle img-responsive">
@@ -15,7 +15,7 @@
             <span class="glyphicon glyphicon-arrow-down"></span>
           </a>
           <ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
-            <li><a href="" ng-click="vm.changeState('addContact')">Add contact</a></li>
+            <li><a href="" ui-sref="chat.addContact">Add contact</a></li>
             <li><a href="">Setting</a></li>
             <li><a href="" ng-click="vm.setFullScreenStatus()"><span
               ng-class="vm.isFullscreen ? 'glyphicon glyphicon-ok' : ''"></span> Full screen</a></li>

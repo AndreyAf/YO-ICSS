@@ -1,10 +1,9 @@
 <div class="profile-image">
-    <img ng-src="{{vm.user.img}}" class="img-circle img-responsive">
-    <!--<div class="user-status"></div>-->
+  <img ng-src="{{vm.user.img}}" class="img-circle img-responsive">
 </div>
 <div class="profile-info">
-    <label class="user-info-name" ng-bind="vm.user.name"></label>
-    <small class="user-info-status" ng-bind="vm.user.status"></small>
+  <label class="user-info-name" ng-bind="vm.user.name"></label>
+  <small class="user-info-status" ng-bind="vm.user.status"></small>
 </div>
 <div class="profile-settings">
   <span uib-dropdown on-toggle="toggled(open)">
@@ -12,15 +11,34 @@
         <span class="glyphicon glyphicon-cog"></span>
       </a>
       <ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
-        <li><a href="" ng-click="vm.changeState('addContact')">Add contact</a></li>
-        <li><a href="" ng-click="vm.changeState('addGroup')">Add group</a></li>
-        <li><a href="" ng-click="vm.changeState('addCompany')">Add company</a></li>
-        <li><a href="" ng-click="vm.changeState('settings')">Setting</a></li>
-        <li><a href="" ng-click="vm.setFullScreenStatus()"><span ng-class="vm.isFullscreen ? 'glyphicon glyphicon-ok' : ''"></span>  Full screen</a></li>
+        <li ui-sref-active="active">
+          <a href="" ui-sref="chat.main"><span class="glyphicon glyphicon-home"></span>  Main</a>
+        </li>
+        <li ui-sref-active="active">
+          <a href="" ui-sref="chat.addContact"><span class="glyphicon glyphicon-user"></span>  Add contact</a>
+        </li>
+        <li ui-sref-active="active">
+          <a href="" ui-sref="chat.addGroup"><span class="fa fa-users"></span>  Add group</a>
+        </li>
+        <li ui-sref-active="active">
+          <a href="" ui-sref="chat.addCompany"><span class="glyphicon glyphicon-briefcase"></span>  Add company</a>
+        </li>
+        <li ui-sref-active="active">
+          <a href="" ui-sref="chat.settings"><span class="glyphicon glyphicon-cog"></span>  Setting</a>
+        </li>
         <li role="separator" class="divider"></li>
-        <li><a href="" ui-sref="main">Back to site</a></li>
-        <li><a href="" ui-sref="logout">Log out</a></li>
+        <li>
+          <a href="" ng-click="vm.setFullScreenStatus()">
+            <span ng-class="vm.isFullscreen ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-fullscreen'"></span> Full screen
+          </a>
+        </li>
+        <li role="separator" class="divider"></li>
+        <li>
+          <a href="" ui-sref="main"><span class="glyphicon glyphicon-arrow-left"></span>  Back to site</a>
+        </li>
+        <li>
+          <a href="" ui-sref="logout"><span class="glyphicon glyphicon-log-out"></span>  Log out</a>
+        </li>
       </ul>
     </span>
-</div>
 </div>

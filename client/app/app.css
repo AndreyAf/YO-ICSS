@@ -8958,6 +8958,8 @@ tfoot td {
 .chat-header .chat-info .chat-info-details {
   padding: 0 0 0 15px;
   float: left;
+  height: 45px;
+  line-height: 45px;
 }
 .chat-header .chat-functions {
   float: right;
@@ -9083,50 +9085,50 @@ tfoot td {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-.chat-main-add-companies .chat-main-header {
+.chat-main-header {
   height: 50px;
   padding: 0 15px;
 }
-.chat-main-add-companies .chat-main-company .search {
+.chat-main-company .search {
   width: 100%;
   border: none;
   height: 40px;
   padding: 0 15px;
 }
-.chat-main-add-companies .chat-main-company .companies-list {
+.chat-main-company .companies-list {
   padding: 20px;
 }
-.chat-main-add-companies .chat-main-company .companies-list li {
+.chat-main-company .companies-list li {
   width: 100%;
   background-color: #E2E2E3;
   list-style: none;
   padding: 5px;
   display: inline-block;
 }
-.chat-main-add-companies .chat-main-company .companies-list li button {
+.chat-main-company .companies-list li button {
   float: right;
 }
-.chat-main-add-content .chat-main-header {
+.chat-main-header {
   height: 50px;
   padding: 0 15px;
 }
-.chat-main-add-content .chat-main-content .search {
+.chat-main-content .search {
   width: 100%;
-  border: none;
-  height: 40px;
+  border: solid 1px #D0D0D0;
+  height: 35px;
   padding: 0 15px;
 }
-.chat-main-add-content .chat-main-content .users-list {
+.chat-main-content .users-list {
   padding: 20px;
 }
-.chat-main-add-content .chat-main-content .users-list li {
+.chat-main-content .users-list li {
   width: 100%;
   background-color: #E2E2E3;
   list-style: none;
   padding: 5px;
   display: inline-block;
 }
-.chat-main-add-content .chat-main-content .users-list li button {
+.chat-main-content .users-list li button {
   float: right;
 }
 .chat-main-add-group .chat-main-header {
@@ -9162,6 +9164,12 @@ tfoot td {
 .chat-main-add-content .chat-main-content .users-list li button {
   float: right;
 }
+.ic-sidebar-list-item {
+  border-radius: inherit !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
 .ic-sidebar-list-item .ic-sidebar-list-item-settings {
   display: none;
   position: absolute;
@@ -9173,13 +9181,6 @@ tfoot td {
 }
 .ic-sidebar-list-item:hover .ic-sidebar-list-item-settings {
   display: block;
-}
-.ic-sidebar-list-item .list-group-item:first-child,
-.ic-sidebar-list-item .list-group-item:last-child {
-  border-radius: inherit;
-  border-top: none;
-  border-left: none;
-  border-right: none;
 }
 .profile-settings ul.uib-dropdown-menu.dropdown-menu {
   width: 270px;
@@ -9506,13 +9507,14 @@ div#content::after {
   left: 0px;
   bottom: 50%;
   z-index: 100;
-  width: 20px;
+  width: 16px;
   height: 60px;
   background-color: #DBE2E4;
   text-align: center;
   padding-top: 18px;
   border: solid 1px #D0D0D0;
-  border-radius: 0 10px 10px 0;
+  border-radius: 0 5px 5px 0;
+  border-left: none;
   color: white;
   text-decoration: none;
 }
