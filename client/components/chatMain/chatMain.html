@@ -46,32 +46,6 @@
     </scrollable>
   </div>
 </div>
-<div ng-show="vm.isVideoChat" class="video-chat-content" style="height:100%">
-  <div id="videoContainer"></div>
-  <video id="local-video" height="150" autoplay></video>
-  <video id="remote-video" height="150" autoplay></video>
-
-  <div style="padding: 17px; padding-top: 0px;color:white;">
-  <span ng-hide="error">
-  Allow the browser to use your web cam and after that share the URL from the address bar with the people you want to talk with.
-  </span>
-    <br>
-    <span ng-bind="error"></span>
-  </div>
-
-  <div class="video-wrapper">
-    <video-player class="col-md-4" ng-repeat="peer in peers" vid-src="{{peer.stream}}"></video-player>
-  </div>
-
-  <div class="video-wrapper">
-    <div class="col-md-2">
-      <video ng-src="{{getLocalVideo()}}" autoplay muted></video>
-    </div>
-  </div>
-
-</div>
-</div>
-
 <div class="chat-header-footer">
   <div class="chat-status" ng-show="vm.someoneTyping.status">{{vm.someoneTyping.name}} is typing...</div>
   <div class="send-message" style="height: 100%">
