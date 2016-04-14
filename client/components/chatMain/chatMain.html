@@ -52,5 +52,5 @@
     <textarea id="message" class="form-control" ng-model="vm.message" placeholder="Write a message..."
               ng-enter="vm.sendMessage()" style="height: 100%;resize: none;"></textarea>
   </div>
-  <a href="" class="send-btn" ng-click="vm.sendMessage()">Send</a>
+  <a href="" class="send-btn" ng-click="vm.sendMessage()" ng-class="{disabled:!vm.message}">Send</a>
 </div>

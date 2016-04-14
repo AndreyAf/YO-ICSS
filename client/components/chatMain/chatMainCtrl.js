@@ -15,7 +15,6 @@
     vm.isVideoChat = false;
     vm.currentChat = ciChatSvc.getCurrentChat();
 
-
     console.log(currentChatType);
 
     ciChatSvc.setCurrentChat(currentChatType);
@@ -32,7 +31,9 @@
 
         // On enter pressed send message
         if (data === 13) {
-          vm.sendMessage();
+          if (vm.message) {
+            vm.sendMessage();
+          }
         }
       }
     });
@@ -70,12 +71,15 @@
 
     vm.sendMessage = function () {
 
-      ciChatSvc.sendMessage(vm.message);
+      if (vm.message) {
 
-      // TODO: rewrite - not the correct angular way
-      $(".nano").nanoScroller({scrollBottom: 5});
+        ciChatSvc.sendMessage(vm.message);
 
-      vm.message = '';
+        // TODO: rewrite - not the correct angular way
+        $(".nano").nanoScroller({scrollBottom: 5});
+
+        vm.message = '';
+      }
     };
   }
 })();

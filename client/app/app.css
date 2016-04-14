@@ -9227,14 +9227,13 @@ tfoot td {
 .ic-chat-sidebar-content .chat-search {
   position: relative;
   display: table;
-  border-bottom: none;
+  border-collapse: separate;
+  border-bottom: solid #D0D0D0 1px;
   margin-bottom: 15px;
   width: 100%;
 }
 .ic-chat-sidebar-content .chat-search .has-feedback .form-control {
   border-radius: inherit;
-  border: none;
-  border-bottom: solid 1px #D0D0D0;
 }
 .ic-chat-sidebar-content .chat-list {
   height: 100%;
@@ -9476,6 +9475,10 @@ body {
   width: calc(100% - 65px) !important;
   float: left;
 }
+
+.disabled {
+  cursor: not-allowed;
+}
 .send-btn {
   float: right;
   background-color: #EFEFEF;
@@ -9486,10 +9489,10 @@ body {
   color: gray;
   text-decoration: none;
 }
-.send-btn :hover {
-  color: black;
-  font-weight: 600;
+a.send-btn:hover {
   text-decoration: none;
+  color: white;
+  background-color: #8DBC79;
 }
 div#content::after {
   height: 10px;
