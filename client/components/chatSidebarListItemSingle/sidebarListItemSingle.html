@@ -12,15 +12,20 @@
       <div class="ic-sidebar-list-item-settings">
         <span uib-dropdown on-toggle="toggled(open)">
           <a href id="simple-dropdown" uib-dropdown-toggle>
-            <span class="glyphicon glyphicon-arrow-down"></span>
+            <span class="glyphicon glyphicon-option-vertical"></span>
           </a>
           <ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
-            <li><a href="" ui-sref="chat.addContact">Add contact</a></li>
-            <li><a href="">Setting</a></li>
-            <li><a href="" ng-click="vm.setFullScreenStatus()"><span
-              ng-class="vm.isFullscreen ? 'glyphicon glyphicon-ok' : ''"></span> Full screen</a></li>
+            <li ui-sref-active="active">
+              <a href="" ui-sref="chat.info({type:'user',id:item._id})"><span
+                class="glyphicon glyphicon-user"></span> Contact Info</a>
+            </li>
+            <li ui-sref-active="active">
+              <a href="" ng-click="vm.addToBlacklist()"><span class="glyphicon glyphicon-list"></span> Add to blacklist</a>
+            </li>
             <li role="separator" class="divider"></li>
-            <li><a href="" ui-sref="logout">Log out</a></li>
+            <li ui-sref-active="active">
+              <a href="" ng-click="vm.removeContact()"><span class="glyphicon glyphicon-trash"></span> Delete contact</a>
+            </li>
           </ul>
         </span>
       </div>

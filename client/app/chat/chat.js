@@ -21,6 +21,39 @@ angular.module('icssApp')
         controllerAs: 'vm',
         authenticate: true
       })
+      .state('chat.info', {
+        url: '/info/:type/:id',
+        templateUrl: 'components/chatMainInfo/chatMainInfo.html',
+        roles: ['client', 'employee', 'admin', 'manager'],
+        controller: 'chatMainInfoCtrl',
+        controllerAs: 'vm',
+        authenticate: true,
+        resolve: {
+          currentChatType: /* @ngInject */ function ($stateParams, $state, UserSvc, GroupSvc, CompanySvc, $timeout) {
+            if ($stateParams && $stateParams.type && $stateParams.id) {
+
+              switch ($stateParams.type) {
+                case 'user':
+                  return UserSvc.getById($stateParams.id);
+                case 'group':
+                  return GroupSvc.getById($stateParams.id);
+                case 'company':
+                  return CompanySvc.getById($stateParams.id);
+                default:
+                  $timeout(function () {
+                    $state.go('chat.main', {})
+                  }, 0);
+              }
+
+            }
+            else {
+              $timeout(function () {
+                $state.go('chat.main', {})
+              }, 0);
+            }
+          }
+        }
+      })
       .state('chat.conversation', {
         url: '/conversation/:type/:id',
         templateUrl: 'components/chatMain/chatMain.html',

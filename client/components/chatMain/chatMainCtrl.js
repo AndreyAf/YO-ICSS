@@ -15,7 +15,7 @@
     vm.isVideoChat = false;
     vm.currentChat = ciChatSvc.getCurrentChat();
 
-    console.log(currentChatType);
+    vm.currentChatType = currentChatType;
 
     ciChatSvc.setCurrentChat(currentChatType);
 
@@ -37,6 +37,12 @@
         }
       }
     });
+
+    vm.clearMsg = clearMsg;
+    vm.removeContact = removeContact;
+    vm.sendMessage = sendMessage;
+    vm.addToBlacklist = addToBlacklist;
+
 
     vm.isCurrentUser = function (_id) {
       return Auth.getCurrentUser()._id === _id;
@@ -69,7 +75,15 @@
       }
     });
 
-    vm.sendMessage = function () {
+    function clearMsg(){
+      alert('functionality is not defined!');
+    }
+
+    function addToBlacklist(){
+      alert('functionality is not defined!');
+    }
+
+    function sendMessage() {
 
       if (vm.message) {
 
@@ -80,6 +94,10 @@
 
         vm.message = '';
       }
-    };
+    }
+
+    function removeContact() {
+      alert('functionality is not defined!');
+    }
   }
 })();

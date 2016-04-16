@@ -5,24 +5,30 @@
     </div>
     <div class="chat-info-details">
       <label class="user-info-name" ng-bind="vm.currentChat.title"></label>
-      <small class="user-info-status" ng-bind="vm.currentChat.status"></small>
     </div>
   </div>
-  <div class="chat-functions col-xs-9">
-    <div class="pull-right">
-      <!--<a class="chat-header-btn chat-video-call" ng-click="vm.isVideoChat = !vm.isVideoChat">-->
-      <!--<span class="glyphicon glyphicon-facetime-video"></span>-->
-      <!--</a>-->
-      <!--<a class="chat-header-btn chat-voice-call">-->
-      <!--<span class="glyphicon glyphicon-earphone"></span>-->
-      <!--</a>-->
-      <!--<a class="chat-header-btn chat-attachment">-->
-      <!--<span class="glyphicon glyphicon-paperclip"></span>-->
-      <!--</a>-->
-      <a class="chat-header-btn chat-settings">
+  <div class="chat-functions pull-right">
+      <span uib-dropdown on-toggle="toggled(open)">
+      <a href id="simple-dropdown" uib-dropdown-toggle class="chat-header-btn chat-settings">
         <span class="glyphicon glyphicon-option-horizontal"></span>
       </a>
-    </div>
+      <ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
+        <li ui-sref-active="active">
+          <a href="" ui-sref="chat.info({type: 'user',id: vm.currentChatType._id})"><span
+            class="glyphicon glyphicon-user"></span> Contact Info</a>
+        </li>
+        <li ui-sref-active="active">
+          <a href="" ng-click="vm.clearMsg()"><span class="glyphicon glyphicon-remove"></span> Clear messages</a>
+        </li>
+        <li ui-sref-active="active">
+          <a href="" ng-click="vm.addToBlacklist()"><span class="glyphicon glyphicon-list"></span> Add to blacklist</a>
+        </li>
+        <li role="separator" class="divider"></li>
+        <li ui-sref-active="active">
+          <a href="" ng-click="vm.removeContact()"><span class="glyphicon glyphicon-trash"></span> Delete contact</a>
+        </li>
+      </ul>
+    </span>
   </div>
 </div>
 <div id="content" class="chat-header-content">

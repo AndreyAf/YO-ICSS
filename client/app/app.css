@@ -8940,8 +8940,7 @@ tfoot td {
   margin-left: 15px;
 }
 .chat-header {
-  display: flex;
-  height: 100%;
+  display: block;
   padding: 10px;
 }
 .chat-header .chat-info {
@@ -8964,6 +8963,13 @@ tfoot td {
 .chat-header .chat-functions {
   float: right;
   height: 100%;
+}
+.chat-header .chat-functions .uib-dropdown-menu {
+  width: 173px;
+  right: 24px;
+  left: -122px;
+  top: 26px;
+  border-radius: 0;
 }
 #messageDiv {
   width: calc(100% - 38px);
@@ -9177,7 +9183,11 @@ tfoot td {
   width: 25px;
   top: 0;
   right: 0;
-  background: #ffffff;
+}
+.ic-sidebar-list-item .ic-sidebar-list-item-settings .dropdown-menu {
+  left: -163px;
+  width: 189px;
+  border-radius: 0;
 }
 .ic-sidebar-list-item:hover .ic-sidebar-list-item-settings {
   display: block;
@@ -9474,10 +9484,6 @@ body {
 .send-message {
   width: calc(100% - 65px) !important;
   float: left;
-}
-
-.disabled {
-  cursor: not-allowed;
 }
 .send-btn {
   float: right;

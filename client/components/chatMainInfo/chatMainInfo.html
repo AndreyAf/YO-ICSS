@@ -1,7 +1,7 @@
 <div class="chat-header">
   <div class="chat-info">
     <div class="chat-info-details">
-      <label>Add new group</label>
+      <label>About {{vm.currentChatInfo.name}}</label>
     </div>
   </div>
 </div>
@@ -43,3 +43,6 @@
     </form>
   </div>
 </div>
+
+<legend>chat main info</legend>
+<code>{{vm.currentChatInfo | json}}</code>
