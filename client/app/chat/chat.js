@@ -21,6 +21,7 @@ angular.module('icssApp')
         controllerAs: 'vm',
         authenticate: true
       })
+
       .state('chat.info', {
         url: '/info/:type/:id',
         templateUrl: 'components/chatMainInfo/chatMainInfo.html',
@@ -116,6 +117,22 @@ angular.module('icssApp')
         templateUrl: 'components/chatMainAddCompany/chatMainAddCompany.html',
         roles: ['client', 'employee', 'admin', 'manager'],
         controller: 'chatMainAddCompanyCtrl',
+        controllerAs: 'vm',
+        authenticate: true
+      })
+      .state('chat.company', {
+        url: '/main',
+        templateUrl: 'components/chatMainComapny/chatMainComapny.html',
+        roles: ['client', 'employee', 'admin', 'manager'],
+        controller: 'chatMainCompanyCtrl',
+        controllerAs: 'vm',
+        authenticate: true,
+        abstract: true
+      })
+      .state('chat.company.main', {
+        url: '/main',
+        templateUrl: 'components/chatMainEmpty/chatMainEmpty.html',
+        roles: ['client', 'employee', 'admin', 'manager'],
         controllerAs: 'vm',
         authenticate: true
       });

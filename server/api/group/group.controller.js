@@ -103,24 +103,27 @@ exports.create = function (req, groupRes) {
     return user._id;
   });
 
+  function updateUser(user) {
+    User.findByIdAsync(user)
+      .then(function (res, pos) {
+        res.groups.push({_id: groupRes._id});
+        res.saveAsync();
+      })
+      .catch(function (res) {
+        handleError(res);
+      });
+  }
+
   group.createAsync(req.body)
     .then((function (res) {
       return function (entity) {
         if (entity) {
-
           for (var i = 0; i < entity.users.length; i++) {
-            User.findByIdAsync(entity.users[i])
-              .then(function (res, pos) {
-                res.groups.push({_id: groupRes._id});
-                res.saveAsync();
-              })
-              .catch(function (res) {
-                handleError(res);
-              });
+            updateUser(entity.users[i]);
           }
-
-          res.status(200).json(entity);
         }
+
+        res.status(200).json(entity);
       };
     })(groupRes))
     .catch(handleError(groupRes));
@@ -129,7 +132,7 @@ exports.create = function (req, groupRes) {
 // Updates an existing group in the DB
 exports.update = function (req, res) {
 
-  function entityFound(updates){
+  function entityFound(updates) {
     return function (entity) {
 
       // map users by id
@@ -145,7 +148,7 @@ exports.update = function (req, res) {
     };
   }
 
-  function response(res){
+  function response(res) {
     return function (entity) {
       if (entity) {
         console.log(entity);

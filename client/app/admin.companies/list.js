@@ -1,10 +1,8 @@
 'use strict';
 
-angular.module('icssApp').controller('AdminCompaniesListCtrl', adminCompaniesListCtrl);
-
 /* @ngInject */
 function adminCompaniesListCtrl(CompanySvc, uiGridConstants) {
-  var vm = this;
+  var vm = this; // jshint ignore: line
 
   vm.gridOptions = {
     data: [],
@@ -82,3 +80,7 @@ function adminCompaniesListCtrl(CompanySvc, uiGridConstants) {
     }
   }
 }
+
+angular.module('icssApp').controller('AdminCompaniesListCtrl', adminCompaniesListCtrl);
+
+
