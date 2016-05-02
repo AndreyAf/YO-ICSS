@@ -8919,9 +8919,8 @@ tfoot td {
   -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
-#banner {
-  border-bottom: none;
-  margin-top: -20px;
+body {
+  height: 100%!important;
 }
 #banner h1 {
   font-size: 60px;
@@ -8938,6 +8937,19 @@ tfoot td {
 }
 .navbar-text {
   margin-left: 15px;
+}
+.peopleCarouselImg img {
+  width: auto;
+  height: 225px;
+  max-height: 225px;
+}
+.main-container {
+  background-color: #F6F7F2;
+}
+.main-container legend {
+  background-color: #25373D;
+  color: white;
+  border: none;
 }
 .chat-header {
   display: block;
@@ -9257,8 +9269,8 @@ tfoot td {
 footer.footer {
   text-align: center;
   padding: 30px 0;
-  margin-top: 70px;
-  border-top: 1px solid #E5E5E5;
+  background-color: #3C3741;
+  color: white;
 }
 .loading-block {
   height: calc(100vh - 131px);
@@ -9382,15 +9394,20 @@ footer.footer {
 .modal-danger .modal-header {
   background: #d9534f;
 }
+.navbar-default {
+  background-color: #7BB0A6;
+  border: none;
+}
+.navbar-default .navbar-nav > li > a {
+  color: white;
+}
 html,
-body {
+body,
+.main-body {
   height: 100%;
 }
 body {
-  background-color: #3c556c;
-  -webkit-box-shadow: inset 0px 0px 215px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: inset 0px 0px 215px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: inset 0px 0px 215px 0px rgba(0, 0, 0, 0.75);
+  background-color: #E0E4CC;
 }
 .full-height {
   height: 100%;

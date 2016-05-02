@@ -1,18 +1,17 @@
 <navbar></navbar>
 
-<header class="hero-unit" id="banner">
-  <div class="container">
+
+<div class="container main-container">
+  <div class="hero-unit row" id="banner">
     <h1>The best support system for your business!</h1>
-    <button class="btn btn-success" ui-sref="login" ng-disabled="isLoggedIn">Login</button>
-    <button class="btn btn-success" ui-sref="signup">Register</button>
+    <button class="btn btn-success" ui-sref="login" ng-disabled="main.isLoggedIn">Login</button>
+    <button class="btn btn-warning" ui-sref="signup">Register account</button>
+    <button class="btn btn-info" ui-sref="signup-company">Register company</button>
   </div>
-</header>
-
-<div class="container">
-
-  <div class="row well">
+  <hr>
+  <div class="row">
     <div class="col-md-12">
-      <legend id="services">Services</legend>
+      <legend id="services" class="text-center">Services</legend>
     </div>
     <div class="col-md-12">
       <p>text text text text text text text text text text text text text text text text text text text text text text
@@ -20,41 +19,105 @@
     </div>
   </div>
 
+  <hr>
 
-  <div class="row well">
+  <div class="row">
     <div class="col-md-12">
-      <legend id="technology">Technology</legend>
+      <legend id="technology" class="text-center">Technologies</legend>
+    </div>
+    <div class="col-md-12">
+      <uib-carousel active="true" interval="100" no-wrap="true">
+        <uib-slide ng-repeat="slide in main.technologies track by $index" index="$index">
+          <div class="peopleCarouselImg">
+            <img ng-src="{{slide.src}}" style="margin:auto;">
+
+            <div class="carousel-caption">
+              <h4>{{slide.title}}</h4>
+
+              <p>{{slide.desc}}</p>
+            </div>
+          </div>
+        </uib-slide>
+      </uib-carousel>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-md-12">
+      <legend id="about_us" class="text-center">About us</legend>
     </div>
     <div class="col-md-12">
       <p>text text text text text text text text text text text text text text text text text text text text text text
         text text text text text text text text </p>
-      <p>text text text text text text text text text text text text text text text text text text text text text text
-      text text text text text text text text </p>
-      <p>text text text text text text text text text text text text text text text text text text text text text text
-      text text text text text text text text </p>
     </div>
   </div>
 
-  <div class="row well">
+  <hr>
+
+  <div class="row">
     <div class="col-md-12">
-      <legend id="about_us">About us</legend>
+      <legend id="out_team" class="text-center">Our team</legend>
     </div>
     <div class="col-md-12">
-      <p>text text text text text text text text text text text text text text text text text text text text text text
-        text text text text text text text text </p>
+      <div class="row">
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <img src="../../assets/images/home_page/andrey.jpg" alt="..." class="img-circle">
+            <div class="caption">
+              <h3>Andrey Pospelov , CEO</h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <img src="../../assets/images/home_page/nick.jpg" alt="..." class="img-circle">
+            <div class="caption">
+              <h3>Nick Yashaev , CTO</h3>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
-  <div class="row well">
+  <hr>
+
+  <div class="row">
     <div class="col-md-12">
-      <legend id="contact_us">Contact us</legend>
+      <legend id="contact_us" class="text-center">Contact us</legend>
     </div>
-    <div class="col-md-12">
-      <p>text text text text text text text text text text text text text text text text text text text text text text
-        text text text text text text text text </p>
+    <div class="col-sm-6 col-sm-offset-3 form-box">
+
+      <div class="form-bottom contact-form">
+        <form>
+          <div class="form-group">
+            <label class="sr-only" for="contact-name">Name</label>
+            <input type="text" name="name" placeholder="Name..." class="contact-name form-control" id="contact-name">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="contact-email">Email</label>
+            <input type="text" name="email" placeholder="Email..." class="contact-email form-control"
+                   id="contact-email">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="contact-subject">Subject</label>
+            <input type="text" name="subject" placeholder="Subject..." class="contact-subject form-control"
+                   id="contact-subject">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="contact-message">Message</label>
+            <textarea name="message" placeholder="Message..." class="contact-message form-control"
+                      id="contact-message"></textarea>
+          </div>
+          <button type="submit" class="btn">Send message</button>
+        </form>
+      </div>
     </div>
   </div>
-
+  <hr>
 </div>
 
 <footer></footer>
