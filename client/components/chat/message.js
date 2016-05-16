@@ -17,30 +17,22 @@
       getLastMessages: function (callback) {
 
         var res =[{
-          "_id": {
-            "$oid": "565f1fc64c459d1816ab868d"
-          },
-          "content": "fth",
+          "_id": "565f1fc64c459d1816ab868d",
+          "content": "123456123",
           "_sender": {
-            "$oid": "565f1fb54c459d1816ab8688"
+            "_id": "565f1fb54c459d1816ab8688"
           },
           "_session": "123123",
-          "created": {
-            "$date": "2015-12-02T16:43:50.335Z"
-          },
+          "created_at":"2015-12-02T16:43:50.335Z",
           "__v": 0
         },{
-          "_id": {
-            "$oid": "565f1fc64c459d1816ab868d"
-          },
-          "content": "sdgsdgsd",
+          "_id": "565f1fc64c459d1816ab868d",
+          "content": "456123456",
           "_sender": {
-            "$oid": "565f1fb54c459d1816ab8688"
+            "_id": "565f1fb54c459d1816ab8688"
           },
           "_session": "123123",
-          "created": {
-            "$date": "2015-12-02T16:43:50.335Z"
-          },
+          "created_at":"2015-12-02T16:43:50.335Z",
           "__v": 0
         }];
 

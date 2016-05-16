@@ -63,21 +63,27 @@ angular.module('icssApp')
         controllerAs: 'vm',
         authenticate: true,
         resolve: {
-          currentChatType: /* @ngInject */ function ($stateParams, $state, UserSvc, GroupSvc, CompanySvc, $timeout) {
+          currentChatType: /* @ngInject */ function ($stateParams, $state, UserSvc, GroupSvc, CompanySvc, $timeout, ciChatSvc) {
             if ($stateParams && $stateParams.type && $stateParams.id) {
-
+              var currentChat = null;
               switch ($stateParams.type) {
                 case 'user':
-                  return UserSvc.getById($stateParams.id);
+                  currentChat = UserSvc.getById($stateParams.id);
+                  break;
                 case 'group':
-                  return GroupSvc.getById($stateParams.id);
+                  currentChat = GroupSvc.getById($stateParams.id);
+                  break;
                 case 'company':
-                  return CompanySvc.getById($stateParams.id);
+                  currentChat = CompanySvc.getById($stateParams.id);
+                  break;
                 default:
                   $timeout(function () {
                     $state.go('chat.main', {})
                   }, 0);
               }
+              return currentChat.then(function(currentChat){
+                return ciChatSvc.setCurrentChat(currentChat);
+              });
 
             }
             else {

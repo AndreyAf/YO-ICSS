@@ -13,11 +13,13 @@
       name: null
     };
     vm.isVideoChat = false;
-    vm.currentChat = ciChatSvc.getCurrentChat();
+    vm.currentChat = currentChatType;
 
-    vm.currentChatType = currentChatType;
-
-    ciChatSvc.setCurrentChat(currentChatType);
+    vm.clearMsg = clearMsg;
+    vm.removeContact = removeContact;
+    vm.sendMessage = sendMessage;
+    vm.addToBlacklist = addToBlacklist;
+    vm.isCurrentUser = isCurrentUser;
 
     $rootScope.$on('keyup', function (event, data) {
 
@@ -37,16 +39,6 @@
         }
       }
     });
-
-    vm.clearMsg = clearMsg;
-    vm.removeContact = removeContact;
-    vm.sendMessage = sendMessage;
-    vm.addToBlacklist = addToBlacklist;
-
-
-    vm.isCurrentUser = function (_id) {
-      return Auth.getCurrentUser()._id === _id;
-    };
 
     /***
      * Listen to new message created
@@ -75,11 +67,15 @@
       }
     });
 
-    function clearMsg(){
-      alert('functionality is not defined!');
+    function isCurrentUser(_id) {
+      return Auth.getCurrentUser()._id === _id;
     }
 
-    function addToBlacklist(){
+    function clearMsg() {
+      vm.currentChat.messages.length = 0;
+    }
+
+    function addToBlacklist() {
       alert('functionality is not defined!');
     }
 

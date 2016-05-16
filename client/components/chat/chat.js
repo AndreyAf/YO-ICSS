@@ -5,6 +5,7 @@
   function ciChatSvc(socket, Auth, ciMessageSvc, ciSingleSessionSvc, $state) {
 
     var currentChat = {
+      _id: null,
       title: null,
       img: 'assets/images/user.png',
       status: 'Online',
@@ -24,13 +25,13 @@
       states: states,
       socket: socket.socket,
       currentChat: currentChat,
-      getCurrentChat: function(){
+      getCurrentChat: function () {
         return currentChat;
       },
-      getCurrentState: function(){
+      getCurrentState: function () {
         return currentState;
       },
-      setCurrentState: function(state){
+      setCurrentState: function (state) {
         currentState = state;
       },
       addMessage: function (message) {
@@ -38,23 +39,33 @@
       },
       setCurrentChat: function (item) {
 
-        // Get session by item id
-        ciSingleSessionSvc.getSession(item._id,function(ses){
+        //// Get session by item id
+        //return ciSingleSessionSvc.getSession(item._id, function (ses) {
+        //
+        //
+        //  // Set state to chat
+        //  currentState = states.chat;
+        //
+        //  // Set current chat title
+        //  currentChat.title = item.name;
+        //
+        //  // TODO: add $promise
+        //  // Set current chat messages
+        //  currentChat.messages = ciMessageSvc.getLastMessages();
+        //
+        //  currentChat.isActive = true;
+        //  return currentChat;
+        //});
+        ciSingleSessionSvc.getSession(item._id, function (ses) {
 
-          // Set state to chat
-          currentState = states.chat;
-
-          // Set current chat title
-          currentChat.title = item.name;
-
-          // TODO: add $promise
-          // Set current chat messages
-          currentChat.messages = ciMessageSvc.getLastMessages();
-
-          currentChat.isActive = true;
-
-          $state.go('chat.conversation');
         });
+
+        currentChat._id = item._id;
+        currentChat.title = item.name;
+        currentChat.messages = ciMessageSvc.getLastMessages();
+        currentChat.isActive = true;
+
+        return currentChat;
       },
       sendMessage: function (message) {
 

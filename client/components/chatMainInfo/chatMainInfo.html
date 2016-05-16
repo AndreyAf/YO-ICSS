@@ -4,45 +4,40 @@
       <label>About {{vm.currentChatInfo.name}}</label>
     </div>
   </div>
+  <div class="chat-functions pull-right">
+    <a ui-sref="chat.conversation({type:'user',id:vm.currentChatInfo._id})" class=" chat-header-btn chat-settings">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+  </div>
+</div>
 </div>
 <div class="chat-main-content">
-  <div class="row">
-    <form class="form-horizontal" name="groupForm">
-      <div class="form-group">
-        <label class="control-label col-md-4">Name* :</label>
+  <div class="col-md-12">
+    <div class="col-md-12">
+      <div class="col-md-12">
+        <div class="col-md-4 col-md-offset-4">
+          <img ng-src="{{vm.currentChatInfo.img}}" class="img-responsive img-rounded img-thumbnail">
+        </div>
+      </div>
+      <hr>
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label class="control-label col-md-4">Name:</label>
 
-        <div class="col-md-6">
-          <input type="text" class="form-control" ng-model="vm.group.name" title="group name" required/>
+          <div class="col-md-6">
+            <input type="text" ng-model="vm.currentChatInfo.name" class="form-control" disabled>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-md-4">Description* :</label>
+        <div class="form-group">
+          <label class="control-label col-md-4">Email:</label>
 
-        <div class="col-md-6">
-          <input type="text" class="form-control" ng-model="vm.group.description" title="group description" required/>
+          <div class="col-md-6">
+            <input type="text" ng-model="vm.currentChatInfo.email" class="form-control" disabled>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-md-4">Logo url :</label>
-
-        <div class="col-md-6">
-          <input type="text" class="form-control" ng-model="vm.group.logo_url" title="group logo"/>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-md-offset-4 col-md-6">
-          <img ng-src="{{vm.group.logo_url}}" width="100px"/>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-md-offset-4 col-md-6">
-          <a href="" ng-click="vm.addGroup()" class="btn btn-success"
-             ng-disabled="!vm.group.name || !vm.group.description || !vm.group.logo_url">Add new group</a>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </div>
 
-<legend>chat main info</legend>
-<code>{{vm.currentChatInfo | json}}</code>
+
