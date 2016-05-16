@@ -33,6 +33,8 @@ module.exports = function(config) {
       'client/bower_components/spin.js/spin.js',
       'client/bower_components/ladda/dist/ladda.min.js',
       'client/bower_components/angular-ladda/dist/angular-ladda.min.js',
+      'client/bower_components/moment/moment.js',
+      'client/bower_components/angular-moment/angular-moment.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'node_modules/socket.io-client/socket.io.js',

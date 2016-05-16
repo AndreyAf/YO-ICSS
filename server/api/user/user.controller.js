@@ -1,6 +1,7 @@
 'use strict';
 
 var User = require('./user.model');
+var Company = require('../company/company.model');
 var _ = require('lodash');
 var passport = require('passport');
 var config = require('../../config/environment');
@@ -192,6 +193,29 @@ exports.getPossibleContacts = function (req, res, next) {
         .catch(handleError(res));
     })
 
+
+};
+
+/**
+ * Return possible companies
+ */
+exports.getPossibleCompanies = function (req, res, next) {
+  var userId = req.user._id;
+
+  User.findOne({_id: userId})
+    .then(function (user) { // don't ever give out the password or salt
+
+      var companiesIds = _.union(_.pluck(user.companies, '_company'), [userId]);
+      Company.findAsync({
+          "$and": [
+            {"_id": {$nin: companiesIds}}
+          ]
+        })
+        .then(function (companies) {
+          res.status(200).json(companies);
+        })
+        .catch(handleError(res));
+    })
 
 };
 

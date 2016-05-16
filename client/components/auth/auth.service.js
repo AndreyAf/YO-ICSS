@@ -95,28 +95,8 @@ angular.module('icssApp')
         }).$promise;
       },
 
-      /**
-       * Gets all available info on a user
-       *   (synchronous|asynchronous)
-       *
-       * @param  {Function|*} callback - optional, funciton(user)
-       * @return {Object|Promise}
-       */
-      getCurrentUser: function (callback) {
-        if (arguments.length === 0) {
-          return currentUser;
-        }
 
-        var value = (currentUser && currentUser.hasOwnProperty('$promise')) ? currentUser.$promise : currentUser;
-        return $q.when(value)
-          .then(function (user) {
-            safeCb(callback)(user);
-            return user;
-          }, function () {
-            safeCb(callback)({});
-            return {};
-          });
-      },
+      getCurrentUser: getCurrentUser ,
 
       /**
        * Check if a user is logged in
@@ -209,6 +189,18 @@ angular.module('icssApp')
         }).$promise;
       },
 
+      /***
+       * Get possible companies
+       */
+      getPossibleCompanies: function(){
+
+        var value = (currentUser && currentUser.hasOwnProperty('$promise')) ? currentUser.$promise : currentUser;
+        return $q.when(value)
+          .then(function (currentUser) {
+            return User.getPossibleCompanies({id: currentUser._id}).$promise;
+          });
+      },
+
       /**
        * Get auth token
        *
@@ -218,4 +210,27 @@ angular.module('icssApp')
         return $cookies.get('token');
       }
     };
+
+    /**
+     * Gets all available info on a user
+     *   (synchronous|asynchronous)
+     *
+     * @param  {Function|*} callback - optional, funciton(user)
+     * @return {Object|Promise}
+     */
+    function getCurrentUser (callback) {
+      if (arguments.length === 0) {
+        return currentUser;
+      }
+
+      var value = (currentUser && currentUser.hasOwnProperty('$promise')) ? currentUser.$promise : currentUser;
+      return $q.when(value)
+        .then(function (user) {
+          safeCb(callback)(user);
+          return user;
+        }, function () {
+          safeCb(callback)({});
+          return {};
+        });
+    }
   });

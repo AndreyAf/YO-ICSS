@@ -11,7 +11,25 @@
     vm.search = "";
     vm.companies = [];
 
-    vm.addCompanies = function (_company) {
+    vm.addCompanies = addCompanies;
+
+    activate();
+
+    /////////
+
+    function activate() {
+      vm.loading = true;
+
+      Auth.getPossibleCompanies()
+        .then(function (companies) {
+          vm.companies = companies;
+        })
+        .finally(function(){
+          vm.loading = true;
+        });
+    }
+
+    function addCompanies(_company) {
 
       vm.loading = true;
 
@@ -24,18 +42,6 @@
 
         vm.loading = false;
       });
-    };
-
-    // Get users
-    var getCompanies = function () {
-      vm.loading = true;
-      // TODO: add
-      //Auth.getPossibleCompanies(function (companies) {
-      //  vm.companies = companies;
-      //})
-    };
-
-    getCompanies();
+    }
   }
-
 })();

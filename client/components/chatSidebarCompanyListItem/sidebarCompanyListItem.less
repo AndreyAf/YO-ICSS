@@ -1,0 +1,28 @@
+.ic-sidebar-list-item {
+
+  border-radius: inherit !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+
+  .ic-sidebar-list-item-settings {
+    display: none;
+    position: absolute;
+    height: 100%;
+    width: 25px;
+    top: 0;
+    right: 0;
+
+    .dropdown-menu {
+      left: -163px;
+      width: 189px;
+      border-radius: 0;
+    }
+  }
+
+  &:hover {
+    .ic-sidebar-list-item-settings {
+      display: block;
+    }
+  }
+}

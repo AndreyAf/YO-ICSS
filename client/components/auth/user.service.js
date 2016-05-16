@@ -33,6 +33,13 @@ angular.module('icssApp')
           params: {
             controller: 'getPossibleContacts'
           }
+        },
+        getPossibleCompanies: {
+          method: 'GET',
+          isArray: true,
+          params: {
+            controller: 'getPossibleCompanies'
+          }
         }
       });
   });

@@ -75,7 +75,6 @@ function removeCompany(groupRes) {
   return removeEntity(groupRes);
 }
 
-
 // Gets a list of companies by session id
 exports.index = function (req, res) {
   company.findAsync({
@@ -114,6 +113,8 @@ exports.create = function (req, companyRes) {
     })
     .catch(handleError(companyRes));
 };
+
+
 
 // Updates an existing company in the DB
 exports.update = function (req, res) {

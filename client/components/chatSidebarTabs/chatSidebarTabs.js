@@ -5,23 +5,28 @@
   angular.module('icssApp').directive('icSidebarTabs', function () {
 
     // @ngInject
-    function icSidebarTabs(User, Auth, ciChatSvc) {
+    function icSidebarTabs(User, Auth) {
       var vm = this; //jshint ignore:line
 
-      vm.users = User.query();
+      vm.users = [];
       vm.companies = [];
       vm.contacts = [];
       vm.groups = [];
 
-      // Get current user contacts
-      Auth.getCurrentUser(function (user) {
-        vm.contacts = user.contacts;
-        vm.groups = user.groups;
-      });
+      activate();
 
-      vm.changeState = function (state) {
-        ciChatSvc.setCurrentState(state);
-      };
+      /////////
+
+      function activate(){
+        vm.users = User.query();
+
+        // Get current user contacts
+        Auth.getCurrentUser(function (user) {
+          vm.contacts = user.contacts;
+          vm.groups = user.groups;
+          vm.companies = user.companies;
+        });
+      }
     }
 
     return {

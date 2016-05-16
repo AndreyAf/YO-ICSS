@@ -39,7 +39,7 @@
                                          item="groups"></ic-sidebar-list-item-single>
           </div>
           <div ng-if="vm.groups.length == 0">
-            <label>You have no groups you poor bastard!! <a href="" ng-click="vm.changeState('addGroup')"> click
+            <label>You have no groups you poor bastard!! <a href="" ng-click=""> click
               here</a> to add new group :) </label>
           </div>
         </ul>
@@ -49,14 +49,12 @@
     <uib-tab>
       <uib-tab-heading>
         <span class="glyphicon glyphicon-briefcase"></span>
-        <span class="badge">{{vm.contacts.length > 99 ?  '+99' : vm.contacts.length}}</span>
+        <span class="badge">{{vm.companies.length > 99 ?  '+99' : vm.companies.length}}</span>
       </uib-tab-heading>
       <div class="full-height" scrollable>
         <ul class="list-group">
-
-          <ic-sidebar-list-item-single ng-repeat="contact in vm.contacts | filter : search"
-                                       item="contact._contact"></ic-sidebar-list-item-single>
-
+          <ic-sidebar-company-list-item ng-repeat="company in vm.companies | filter : search"
+                                        item="contact._contact"></ic-sidebar-company-list-item>
         </ul>
       </div>
 

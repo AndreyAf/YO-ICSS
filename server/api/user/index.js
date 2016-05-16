@@ -10,6 +10,7 @@ router.get('/', auth.isAuthenticated(), controller.index);
 router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 router.get('/me', auth.isAuthenticated(), controller.me);
 router.get('/:id/getPossibleContacts', auth.isAuthenticated(), controller.getPossibleContacts);
+router.get('/:id/getPossibleCompanies', auth.isAuthenticated(), controller.getPossibleCompanies);
 router.put('/:id/addContact', auth.isAuthenticated(), controller.addContact);
 router.put('/:id/addGroup', auth.isAuthenticated(), controller.addGroup); // TODO
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
