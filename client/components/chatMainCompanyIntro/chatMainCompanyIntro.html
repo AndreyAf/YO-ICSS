@@ -1,0 +1,30 @@
+<div class="col-md-12">
+  <legend>{{vm.currentCompany.name}}</legend>
+  <small>{{vm.currentCompany.logo_url}}</small>
+  <br>
+  <small>{{vm.currentCompany.slogan}}</small>
+  <br>
+  <small>{{vm.currentCompany.description}}</small>
+  <br>
+  <hr>
+  <ul class="list-group">
+    <li ng-repeat="department in vm.currentCompany.departments" class="list-group-item">
+      <legend>{{department.name}}</legend>
+      <small>{{department.description}}</small>
+      <br>
+      <small>{{department.email}}</small>
+      <br>
+      <small>{{department.location.country}}</small>
+      <br>
+      <small>{{department.location.city}}</small>
+      <br>
+      <small>{{department.location.address}}</small>
+      <br>
+      <small>{{department.location.phone}}</small>
+      <br>
+      <small>{{department.location.fax}}</small>
+      <br>
+      <button class="btn btn-success" ui-sref="chat.departmentCall({companyId: vm.currentCompany._id, departmentId: department._id})">Make a Call</button>
+    </li>
+  </ul>
+</div>

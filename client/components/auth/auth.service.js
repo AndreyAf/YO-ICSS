@@ -95,8 +95,7 @@ angular.module('icssApp')
         }).$promise;
       },
 
-
-      getCurrentUser: getCurrentUser ,
+      getCurrentUser: getCurrentUser,
 
       /**
        * Check if a user is logged in
@@ -112,7 +111,7 @@ angular.module('icssApp')
 
         return this.getCurrentUser(null)
           .then(function (user) {
-            var is = currentUser &&  user.hasOwnProperty('roles');
+            var is = currentUser && user.hasOwnProperty('roles');
             safeCb(callback)(is);
             return is;
           });
@@ -145,19 +144,18 @@ angular.module('icssApp')
           });
       },
 
-        /***
-         * Returns current user roles
-         * @returns {Array|*|Object[]}
-         */
-      getRoles: function(){
+      /***
+       * Returns current user roles
+       * @returns {Array|*|Object[]}
+       */
+      getRoles: function () {
         return currentUser.roles;
       },
-
 
       /***
        * Add new contact to current user
        */
-      addContact: function(contact, callback){
+      addContact: function (contact, callback) {
 
         var newContact = {
           _contact: contact,
@@ -179,7 +177,7 @@ angular.module('icssApp')
       /***
        * Add new contact to current user
        */
-      getPossibleContacts: function(callback){
+      getPossibleContacts: function (callback) {
 
         // update server
         return User.getPossibleContacts({id: currentUser._id}, function (users) {
@@ -188,11 +186,32 @@ angular.module('icssApp')
           return safeCb(callback)(err);
         }).$promise;
       },
+      /***
+       * Add new company to current user
+       */
+      addCompany: function (company, callback) {
 
+        var newCompany = {
+          _company: company,
+          _session: null
+        };
+
+        // Update locally
+        currentUser.companies.push(newCompany);
+
+        // update server
+        return User.addCompany({id: currentUser._id}, {
+          company: newCompany
+        }, function () {
+          return safeCb(callback)(null);
+        }, function (err) {
+          return safeCb(callback)(err);
+        }).$promise;
+      },
       /***
        * Get possible companies
        */
-      getPossibleCompanies: function(){
+      getPossibleCompanies: function () {
 
         var value = (currentUser && currentUser.hasOwnProperty('$promise')) ? currentUser.$promise : currentUser;
         return $q.when(value)
@@ -218,7 +237,7 @@ angular.module('icssApp')
      * @param  {Function|*} callback - optional, funciton(user)
      * @return {Object|Promise}
      */
-    function getCurrentUser (callback) {
+    function getCurrentUser(callback) {
       if (arguments.length === 0) {
         return currentUser;
       }

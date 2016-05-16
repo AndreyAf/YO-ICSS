@@ -21,6 +21,12 @@ angular.module('icssApp')
             controller: 'addContact'
           }
         },
+        addCompany: {
+          method: 'PUT',
+          params: {
+            controller: 'addCompany'
+          }
+        },
         get: {
           method: 'GET',
           params: {

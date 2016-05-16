@@ -94,6 +94,7 @@ exports.show = function (req, res, next) {
 
   User.findOne({_id: userId})
     .populate('contacts._contact')
+    .populate('companies._company')
     .populate('groups')
     .execAsync()
     .then(handleEntityNotFound(res))
@@ -163,6 +164,23 @@ exports.addContact = function (req, res, next) {
 };
 
 /**
+ * Add company to user
+ */
+exports.addCompany = function (req, res, next) {
+  var userId = req.user._id;
+
+  User.findByIdAsync(userId)
+    .then(function (user) {
+      user.companies.push(req.body.company);
+      return user.saveAsync()
+        .then(function () {
+          res.status(204).end();
+        })
+        .catch(validationError(res));
+    });
+};
+
+/**
  * Add group to user
  */
 exports.addGroup = function (req, res, next) {
@@ -180,7 +198,7 @@ exports.getPossibleContacts = function (req, res, next) {
   User.findOne({_id: userId})
     .then(function (user) { // don't ever give out the password or salt
 
-      var contactsIds = _.union(_.pluck(user.contacts,'_contact'),[userId]);
+      var contactsIds = _.union(_.pluck(user.contacts, '_contact'), [userId]);
       User.findAsync({
           "$and": [
             {"_id": {$nin: contactsIds}}
@@ -192,7 +210,6 @@ exports.getPossibleContacts = function (req, res, next) {
         })
         .catch(handleError(res));
     })
-
 
 };
 
@@ -227,6 +244,7 @@ exports.me = function (req, res, next) {
 
   User.findOne({_id: userId}, '-salt -hashedPassword')
     .populate('contacts._contact')
+    .populate('companies._company')
     .populate('groups')
     .execAsync()
     .then(function (user) { // don't ever give out the password or salt

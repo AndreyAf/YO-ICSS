@@ -81,7 +81,7 @@ angular.module('icssApp')
                     $state.go('chat.main', {})
                   }, 0);
               }
-              return currentChat.then(function(currentChat){
+              return currentChat.then(function (currentChat) {
                 return ciChatSvc.setCurrentChat(currentChat);
               });
 
@@ -125,6 +125,56 @@ angular.module('icssApp')
         controller: 'chatMainAddCompanyCtrl',
         controllerAs: 'vm',
         authenticate: true
+      })
+      .state('chat.companyIntro', {
+        url: '/companyIntro/:id',
+        templateUrl: 'components/chatMainCompanyIntro/chatMainCompanyIntro.html',
+        roles: ['client', 'employee', 'admin', 'manager'],
+        controller: 'chatMainCompanyIntroCtrl',
+        controllerAs: 'vm',
+        authenticate: true,
+        resolve: {
+          currentCompany: /* @ngInject */ function ($stateParams, $state, UserSvc, GroupSvc, CompanySvc, $timeout) {
+            if ($stateParams && $stateParams.id) {
+              return CompanySvc.getById($stateParams.id);
+            }
+            else {
+              $timeout(function () {
+                $state.go('chat.main', {})
+              }, 0);
+            }
+          }
+        }
+      })
+      .state('chat.departmentCall', {
+        url: '/company/:companyId/department/:departmentId',
+        templateUrl: 'components/chatMainDepartment/chatMainDepartmentCall.html',
+        roles: ['client', 'employee', 'admin', 'manager'],
+        controller: 'chatMainDepartmentCtrl',
+        controllerAs: 'vm',
+        authenticate: true,
+        resolve: {
+          currentCompany: /* @ngInject */ function ($stateParams, $state, UserSvc, GroupSvc, CompanySvc, $timeout) {
+            if ($stateParams && $stateParams.companyId) {
+              return CompanySvc.getById($stateParams.companyId);
+            }
+            else {
+              $timeout(function () {
+                $state.go('chat.main', {})
+              }, 0);
+            }
+          },
+          currentDepartmentId: /* @ngInject */ function ($stateParams, $state, UserSvc, GroupSvc, CompanySvc, $timeout) {
+            if ($stateParams && $stateParams.companyId && $stateParams.departmentId) {
+              return $stateParams.departmentId;
+            }
+            else {
+              $timeout(function () {
+                $state.go('chat.main', {})
+              }, 0);
+            }
+          }
+        }
       })
       .state('chat.company', {
         url: '/main',

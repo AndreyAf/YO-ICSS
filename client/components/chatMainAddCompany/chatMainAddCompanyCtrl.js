@@ -11,7 +11,7 @@
     vm.search = "";
     vm.companies = [];
 
-    vm.addCompanies = addCompanies;
+    vm.addCompany = addCompany;
 
     activate();
 
@@ -24,20 +24,20 @@
         .then(function (companies) {
           vm.companies = companies;
         })
-        .finally(function(){
+        .finally(function () {
           vm.loading = true;
         });
     }
 
-    function addCompanies(_company) {
+    function addCompany(_company) {
 
       vm.loading = true;
 
       Auth.addCompany(_company, function () {
 
-        // Remove contact from users list
+        // Remove company from users list
         vm.companies = lodash.remove(vm.companies, function (company) {
-          return company._id != _company._id;
+          return company._id !== _company._id;
         });
 
         vm.loading = false;
