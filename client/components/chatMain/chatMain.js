@@ -5,7 +5,7 @@
   angular.module('icssApp').directive('icChatMain', function () {
 
     // @ngInject
-    function icChatMain(ciChatSvc, $rootScope, Auth, $timeout, socket, $sce, VideoStream, $location, Room, ciSingleSessionSvc, $scope) {
+    function icChatMain(ciChatSvc, $rootScope, Auth, $timeout, socket, ciSingleSessionSvc, $scope) {
       var vm = this; //jshint ignore:line
 
       vm.message = null;
@@ -16,6 +16,9 @@
       vm.isVideoChat = false;
       vm.currentChat = ciChatSvc.getCurrentChat();
 
+      vm.sendMessage = sendMessage;
+      vm.onTyping = onTyping;
+
       $scope.$watch(function () {
         return ciChatSvc.getCurrentChat();
       }, function (newVal) {
@@ -23,10 +26,28 @@
         vm.currentChat = newVal;
       });
 
+      /***
+       * On typing event
+       */
+      function onTyping() {
+        if (ciSingleSessionSvc.getCurrentSession() != null) {
+          // Send message
+          socket.socket.emit('typing new message', {
+            _session: ciSingleSessionSvc.getCurrentSession()._id,
+            _sender: Auth.getCurrentUser()._id,
+            sender_name: Auth.getCurrentUser().name
+          });
+
+          // On enter pressed send message
+          if (data === 13) {
+            vm.sendMessage();
+          }
+        }
+      }
+
       $rootScope.$on('keyup', function (event, data) {
 
-
-        if(ciSingleSessionSvc.getCurrentSession() != null) {
+        if (ciSingleSessionSvc.getCurrentSession() != null) {
           // Send message
           socket.socket.emit('typing new message', {
             _session: ciSingleSessionSvc.getCurrentSession()._id,
@@ -72,66 +93,19 @@
         }
       });
 
-      vm.sendMessage = function () {
+      /***
+       * Send Message
+       */
+      function sendMessage() {
 
         ciChatSvc.sendMessage(vm.message);
 
         // TODO: rewrite - not the correct angular way
         $(".nano").nanoScroller({scrollBottom: 5});
 
+        // reset message
         vm.message = '';
-      };
-
-      // #######################################
-      // TESTING START
-      // #######################################
-
-      //var roomId = '123123123';
-      //if (!window.RTCPeerConnection || !navigator.getUserMedia) {
-      //  console.log('WebRTC is not supported by your browser. You can try the app with Chrome and Firefox.');
-      //  return;
-      //}
-      //
-      //var stream;
-      //
-      //VideoStream.get()
-      //  .then(function (s) {
-      //    stream = s;
-      //    Room.init(stream);
-      //    stream = URL.createObjectURL(stream);
-      //    if (!roomId) {
-      //      Room.createRoom()
-      //        .then(function (roomId) {
-      //          $location.path('/room/' + roomId);
-      //        });
-      //    } else {
-      //      Room.joinRoom(roomId);
-      //    }
-      //  }, function () {
-      //    console.log('No audio/video permissions. Please refresh your browser and allow the audio/video capturing.');
-      //  });
-      //vm.peers = [];
-      //Room.on('peer.stream', function (peer) {
-      //  console.log('Client connected, adding new stream');
-      //  vm.peers.push({
-      //    id: peer.id,
-      //    stream: URL.createObjectURL(peer.stream)
-      //  });
-      //});
-      //Room.on('peer.disconnected', function (peer) {
-      //  console.log('Client disconnected, removing stream');
-      //  vm.peers = vm.peers.filter(function (p) {
-      //    return p.id !== peer.id;
-      //  });
-      //});
-      //
-      //vm.getLocalVideo = function () {
-      //  return $sce.trustAsResourceUrl(stream);
-      //};
-
-      // #######################################
-      // TESTING END
-      // #######################################
+      }
     }
 
     return {

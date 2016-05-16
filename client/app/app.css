@@ -9005,6 +9005,9 @@ body {
   color: #434651;
   height: 100%;
 }
+.chat ul {
+  padding: 0;
+}
 .chat .chat-history {
   padding: 30px 30px 20px;
   border-bottom: 2px solid white;
@@ -9013,9 +9016,11 @@ body {
 }
 .chat .chat-history li {
   list-style: none;
+  width: 100%;
 }
 .chat .chat-history .message-data {
   margin-bottom: 15px;
+  width: 100%;
 }
 .chat .chat-history .message-data-time {
   color: #949494;
@@ -9028,7 +9033,7 @@ body {
   font-size: 16px;
   border-radius: 7px;
   margin-bottom: 30px;
-  width: 90%;
+  width: 100%;
   position: relative;
 }
 .chat .chat-history .message:after {

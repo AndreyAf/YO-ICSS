@@ -15,7 +15,8 @@ angular.module('icssApp', [
     'ngLodash',
     'smart-table',
     'ui.grid',
-    'angular-ladda'
+    'angular-ladda',
+    'angularMoment'
   ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
@@ -56,7 +57,9 @@ angular.module('icssApp', [
     };
   })
 
-  .run(function ($rootScope, $state, Auth, lodash, $stateParams) {
+  .run(function ($rootScope, $state, Auth, lodash, $stateParams, amMoment) {
+
+    amMoment.changeLocale('en');
 
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;

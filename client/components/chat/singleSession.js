@@ -12,8 +12,11 @@
     var safeCb = function (cb) {
         return (angular.isFunction(cb)) ? cb : angular.noop;
       },
+
     // TODO: set null
-      session = {_id: '123123'};
+      session = {
+        _id: '123123'
+      };
 
     return {
       getCurrentSession: function () {
@@ -26,18 +29,19 @@
        * @returns {*|Function}
        */
       getSession: function (_participantTwo, callback) {
-        var currentId = Auth.getCurrentUser()._id;
-
+        var currentUser = Auth.getCurrentUser();
 
         // todo: rewrite
-        return $q.when(session).then(function () {
-          socket.socket.emit('new user', {
-            user: {
-              name: Auth.getCurrentUser().name
-            },
-            _session: session._id
+        return $q.when(session)
+          .then(function () {
+            socket.socket.emit('new user', {
+              user: {
+                id: currentUser.id,
+                name: currentUser.name
+              },
+              _session: session._id
+            });
           });
-        });
 
         //SingleSession.getSession({
         //  id: currentId,
