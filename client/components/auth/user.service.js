@@ -46,6 +46,13 @@ angular.module('icssApp')
           params: {
             controller: 'getPossibleCompanies'
           }
+        },
+        getWorkCompanies : {
+          method: 'GET',
+          isArray: true,
+          params: {
+            controller: 'getWorkCompanies'
+          }
         }
       });
   });

@@ -1,0 +1,11 @@
+<legend>Department {{vm.department.name}}</legend>
+
+<h2>list of user wating to call</h2>
+<ul class="list-group">
+  <li class="list-group-item" ng-repeat="user in vm.waitUsers">
+    <label>{{user.name}}</label>
+    <a class="btn btn-success pull-right"
+       ui-sref="employeeChat({session:'123FG34!3'})" target="_blank">Call client</a>
+    <div class="clearfix"></div>
+  </li>
+</ul>

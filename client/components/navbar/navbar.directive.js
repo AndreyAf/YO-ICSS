@@ -42,6 +42,10 @@ function navbarCtrl($location, Auth) {
               vm.isAdmin = true;
               break;
             }
+            if (user.roles[i] === 'employee') {
+              vm.isEmployee = true;
+              break;
+            }
           }
 
           vm.menu.push({
@@ -57,6 +61,12 @@ function navbarCtrl($location, Auth) {
             'title': 'Admin',
             'state': 'admin.users.list',
             'isVisible': vm.isAdmin
+          });
+
+          vm.menu.push({
+            'title': 'Employee',
+            'state': 'employee',
+            'isVisible': vm.isAdmin || vm.isEmployee
           });
         }
       }

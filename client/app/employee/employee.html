@@ -1,0 +1,28 @@
+<navbar></navbar>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">Employee Menu</div>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="cmp in workCompanies">
+            <a class="list-group-item-text" ng-bind="cmp.name"></a><br>
+            <small ng-bind="cmp.description"></small>
+            <ul class="list-group">
+              <li class="list-group-item" ng-repeat="dp in cmp.departments">
+                <a class="list-group-item-text"
+                   ui-sref="employee.departments.item({cmpId: cmp._id,dpId: dp._id})"
+                   ng-bind="dp.name"></a><br>
+                <small ng-bind="dp.description"></small>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div ui-view="content"></div>
+    </div>
+  </div>
+</div>
