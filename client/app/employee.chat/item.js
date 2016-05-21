@@ -33,7 +33,7 @@ function employeeChatCtrl($rootScope, ciSingleSessionSvc, socket, Auth, ciChatSv
     if (ciSingleSessionSvc.getCurrentSession() != null) {
       // Send message
       socket.socket.emit('typing new message', {
-        _session: ciSingleSessionSvc.getCurrentSession()._id,
+        _session: ciSingleSessionSvc.getCurrentSession(),
         _sender: Auth.getCurrentUser()._id,
         sender_name: Auth.getCurrentUser().name
       });

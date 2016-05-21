@@ -70,7 +70,7 @@
       sendMessage: function (message) {
 
         var newMesasge = {
-          _session: ciSingleSessionSvc.getCurrentSession()._id,
+          _session: ciSingleSessionSvc.getCurrentSession(),
           _sender: Auth.getCurrentUser()._id,
           content: message
         };
