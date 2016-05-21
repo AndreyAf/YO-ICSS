@@ -111,6 +111,19 @@ exports.show = function (req, res, next) {
     });
 };
 
+
+// Updates an existing company in the DB
+exports.update = function (req, res) {
+  if (req.body._id) {
+    delete req.body._id;
+  }
+  User.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(saveUpdates(req.body))
+    .then(responseWithResult(res))
+    .catch(handleError(res));
+};
+
 /**
  * Deletes a user
  * restriction: 'admin'
@@ -226,6 +239,34 @@ exports.getPossibleCompanies = function (req, res, next) {
       Company.findAsync({
           "$and": [
             {"_id": {$nin: companiesIds}}
+          ]
+        })
+        .then(function (companies) {
+          res.status(200).json(companies);
+        })
+        .catch(handleError(res));
+    })
+
+};
+
+/**
+ * Return work companies
+ */
+exports.getWorkCompanies = function (req, res, next) {
+  var userId = req.user._id;
+
+  User.findOne({_id: userId})
+    .then(function (user) { // don't ever give out the password or salt
+
+      user.companies = _.filter(user.companies, function (company) {
+        return company.role === "employee";
+      });
+
+      var companiesIds = _.union(_.pluck(user.companies, '_company'), [userId]);
+
+      Company.findAsync({
+          "$and": [
+            {"_id": {$in: companiesIds}}
           ]
         })
         .then(function (companies) {

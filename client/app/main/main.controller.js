@@ -7,7 +7,6 @@
 
     vm.isLoggedIn = Auth.isLoggedIn;
 
-
     vm.technologies = [
       {
         src: '../assets/images/home_page/AngularJS.png',
@@ -31,7 +30,7 @@
       },
       {
         src: '../assets/images/home_page/MongoDB.png',
-        itle: 'MongoDB',
+        title: 'MongoDB',
         desc: ''
       },
       {
@@ -50,10 +49,6 @@
         desc: ''
       }
     ];
-
-    vm.title = "fhjfhj fjhfj hfj hfj hfjh";
-
-    console.log(vm.technologies);
   }
 
   angular.module('icssApp').controller('MainController', MainController);

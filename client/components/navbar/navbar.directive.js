@@ -8,6 +8,7 @@ function navbarCtrl($location, Auth) {
   vm.isCollapsed = true;
   vm.getCurrentUser = null;
   vm.isLoggedIn = false;
+  vm.isEmployee = false;
   vm.isAdmin = false;
   vm.menu = [{
     'title': 'Home',
@@ -42,7 +43,10 @@ function navbarCtrl($location, Auth) {
               vm.isAdmin = true;
               break;
             }
-            if (user.roles[i] === 'employee') {
+          }
+
+          for (var cmp in user.companies) {
+            if (cmp.role === 'employee') {
               vm.isEmployee = true;
               break;
             }
@@ -52,9 +56,6 @@ function navbarCtrl($location, Auth) {
             'title': 'Chat',
             'state': 'chat.main',
             'isVisible': vm.isLoggedIn
-            //,
-            //'target': '_blank'
-            //
           });
 
           vm.menu.push({
