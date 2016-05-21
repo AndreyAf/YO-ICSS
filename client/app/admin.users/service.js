@@ -39,6 +39,12 @@ function userSvc($resource) {
   }
 
   function update(user) {
+
+    user.companies = user.companies.map(function (company) {
+
+      company._company = company._company._id;
+      return company;
+    });
     return userRsc.update(user).$promise;
   }
 }

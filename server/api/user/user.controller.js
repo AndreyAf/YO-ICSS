@@ -50,6 +50,10 @@ function handleEntityNotFound(res) {
 function saveUpdates(updates) {
   return function (entity) {
     var updated = _.merge(entity, updates);
+    updated.companies = updates.companies;
+    updated.groups = updates.groups;
+    updated.contacts = updates.contacts;
+    updated.blackList = updates.blackList;
     return updated.saveAsync()
       .spread(function (updated) {
         return updated;
@@ -110,7 +114,6 @@ exports.show = function (req, res, next) {
       return next(err);
     });
 };
-
 
 // Updates an existing company in the DB
 exports.update = function (req, res) {
