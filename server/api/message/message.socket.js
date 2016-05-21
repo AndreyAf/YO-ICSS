@@ -35,8 +35,6 @@ exports.register = function (socket, socketio) {
       content: data.content
     });
 
-    console.log(newMsg);
-
     // Save the new message
     newMsg.save().then(function (msg) {
 

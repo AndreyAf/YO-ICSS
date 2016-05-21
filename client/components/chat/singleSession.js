@@ -22,7 +22,7 @@
       if (str1.length === 0 || str2.length === 0 || str1.length != str2.length) return hash;
 
       for (i = 0, len = str1.length; i < len; i++) {
-        chr = String.fromCharCode((str1.charCodeAt(i) + str2.charCodeAt(i)%126));
+        chr = String.fromCharCode((str1.charCodeAt(i) + str2.charCodeAt(i) + str1.charCodeAt(len-1)+ str2.charCodeAt(len-1))%93+33);
         hash += chr;
       }
       return hash;

@@ -9302,6 +9302,9 @@ body {
 .chat-main-company .companies-list li button {
   float: right;
 }
+.company-img {
+  height: 100px;
+}
 .chat-main-header {
   height: 50px;
   padding: 0 15px;

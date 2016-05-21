@@ -40,6 +40,7 @@ function adminCompanyModelCtrl(CompanySvc, $state, $q) {
     var promise = vm.company._id ? CompanySvc.update(vm.company) : CompanySvc.create(vm.company);
 
     promise.then(function () {
+      vm.loading = false;
       $state.go('admin.companies.list');
     });
   }
